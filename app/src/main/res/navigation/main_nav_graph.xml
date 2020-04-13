@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginFragment"
+    >
+
+    <fragment
+        android:id="@+id/resetFragment"
+        android:name="com.example.android.androidmarki.ui.main.reset.ResetFragment"
+        android:label="ResetFragment"
+        tools:layout="@layout/fragment_reset"/>
+
+    <activity
+        android:id="@+id/home_activity"
+        android:name="com.example.android.androidmarki.ui.home.HomeActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_home">
+
+    </activity>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.android.androidmarki.ui.main.signUp.SignUpFragment"
+        android:label="fragment_signUp"
+        tools:layout="@layout/fragment_sign_up"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.android.androidmarki.ui.main.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_loginFragment_to_resetFragment"
+            app:destination="@id/resetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.example.android.androidmarki.ui.main.verify.VerificationFragment"
+        android:label="VerificationFragment"
+        tools:layout="@layout/fragment_verification"/>
+</navigation>

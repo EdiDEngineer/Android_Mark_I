@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">Android Mark I</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_verify">verify</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_number">Phone Number must be >10 numbers and start with +</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="settings_fact_type_title">type</string>
+    <string name="invalid_details">Invalid Username or Password</string>
+    <string name="account_failed">Authentication Failed.</string>
+    <string name="fact_type_android">Android</string>
+    <string name="fact_type_california">California</string>
+    <string name="phone_number">Phone Number with Country Code</string>
+    <string name="create">Create</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="signUp_failed">"SignUp failed"</string>
+    <string name="verify_email_failed">"Verify Email Link failed"</string>
+    <string name="invalid_phone_number">Invalid Phone Number</string>
+    <string name="invalid_verify_info">Invalid Phone Number or Code</string>
+    <string name="verification_failed">Verification Failed</string>
+    <string name="invalid_code">Code must be 6 Numbers</string>
+
+    <string name="login">Login</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+    <string name="home_second">Home Second</string>
+    <string name="login_unsuccessful_msg">Login unsuccessful</string>
+    <string name="code">Enter Code Here</string>
+    <string name="logout">LogOut</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_1">Title 1</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="or_connect_using">Or connect using</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in_to_your_existing_account_of_mark_i">Log in to your existing account of Mark I</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="create_an_account_for_mark_i">Create an account for Mark I to access all features</string>
+    <string name="let_s_get_started">Let\'s Get Started!</string>
+    <string name="verify_phone_number_to_continue">Verify phone number to continue</string>
+    <string name="enter_phone_number_and_continue_with_code_received">Enter phone number and continue with code received</string>
+    <string name="verify_phone_number">Verify Phone Number</string>
+    <string name="enter_email_to_reset_password">Enter email and continue to reset password</string>
+    <string name="reset_password">Reset Password</string>
+
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="google">Google</string>
+    <string name="next">Continue</string>
+    <string name="send_code">Send Code</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="sign_up_success">Sign Up Successful</string>
+    <string name="phone_success">Phone number Verification Success</string>
+    <string name="password_reset_email_error">Password Reset Email Sent</string>
+    <string name="resend_code">Resend Code</string>
+
+</resources>
