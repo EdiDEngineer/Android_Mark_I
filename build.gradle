@@ -12,7 +12,8 @@ buildscript {
         timber_version = "4.7.1"
         room_version = "2.2.5"
          nav_version = "2.3.0-alpha04"
-
+        nav_safe_args_version = "2.2.1"
+        core_version ="1.2.0"
     }
     repositories {
         google()
@@ -28,7 +29,7 @@ buildscript {
         /**firebase**/
         classpath 'com.google.gms:google-services:4.3.3'
 
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_safe_args_version"
 
     }
 }

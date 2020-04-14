@@ -1,11 +1,10 @@
 package com.example.android.androidmarki.ui.home.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
@@ -26,6 +25,7 @@ class HomeFragment : BaseFragment() {
 ////            textView.text = it
 //        })
 
+        setHasOptionsMenu(true)
         return root
     }
 
@@ -35,6 +35,17 @@ class HomeFragment : BaseFragment() {
 
     }
 
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.home, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, findNavController())
+                || super.onOptionsItemSelected(item)
+    }
 
 
 }

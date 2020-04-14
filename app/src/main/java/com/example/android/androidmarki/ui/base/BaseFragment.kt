@@ -1,35 +1,38 @@
 package com.example.android.androidmarki.ui.base
 
-import android.content.Context
 import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.example.android.androidmarki.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment : Fragment() {
-    private val builder:  MaterialAlertDialogBuilder by lazy {  MaterialAlertDialogBuilder(requireContext()) }
-    protected lateinit var snackView : View
+    private val builder: MaterialAlertDialogBuilder by lazy {
+        MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_App_MaterialAlertDialog
+        )
+    }
+    protected lateinit var snackView: View
     protected lateinit var navController: NavController
 
     // fun isUserLoggedIn(): Boolean = StorageUtil(context!!).currentUser != null
 
-    fun showShortToast( @StringRes  message: Int) {
+    fun showShortToast(@StringRes message: Int) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showSnackBar(@StringRes error : Int){
+    fun showSnackBar(@StringRes error: Int) {
         Snackbar.make(snackView, error, Snackbar.LENGTH_SHORT).show()
     }
-    fun showSnackBar(error : String,actionTitle: String, listener : View.OnClickListener){
+
+    fun showSnackBar(error: String, actionTitle: String, listener: View.OnClickListener) {
         Snackbar.make(snackView, error, Snackbar.LENGTH_LONG)
-            .setAction(actionTitle,listener)
+            .setAction(actionTitle, listener)
             .show()
     }
 
@@ -61,7 +64,6 @@ abstract class BaseFragment : Fragment() {
         val dialog = builder.create()
         dialog.show()
     }
-
 
 
 }

@@ -14,5 +14,9 @@
     <color name="google_yellow">#fbbc05</color>
 
     <color name="google_red">#ea4335</color>
+    <color name="youWinDark">#34a853</color>
+    <color name="youWinBackground">#B7F8C9</color>
+    <color name="gameOverBackground">#f8bbd0</color>
+
 
 </resources>

@@ -90,5 +90,9 @@
     <string name="phone_success">Phone number Verification Success</string>
     <string name="password_reset_email_error">Password Reset Email Sent</string>
     <string name="resend_code">Resend Code</string>
+    <string name="roll">Roll</string>
+    <string name="dice_roller">Dice Roller</string>
+    <string name="android_trivia">Android Trivia</string>
+    <string name="play">Play</string>
 
 </resources>

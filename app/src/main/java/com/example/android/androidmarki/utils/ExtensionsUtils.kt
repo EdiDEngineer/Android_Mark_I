@@ -1,11 +1,14 @@
 package com.example.android.androidmarki.utils
 
+import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
-import com.example.android.androidmarki.R
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -46,6 +49,11 @@ inline fun EditText.done(crossinline function: () -> Unit) {
         }
         false
     }
+}
+
+@BindingAdapter("src")
+fun ImageView.src(@DrawableRes drawable: Int) {
+    setImageResource(drawable)
 }
 
 

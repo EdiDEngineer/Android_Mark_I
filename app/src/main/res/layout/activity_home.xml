@@ -8,10 +8,10 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
@@ -22,30 +22,28 @@
 
             <include
                 layout="@layout/app_bar_home"
+                android:id="@+id/include_app_bar_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/nav_view"
+                style="@style/Widget.Design.NavigationView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 app:headerLayout="@layout/nav_header_home"
-                app:itemIconSize="24dp"
-                app:itemShapeFillColor="@color/colorAccent"
-                app:itemIconTint="@color/colorPrimaryDark"
                 app:menu="@menu/activity_home_drawer" />
 
         </androidx.drawerlayout.widget.DrawerLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
-            style="@style/Widget.Design.BottomNavigationView"
+            style="@style/Widget.MaterialComponents.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
             app:labelVisibilityMode="selected"
-            app:itemIconTint="@android:color/darker_gray"
             app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 </layout>

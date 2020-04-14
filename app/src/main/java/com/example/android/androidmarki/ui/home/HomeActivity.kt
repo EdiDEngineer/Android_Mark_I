@@ -1,32 +1,36 @@
 package com.example.android.androidmarki.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.*
 import com.example.android.androidmarki.R
+import com.example.android.androidmarki.databinding.ActivityHomeBinding
+import com.example.android.androidmarki.databinding.AppBarHomeBinding
+import com.example.android.androidmarki.databinding.ContentHomeBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
-import com.example.android.androidmarki.ui.base.BaseViewModel
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
-import com.example.android.androidmarki.ui.home.home.HomeFragmentDirections
 import com.example.android.androidmarki.ui.home.home.HomeViewModel
-import com.example.android.androidmarki.ui.main.MainActivity
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.content_home.*
 
-class HomeActivity : BaseActivity(){
+
+class HomeActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityHomeBinding
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val homeViewModel by viewModels<HomeViewModel> {
@@ -36,27 +40,33 @@ class HomeActivity : BaseActivity(){
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        binding = ActivityHomeBinding.inflate(layoutInflater)//issues with nav host fragment couldnt
+        setContentView(binding.root)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
+        setSupportActionBar(binding.includeAppBarHome.toolbar)
+        val fab: FloatingActionButton = binding.includeAppBarHome.fab
+       fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
+
+        drawerLayout =binding.drawerLayout
+        val navView: NavigationView = binding.navView
 
 
-        val navController = findNavController(R.id.home_nav_host_fragment)
+        val navController = home_nav_host_fragment.findNavController()
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_logout
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_trivia, R.id.nav_logout
             ), drawerLayout
         )
+
+        navView.itemIconTintList = null
+
 
 //        homeViewModel.authenticationState.observe(
 //            this,
@@ -67,8 +77,10 @@ class HomeActivity : BaseActivity(){
 //                }
 //
 //            })
+        val bottomNavView: BottomNavigationView = binding.bottomNavView
 
-        val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
+        val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(R.id.navigation_dashboard)
+        badge.isVisible = true
 
         bottomNavView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -82,21 +94,20 @@ class HomeActivity : BaseActivity(){
         }
 
 
+        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
+            if (nd.id == nc.graph.startDestination) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.home, menu)
-        return true
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.home_nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

@@ -1,11 +1,10 @@
-package com.example.android.androidmarki.ui.home.slideshow
+package com.example.android.androidmarki.ui.home.trivia.game
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.android.androidmarki.ui.base.BaseViewModel
 
-class SlideshowViewModel : BaseViewModel() {
+class TriviaGameViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is slideshow Fragment"
