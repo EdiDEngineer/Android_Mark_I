@@ -22,7 +22,7 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
 
     fun signUp() {
         if (signUpUIData.isDataValid) {
-            _signUpResult.value!!.isLoading.value = true
+            _signUpResult.value = SignUpResult(isLoading = true)
             repository.signUp(
                 signUpUIData.username.value!!,
                 signUpUIData.password.value!!,
@@ -48,7 +48,6 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
     }
 
     private fun verifyEmail() {
-        _signUpResult.value!!.isLoading.value = true
         repository.verifyEmail(object : AuthenticateDataSource.VerifyEmail {
             override fun onVerify(Result: Result.Success<Task<Void>>) {
                 Result.data.addOnCompleteListener {
@@ -56,7 +55,7 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
                         _signUpResult.value = SignUpResult(error = R.string.verify_email_failed, exception = it.exception)
                     } else {
                         _signUpResult.value = SignUpResult(
-                            isSuccessful = it.isSuccessful, isLoading = MutableLiveData(true)
+                            isSuccessful = it.isSuccessful, isLoading = true
                         )
                     }
                 }

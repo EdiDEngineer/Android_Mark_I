@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.example.android.androidmarki.R
+import androidx.navigation.fragment.findNavController
+import com.example.android.androidmarki.databinding.FragmentTriviaGameOverBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaGameOverFragment : BaseFragment() {
 
-    private lateinit var triviaGameOverViewModel: TriviaGameOverViewModel
-    private val clickListener = object : HomeListener.TriviaTitle {
-        override fun onPlay() {
-//            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+    private lateinit var binding: FragmentTriviaGameOverBinding
+    val clickListener = object : HomeListener.TriviaGameOver {
+        override fun onRetry() {
+            navController.navigate(TriviaGameOverFragmentDirections.actionGameOverFragmentToGameFragment())
         }
 
     }
@@ -25,13 +24,15 @@ class TriviaGameOverFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        triviaGameOverViewModel =
-            ViewModelProviders.of(this).get(TriviaGameOverViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_trivia_title, container, false)
-//        val textView: TextView = root.findViewById(R.id.nav_trivia)
-        triviaGameOverViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-        })
-        return root
+        binding = FragmentTriviaGameOverBinding.inflate(inflater, container, false).apply {
+            gameOver = this@TriviaGameOverFragment
+        }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
     }
 }

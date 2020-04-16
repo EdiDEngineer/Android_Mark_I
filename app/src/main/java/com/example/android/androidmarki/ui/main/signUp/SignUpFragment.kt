@@ -18,15 +18,6 @@ import timber.log.Timber
 
 class SignUpFragment : BaseFragment() {
     private lateinit var binding: FragmentSignUpBinding
-    private val clickListener = object : MainListener.SignUp {
-        override fun onBack() {
-            requireActivity().onBackPressed()
-        }
-
-        override fun onLogin() {
-            requireActivity().onBackPressed()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,11 +32,12 @@ class SignUpFragment : BaseFragment() {
             ).get(
                 SignUpViewModel::class.java
             )
-            clickListener = this@SignUpFragment.clickListener
+
+            signUp = this@SignUpFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +48,7 @@ class SignUpFragment : BaseFragment() {
             if (it.error != null) {
                 showSnackBar(it.error!!)
                 it.error = null
-                Timber.tag(TAG).w ( it.exception,"createUserWithEmail:failure")
+                Timber.tag(TAG).w(it.exception, "createUserWithEmail:failure")
                 it.exception = null
             }
             if (it.isSuccessful) {
@@ -77,6 +69,7 @@ class SignUpFragment : BaseFragment() {
 
         })
     }
+
     companion object {
         const val TAG = "Sign Up Fragment"
     }

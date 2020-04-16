@@ -13,10 +13,7 @@
         <action
             android:id="@+id/action_nav_home_to_nav_home_second"
             app:destination="@id/nav_home_second" />
-        <action
-            android:id="@+id/action_nav_home_to_action_settings"
-            app:destination="@id/action_settings" />
-    </fragment>
+        </fragment>
     <fragment
         android:id="@+id/nav_home_second"
         android:name="com.example.android.androidmarki.ui.home.second.HomeSecondFragment"
@@ -36,12 +33,6 @@
         android:name="com.example.android.androidmarki.ui.home.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_trivia"
-        android:name="com.example.android.androidmarki.ui.home.trivia.title.TriviaTitleFragment"
-        android:label="@string/android_trivia"
-        tools:layout="@layout/fragment_trivia_title" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -71,5 +62,8 @@
         android:label="DiceFragment"
         tools:layout="@layout/fragment_dice"
         />
+    <include
+        android:id="@+id/nav_trivia"
+        app:graph="@navigation/android_trivia_nav_graph" />
 
 </navigation>

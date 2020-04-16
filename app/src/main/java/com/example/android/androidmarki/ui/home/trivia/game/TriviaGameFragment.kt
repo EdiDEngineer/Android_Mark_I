@@ -5,33 +5,66 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
+import com.example.android.androidmarki.databinding.FragmentTriviaGameBinding
+import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseFragment
-import com.example.android.androidmarki.ui.home.HomeListener
+import com.example.android.androidmarki.ui.base.BaseViewModelFactory
 
 class TriviaGameFragment : BaseFragment() {
-
-    private lateinit var triviaGameViewModel: TriviaGameViewModel
-    private val clickListener = object : HomeListener.TriviaTitle {
-        override fun onPlay() {
-//            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
-        }
-
-    }
+    private lateinit var binding: FragmentTriviaGameBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        triviaGameViewModel =
-            ViewModelProviders.of(this).get(TriviaGameViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_trivia_title, container, false)
-//        val textView: TextView = root.findViewById(R.id.nav_trivia)
-        triviaGameViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
+        binding = FragmentTriviaGameBinding.inflate(inflater, container, false).apply {
+            viewModel = ViewModelProvider(
+                this@TriviaGameFragment,
+                BaseViewModelFactory(TriviaGameViewModel())
+            ).get(
+                TriviaGameViewModel::class.java
+            )
+            lifecycleOwner = viewLifecycleOwner
+
+        }
+
+        layoutView = binding.root
+        return layoutView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
+        binding.viewModel!!.gameUIData.observe(viewLifecycleOwner, Observer {
+            if (it.isWon) {
+                navController.navigate(
+                    TriviaGameFragmentDirections.actionGameFragmentToGameWonFragment(
+                        binding.viewModel!!.questionIndex.value!!,
+                        binding.viewModel!!.numQuestions
+                    )
+                )
+            }
+
+            if (it.isLost) {
+                navController.navigate(TriviaGameFragmentDirections.actionGameFragmentToGameOverFragment())
+            }
+            if (it.error != null) {
+                showSnackBar(it.error!!)
+                it.error = null
+            }
         })
-        return root
+        binding.viewModel!!.questionIndex.observe(viewLifecycleOwner, Observer {
+            (activity as BaseActivity).supportActionBar?.title =
+                getString(
+                    R.string.title_android_trivia_question,
+                    it + 1,
+                    binding.viewModel!!.numQuestions
+                )
+        })
+
     }
 }

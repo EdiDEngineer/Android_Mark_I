@@ -8,7 +8,7 @@ import java.lang.Exception
  */
 data class VerifyResult(
         var isSuccessful :Boolean= false,
-        val isLoading : MutableLiveData<Boolean> = MutableLiveData<Boolean>(),
+        val isLoading : Boolean = false,
         val isSignOut  :Boolean= false,
         var exception: Exception?= null,
         var error: Int? = null

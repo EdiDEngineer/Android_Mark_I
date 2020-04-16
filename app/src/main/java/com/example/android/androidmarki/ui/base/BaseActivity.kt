@@ -10,8 +10,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,11 +21,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.android.androidmarki.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity() {
     private lateinit var  locationString: String
     private lateinit var dialog : Dialog
-    private val builder: AlertDialog.Builder by lazy { AlertDialog.Builder(this) }
+    private val builder: MaterialAlertDialogBuilder by lazy {
+        MaterialAlertDialogBuilder(
+            this,
+            R.style.ThemeOverlay_App_MaterialAlertDialog
+        )
+    }
+    protected lateinit var snackView: View
 
     var frameId = -1
 
@@ -165,12 +175,12 @@ abstract class BaseActivity : AppCompatActivity() {
 //        })
     }
 
-    private fun showLongToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    private fun showLongToast( message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    fun showShortToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    fun showShortToast( message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun changeLocationSettings() {
@@ -192,6 +202,16 @@ abstract class BaseActivity : AppCompatActivity() {
                 return
             }
         }
+    }
+
+    fun showSnackBar(@StringRes error: Int) {
+        Snackbar.make(snackView, error, Snackbar.LENGTH_SHORT).show()
+    }
+
+    fun showSnackBar(error: String, actionTitle: String, listener: View.OnClickListener) {
+        Snackbar.make(snackView, error, Snackbar.LENGTH_LONG)
+            .setAction(actionTitle, listener)
+            .show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

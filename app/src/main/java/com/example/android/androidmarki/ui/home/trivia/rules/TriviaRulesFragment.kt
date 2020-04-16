@@ -7,31 +7,20 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.androidmarki.R
+import com.example.android.androidmarki.databinding.FragmentTriviaGameBinding
+import com.example.android.androidmarki.databinding.FragmentTriviaRulesBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaRulesFragment : BaseFragment() {
-
-    private lateinit var triviaRulesViewModel: TriviaRulesViewModel
-    private val clickListener = object : HomeListener.TriviaTitle {
-        override fun onPlay() {
-//            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
-        }
-
-    }
+    private lateinit var binding: FragmentTriviaRulesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        triviaRulesViewModel =
-            ViewModelProviders.of(this).get(TriviaRulesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_trivia_title, container, false)
-//        val textView: TextView = root.findViewById(R.id.nav_trivia)
-        triviaRulesViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-        })
-        return root
+       binding = FragmentTriviaRulesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

@@ -4,15 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="clickListener"
-            type="com.example.android.androidmarki.ui.home.HomeListener.TriviaTitle" />
-
-        <variable
-            name="viewModel"
-            type="com.example.android.androidmarki.ui.home.trivia.title.TriviaTitleViewModel" />
-    </data>
+            name="title"
+            type="com.example.android.androidmarki.ui.home.trivia.title.TriviaTitleFragment" />
+       </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,10 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/play"
-            android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            app:backgroundTint="@color/colorAccent"
-            android:onClick="@{()->clickListener.onPlay()}"
+            android:onClick="@{()->title.clickListener.onPlay()}"
             app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

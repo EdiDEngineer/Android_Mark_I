@@ -1,24 +1,21 @@
 package com.example.android.androidmarki.ui.home.trivia.title
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import android.view.*
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.android.androidmarki.R
+import com.example.android.androidmarki.databinding.FragmentTriviaTitleBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaTitleFragment : BaseFragment() {
 
-    private lateinit var triviaTitleViewModel: TriviaTitleViewModel
-    private val clickListener = object : HomeListener.TriviaTitle {
+    private lateinit var binding: FragmentTriviaTitleBinding
+    val clickListener = object : HomeListener.TriviaTitle {
         override fun onPlay() {
-//            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+            navController.navigate(TriviaTitleFragmentDirections.actionTitleFragmentToGameFragment())
         }
-
     }
 
     override fun onCreateView(
@@ -26,13 +23,30 @@ class TriviaTitleFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        triviaTitleViewModel =
-            ViewModelProviders.of(this).get(TriviaTitleViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_trivia_title, container, false)
-//        val textView: TextView = root.findViewById(R.id.nav_trivia)
-        triviaTitleViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-        })
-        return root
+        binding = FragmentTriviaTitleBinding.inflate(inflater, container, false).apply {
+            title = this@TriviaTitleFragment
+        }
+        setHasOptionsMenu(true)
+        return binding.root
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            navController
+        )
+                || super.onOptionsItemSelected(item)
+    }
+
 }

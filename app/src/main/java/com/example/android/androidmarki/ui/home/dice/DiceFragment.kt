@@ -27,8 +27,8 @@ class DiceFragment : BaseFragment() {
             )
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
 

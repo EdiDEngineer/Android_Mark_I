@@ -1,22 +1,19 @@
 package com.example.android.androidmarki.ui.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.ActivityHomeBinding
-import com.example.android.androidmarki.databinding.AppBarHomeBinding
-import com.example.android.androidmarki.databinding.ContentHomeBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
 import com.example.android.androidmarki.ui.home.home.HomeViewModel
@@ -37,6 +34,11 @@ class HomeActivity : BaseActivity() {
         BaseViewModelFactory(HomeViewModel())
 //remember
     }
+    private val navController by lazy {
+        home_nav_host_fragment.findNavController()
+    }
+//     private lateinit var navController: NavController
+
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,23 +47,20 @@ class HomeActivity : BaseActivity() {
 
         setSupportActionBar(binding.includeAppBarHome.toolbar)
         val fab: FloatingActionButton = binding.includeAppBarHome.fab
-       fab.setOnClickListener { view ->
+        fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        drawerLayout =binding.drawerLayout
+        drawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-
-
-        val navController = home_nav_host_fragment.findNavController()
 
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_trivia, R.id.nav_logout
+                R.id.nav_home, R.id.nav_gallery,R.id.nav_dice_roller, R.id.nav_logout
             ), drawerLayout
         )
 
@@ -93,9 +92,13 @@ class HomeActivity : BaseActivity() {
             true
         }
 
+//        navView.menu.findItem(R.id.nav_trivia).setOnMenuItemClickListener {
+//            navController.navigate(R.id.nav_trivia)
+//            true
+//        }
 
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == nc.graph.startDestination) {
+            if (nd.id == R.id.nav_home|| nd.id == R.id.nav_gallery||nd.id == R.id.nav_dice_roller) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -112,7 +115,11 @@ class HomeActivity : BaseActivity() {
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
+        }
+//        else if (!navController.popBackStack()) {
+//            finish()
+//        }
+        else {
             super.onBackPressed()
         }
     }

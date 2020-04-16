@@ -19,11 +19,7 @@ import timber.log.Timber
 
 class VerificationFragment : BaseFragment() {
     private lateinit var binding: FragmentVerificationBinding
-    private val clickListener = object : MainListener.Verify {
-        override fun onBack() {
-            requireActivity().onBackPressed()
-        }
-
+    val clickListener = object : MainListener.Verify {
         override fun onSendCode() {
             binding.viewModel!!.sendCode(requireActivity() as BaseActivity)
         }
@@ -43,11 +39,10 @@ class VerificationFragment : BaseFragment() {
             ).get(
                 VerifyViewModel::class.java
             )
-            clickListener = this@VerificationFragment.clickListener
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
 
@@ -64,7 +59,6 @@ class VerificationFragment : BaseFragment() {
                     binding.viewModel!!.signOut()
                 })
         }
-binding.verify.setOnClickListener {  }
 
         binding.viewModel!!.verifyResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {

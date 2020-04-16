@@ -17,6 +17,7 @@
     <color name="youWinDark">#34a853</color>
     <color name="youWinBackground">#B7F8C9</color>
     <color name="gameOverBackground">#f8bbd0</color>
+    <color name="background">#68EFEFEF</color>
 
 
 </resources>

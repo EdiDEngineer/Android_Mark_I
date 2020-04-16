@@ -11,14 +11,19 @@
             type="com.example.android.androidmarki.ui.main.reset.ResetViewModel" />
 
         <variable
-            name="clickListener"
-            type="com.example.android.androidmarki.ui.main.MainListener.Reset" />
+            name="reset"
+            type="com.example.android.androidmarki.ui.main.reset.ResetFragment" />
     </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#68EFEFEF"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -30,7 +35,7 @@
             android:id="@+id/reset_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{viewModel.resetResult.loading == false ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{viewModel.resetResult.loading  ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +46,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->clickListener.onBack()}"
+                android:onClick="@{()->reset.requireActivity().onBackPressed()}"
                 app:icon="@drawable/ic_ab_back_material"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +106,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/reset"
+                android:id="@+id/reset_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,11 +123,12 @@
             android:id="@+id/reset_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.resetResult.loading == false ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.resetResult.loading  ? View.VISIBLE:View.GONE  }"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

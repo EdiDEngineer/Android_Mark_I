@@ -20,7 +20,7 @@ class ResetViewModel(private val repository: AuthenticateRepository) : BaseViewM
 
     fun reset() {
         if (resetUIData.usernameError.value == 0) {
-            _resetResult.value!!.isLoading.value = true
+            _resetResult.value = ResetResult(isLoading = true)
             repository.resetPassword(
                 resetUIData.username.value!!,
                 object : AuthenticateDataSource.ResetPassword {
@@ -29,7 +29,7 @@ class ResetViewModel(private val repository: AuthenticateRepository) : BaseViewM
                             if (!it.isSuccessful) {
                                 _resetResult.value = ResetResult(error = R.string.account_failed, exception =  it.exception)
                             } else {
-                                _resetResult.value = ResetResult(isSuccessful = true, isLoading = MutableLiveData(true))
+                                _resetResult.value = ResetResult(isSuccessful = true, isLoading = true)
                             }
                         }
                     }

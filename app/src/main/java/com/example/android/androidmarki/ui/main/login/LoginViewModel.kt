@@ -31,7 +31,9 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
 
     fun login() {
         if (loginUIData.isDataValid) {
-            _loginResult.value!!.isLoading.value = true
+            _loginResult.value = LoginResult(
+                isLoading = true
+            )
             repository.login(
                 loginUIData.username.value!!,
                 loginUIData.password.value!!,
@@ -39,12 +41,18 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
                     override fun onLoggedIn(Result: Result.Success<Task<AuthResult>>) {
                         Result.data.addOnCompleteListener {
                             if (!it.isSuccessful) {
-                                _loginResult.value = LoginResult(error = R.string.account_failed, exception = it.exception)
+                                _loginResult.value = LoginResult(
+                                    error = R.string.account_failed,
+                                    exception = it.exception
+                                )
                             } else {
-                                _loginResult.value = LoginResult(isSuccessful = it.isSuccessful, isLoading = MutableLiveData(true))
-
+                                _loginResult.value = LoginResult(
+                                    isSuccessful = it.isSuccessful,
+                                    isLoading = true
+                                )
                             }
                         }
+
                     }
 
                     override fun onFail(e: Result.Error) {
@@ -58,14 +66,20 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
     }
 
     fun loginWithGoogle(account: GoogleSignInAccount) {
-        _loginResult.value!!.isLoading.value = true
+        _loginResult.value = LoginResult(
+            isLoading = true
+        )
         repository.loginWithGoogle(account, object : AuthenticateDataSource.LoginWithGoogle {
             override fun onLoggedIn(Result: Result.Success<Task<AuthResult>>) {
                 Result.data.addOnCompleteListener {
                     if (!it.isSuccessful) {
-                        _loginResult.value = LoginResult(error = R.string.account_failed, exception = it.exception)
+                        _loginResult.value =
+                            LoginResult(error = R.string.account_failed, exception = it.exception)
                     } else {
-                        _loginResult.value = LoginResult(isSuccessful = it.isSuccessful, isLoading = MutableLiveData(true))
+                        _loginResult.value = LoginResult(
+                            isSuccessful = it.isSuccessful,
+                            isLoading = true
+                        )
                     }
                 }
             }

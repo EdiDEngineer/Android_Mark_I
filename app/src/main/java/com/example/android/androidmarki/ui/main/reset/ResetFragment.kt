@@ -12,17 +12,10 @@ import com.example.android.androidmarki.data.repository.AuthenticateRepository
 import com.example.android.androidmarki.databinding.FragmentResetBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
-import com.example.android.androidmarki.ui.main.MainListener
 import timber.log.Timber
 
 class ResetFragment : BaseFragment() {
     private lateinit var binding: FragmentResetBinding
-    private val clickListener = object : MainListener.Reset {
-        override fun onBack() {
-            requireActivity().onBackPressed()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,11 +29,11 @@ class ResetFragment : BaseFragment() {
             ).get(
                 ResetViewModel::class.java
             )
-            clickListener = this@ResetFragment.clickListener
+            reset = this@ResetFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +43,7 @@ class ResetFragment : BaseFragment() {
             if (it.error != null) {
                 showSnackBar(it.error!!)
                 it.error = null
-                Timber.tag(TAG).w ( it.exception,"createUserWithEmail:failure")
+                Timber.tag(TAG).w(it.exception, "createUserWithEmail:failure")
                 it.exception = null
             }
             if (it.isSuccessful) {

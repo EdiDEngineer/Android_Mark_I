@@ -17,7 +17,7 @@ abstract class BaseFragment : Fragment() {
             R.style.ThemeOverlay_App_MaterialAlertDialog
         )
     }
-    protected lateinit var snackView: View
+    protected lateinit var layoutView: View
     protected lateinit var navController: NavController
 
     // fun isUserLoggedIn(): Boolean = StorageUtil(context!!).currentUser != null
@@ -27,11 +27,16 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showSnackBar(@StringRes error: Int) {
-        Snackbar.make(snackView, error, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(layoutView, error, Snackbar.LENGTH_SHORT).show()
     }
 
+    fun showShortToast( message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+
     fun showSnackBar(error: String, actionTitle: String, listener: View.OnClickListener) {
-        Snackbar.make(snackView, error, Snackbar.LENGTH_LONG)
+        Snackbar.make(layoutView, error, Snackbar.LENGTH_LONG)
             .setAction(actionTitle, listener)
             .show()
     }

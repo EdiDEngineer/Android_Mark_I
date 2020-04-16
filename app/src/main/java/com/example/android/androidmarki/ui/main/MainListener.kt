@@ -6,17 +6,8 @@ interface MainListener {
         fun onSignUp()
         fun onSignInWithGoogle()
     }
-    interface Reset{
-        fun onBack()
-    }
-
-    interface SignUp{
-        fun onBack()
-        fun onLogin()
-    }
 
     interface Verify{
-        fun onBack()
         fun onSendCode()
     }
 }

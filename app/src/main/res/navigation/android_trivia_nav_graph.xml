@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_trivia"
+    app:startDestination="@+id/triviaTitleFragment"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/triviaTitleFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.title.TriviaTitleFragment"
+        android:label="@string/android_trivia"
+        tools:layout="@layout/fragment_trivia_title">
+        <action
+            android:id="@+id/action_titleFragment_to_gameFragment"
+            app:destination="@id/triviaGameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/triviaGameFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.game.TriviaGameFragment"
+        android:label="@string/android_trivia"
+        tools:layout="@layout/fragment_trivia_game">
+        <action
+            android:id="@+id/action_gameFragment_to_gameOverFragment"
+            app:destination="@id/triviaGameOverFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/triviaGameFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_gameFragment_to_gameWonFragment"
+            app:destination="@id/triviaGameWonFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/triviaGameFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/triviaGameWonFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.gameWon.TriviaGameWonFragment"
+        android:label="@string/android_trivia"
+        tools:layout="@layout/fragment_trivia_game_won">
+        <argument
+            android:name="numQuestions"
+            app:argType="integer" />
+        <argument
+            android:name="numCorrect"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_gameWonFragment_to_gameFragment"
+            app:destination="@id/triviaGameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/triviaTitleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/triviaGameOverFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.gameOver.TriviaGameOverFragment"
+        android:label="@string/android_trivia"
+        tools:layout="@layout/fragment_trivia_game_over">
+        <action
+            android:id="@+id/action_gameOverFragment_to_gameFragment"
+            app:destination="@id/triviaGameFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/triviaTitleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/triviaRulesFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.rules.TriviaRulesFragment"
+        android:label="@string/title_trivia_rules"
+        tools:layout="@layout/fragment_trivia_rules" />
+    <fragment
+        android:id="@+id/triviaAboutFragment"
+        android:name="com.example.android.androidmarki.ui.home.trivia.about.TriviaAboutFragment"
+        android:label="@string/title_about_trivia"
+        tools:layout="@layout/fragment_trivia_about" />
+
+</navigation>

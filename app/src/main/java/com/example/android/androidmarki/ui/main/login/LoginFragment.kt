@@ -23,7 +23,7 @@ import timber.log.Timber
 
 class LoginFragment : BaseFragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val clickListener = object : MainListener.Login {
+    val clickListener = object : MainListener.Login {
         override fun onReset() {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToResetFragment())
         }
@@ -56,24 +56,24 @@ class LoginFragment : BaseFragment() {
             ).get(
                 LoginViewModel::class.java
             )
-            clickListener = this@LoginFragment.clickListener
+            login = this@LoginFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
-
         binding.viewModel!!.authenticationState.observe(
             viewLifecycleOwner,
             Observer { authenticationState ->
                 if (authenticationState == BaseViewModel.AuthenticationState.AUTHENTICATED || authenticationState == BaseViewModel.AuthenticationState.EMAIL_UNVERIFIED) {
                     navController.navigate(R.id.home_activity)
-//                    requireActivity().finish()
+                    requireActivity().finish()
+
                 } else if (authenticationState == BaseViewModel.AuthenticationState.PHONE_UNVERIFIED) {
                     navController.navigate(R.id.verificationFragment)
                 }
@@ -83,7 +83,7 @@ class LoginFragment : BaseFragment() {
             if (it.error != null) {
                 showSnackBar(it.error!!)
                 it.error = null
-                Timber.tag(TAG).w ( it.exception,"signInWithEmail:failure")
+                Timber.tag(TAG).w(it.exception, "signInWithEmail:failure")
                 it.exception = null
             }
             if (it.isSuccessful) {

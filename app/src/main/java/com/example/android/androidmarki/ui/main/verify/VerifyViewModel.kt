@@ -22,6 +22,7 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
     }
 
     fun verify() {
+        _verifyResult.value = VerifyResult(isLoading = true)
         if (verifyUIData.isDataValid) {
             repository.verifyPhoneNumberWithCode(verifyUIData.code.value!!,
                 object : AuthenticateDataSource.VerifyPhoneNumber {
@@ -81,7 +82,7 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
                          _verifyResult.value = VerifyResult(error = R.string.verification_failed, exception = it.exception)
                      }
                      else{
-                         _verifyResult.value = VerifyResult(isSuccessful = true, isLoading = MutableLiveData(true))
+                         _verifyResult.value = VerifyResult(isSuccessful = true, isLoading = true)
                      }
                  }
                 }

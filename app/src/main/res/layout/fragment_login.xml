@@ -12,14 +12,13 @@
             type="com.example.android.androidmarki.ui.main.login.LoginViewModel" />
 
         <variable
-            name="clickListener"
-            type="com.example.android.androidmarki.ui.main.MainListener.Login" />
+            name="login"
+            type="com.example.android.androidmarki.ui.main.login.LoginFragment" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#68EFEFEF"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +34,7 @@
                 android:id="@+id/login_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{viewModel.loginResult.loading == false ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{viewModel.loginResult.loading ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +45,11 @@
                     android:layout_width="0dp"
                     android:layout_height="192dp"
                     android:layout_margin="16dp"
+                    app:tint="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/splash" />
+                    app:srcCompat="@drawable/ic_android_black" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/welcome"
@@ -136,14 +136,14 @@
                     android:id="@+id/forgot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->clickListener.onReset()}"
+                    android:onClick="@{()->login.clickListener.onReset()}"
                     android:text="@string/forgot_password"
                     android:textColor="@color/google_green"
                     app:layout_constraintEnd_toEndOf="@id/login_password_layout"
                     app:layout_constraintTop_toBottomOf="@id/login_password_layout" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/login"
+                    android:id="@+id/login_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -167,7 +167,7 @@
                     android:text="@string/or_connect_using"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/login" />
+                    app:layout_constraintTop_toBottomOf="@id/login_button" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/login_google"
@@ -176,7 +176,7 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="48dp"
-                    android:onClick="@{()->clickListener.onSignInWithGoogle()}"
+                    android:onClick="@{()->login.clickListener.onSignInWithGoogle()}"
                     android:text="@string/google"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textColor="@color/google_green"
@@ -208,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:onClick="@{()->clickListener.onSignUp()}"
+                    android:onClick="@{()->login.clickListener.onSignUp()}"
                     android:text="@string/sign_up"
                     android:textColor="@color/google_green"
                     app:layout_constraintBottom_toBottomOf="@id/sign"
@@ -221,7 +221,7 @@
                 android:id="@+id/login_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{viewModel.loginResult.loading == false ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewModel.loginResult.loading ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
