@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:src="@{viewModel.diceDrawableResource}"
-            tools:src="@drawable/dice_1" />
+            tools:src="@drawable/dice_roller_dice_1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/roll_button"

@@ -101,7 +101,7 @@ class TriviaGameViewModel : BaseViewModel() {
         }
         if (answerIndex != -1) {
             if (_answers.value!![answerIndex] == _currentQuestion.value!!.answers[0]) {
-                _questionIndex.value = _questionIndex.value!! + 1
+                _questionIndex.value = _questionIndex.value?.plus(1)
                 if (_questionIndex.value!! < numQuestions) {
                     setQuestion()
                 } else {

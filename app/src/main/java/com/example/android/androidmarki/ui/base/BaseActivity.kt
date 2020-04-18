@@ -33,6 +33,7 @@ abstract class BaseActivity : AppCompatActivity() {
             R.style.ThemeOverlay_App_MaterialAlertDialog
         )
     }
+
     protected lateinit var snackView: View
 
     var frameId = -1

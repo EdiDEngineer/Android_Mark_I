@@ -28,6 +28,7 @@ class TriviaGameWonFragment : BaseFragment() {
         binding = FragmentTriviaGameWonBinding.inflate(inflater, container, false).apply {
             gameWon = this@TriviaGameWonFragment
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -38,7 +39,7 @@ class TriviaGameWonFragment : BaseFragment() {
 
     private fun getShareIntent(): Intent? {
         val args = TriviaGameWonFragmentArgs.fromBundle(requireArguments())
-        return activity?.parent?.let {
+        return activity?.let {
             ShareCompat.IntentBuilder.from(it)
                 .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
                 .setType("text/plain")
@@ -52,7 +53,7 @@ class TriviaGameWonFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.winner_menu, menu)
+        inflater.inflate(R.menu.trivia_winner_menu, menu)
         // check if the activity resolves
         if (null == getShareIntent()?.resolveActivity(requireActivity().packageManager)) {
             // hide the menu item if it doesn't resolve

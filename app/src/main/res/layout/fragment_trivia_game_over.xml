@@ -41,11 +41,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/gameOverFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="362dp"
                 android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toTopOf="@+id/tryAgainButton"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +54,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tryAgainButton"
                 app:layout_constraintVertical_chainStyle="packed"
-                app:srcCompat="@drawable/try_again" />
+                app:srcCompat="@drawable/trivia_try_again" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tryAgainButton"
@@ -65,8 +66,6 @@
                 android:layout_marginEnd="@dimen/vertical_margin"
                 android:layout_marginBottom="64dp"
                 android:onClick="@{()->gameOver.clickListener.onRetry()}"
-                android:paddingStart="@dimen/button_padding"
-                android:paddingEnd="@dimen/button_padding"
                 android:text="@string/try_again"
                 android:textSize="@dimen/button_text_size"
                 android:textStyle="bold"

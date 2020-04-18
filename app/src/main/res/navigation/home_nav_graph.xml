@@ -29,10 +29,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.android.androidmarki.ui.home.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_dessert_pusher"
+        android:name="com.example.android.androidmarki.ui.home.dessertPusher.DessertPusherFragment"
+        android:label="@string/dessert_pusher"
+        tools:layout="@layout/fragment_dessert_pusher" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -50,20 +50,22 @@
         android:id="@+id/action_settings"
         tools:layout="@xml/settings"
         android:name="com.example.android.androidmarki.ui.home.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="Settings"
+        />
     <activity
         android:id="@+id/mainActivity"
         tools:layout="@layout/activity_main"
         android:name="com.example.android.androidmarki.ui.main.MainActivity"
-        android:label="MainActivity" />
+        android:label="MainActivity"
+        />
     <fragment
         android:id="@+id/nav_dice_roller"
         android:name="com.example.android.androidmarki.ui.home.dice.DiceFragment"
-        android:label="DiceFragment"
+        android:label="@string/dice_roller"
         tools:layout="@layout/fragment_dice"
         />
     <include
         android:id="@+id/nav_trivia"
-        app:graph="@navigation/android_trivia_nav_graph" />
+        app:graph="@navigation/trivia_nav_graph" />
 
 </navigation>

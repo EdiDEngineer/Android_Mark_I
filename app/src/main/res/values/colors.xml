@@ -8,16 +8,18 @@
     <color name="ic_launcher_background">#3DDC84</color>
 
     <color name="google_blue">#4285f4</color>
-
     <color name="google_green">#34a853</color>
-
     <color name="google_yellow">#fbbc05</color>
-
     <color name="google_red">#ea4335</color>
+
+    <!--Trivia-->
     <color name="youWinDark">#34a853</color>
     <color name="youWinBackground">#B7F8C9</color>
     <color name="gameOverBackground">#f8bbd0</color>
     <color name="background">#68EFEFEF</color>
 
+    <!--Desert pusher-->
+    <color name="green">#6ab343</color>
+    <color name="grey">#99000000</color>
 
 </resources>

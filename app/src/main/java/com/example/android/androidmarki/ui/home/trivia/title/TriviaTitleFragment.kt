@@ -38,15 +38,27 @@ class TriviaTitleFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
+        inflater.inflate(R.menu.trivia_overflow_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
-            item,
-            navController
-        )
-                || super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.triviaAboutFragment -> {
+                navController.navigate(TriviaTitleFragmentDirections.actionTriviaTitleFragmentToTriviaAboutFragment())
+                true
+            }
+            R.id.triviaRulesFragment -> {
+                navController.navigate(TriviaTitleFragmentDirections.actionTriviaTitleFragmentToTriviaRulesFragment())
+                true
+            }
+            else -> {
+                NavigationUI.onNavDestinationSelected(
+                    item,
+                    navController
+                )
+                        || super.onOptionsItemSelected(item)
+            }
+        }
     }
 
 }

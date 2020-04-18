@@ -9,16 +9,16 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_dessert_pusher"
+            android:icon="@drawable/dessert_pusher_ic_dessert_pusher_round"
+            android:title="@string/dessert_pusher" />
         <item
             android:id="@+id/nav_trivia"
             android:icon="@drawable/trivia_icon_round"
             android:title="@string/android_trivia" />
         <item
             android:id="@+id/nav_dice_roller"
-            android:icon="@drawable/dice_1"
+            android:icon="@drawable/dice_roller_dice_1"
             android:title="@string/dice_roller" />
 
     </group>

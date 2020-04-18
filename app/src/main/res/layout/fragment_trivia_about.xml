@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rulesText"
-                app:srcCompat="@drawable/about_android_trivia" />
+                app:srcCompat="@drawable/trivia_about_android_trivia" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rulesText"

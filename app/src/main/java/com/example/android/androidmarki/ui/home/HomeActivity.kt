@@ -1,6 +1,7 @@
 package com.example.android.androidmarki.ui.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -28,7 +29,6 @@ import kotlinx.android.synthetic.main.content_home.*
 class HomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val homeViewModel by viewModels<HomeViewModel> {
         BaseViewModelFactory(HomeViewModel())
@@ -37,7 +37,6 @@ class HomeActivity : BaseActivity() {
     private val navController by lazy {
         home_nav_host_fragment.findNavController()
     }
-//     private lateinit var navController: NavController
 
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +59,11 @@ class HomeActivity : BaseActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery,R.id.nav_dice_roller, R.id.nav_logout
+                R.id.nav_home,
+                R.id.nav_dessert_pusher,
+                R.id.nav_dice_roller,
+                R.id.triviaTitleFragment,
+                R.id.nav_logout
             ), drawerLayout
         )
 
@@ -92,16 +95,18 @@ class HomeActivity : BaseActivity() {
             true
         }
 
-//        navView.menu.findItem(R.id.nav_trivia).setOnMenuItemClickListener {
-//            navController.navigate(R.id.nav_trivia)
-//            true
-//        }
-
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == R.id.nav_home|| nd.id == R.id.nav_gallery||nd.id == R.id.nav_dice_roller) {
+            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.nav_dice_roller || nd.id == R.id.triviaTitleFragment) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+            if (nd.id == R.id.nav_home || nd.id == R.id.navigation_dashboard || nd.id == R.id.navigation_notifications) {
+                bottomNavView.visibility = View.VISIBLE
+                fab.visibility = View.VISIBLE
+            } else {
+                bottomNavView.visibility = View.GONE
+                fab.visibility = View.GONE
             }
         }
     }
@@ -115,11 +120,7 @@ class HomeActivity : BaseActivity() {
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        }
-//        else if (!navController.popBackStack()) {
-//            finish()
-//        }
-        else {
+        } else {
             super.onBackPressed()
         }
     }

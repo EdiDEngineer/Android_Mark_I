@@ -17,6 +17,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_triviaTitleFragment_to_triviaRulesFragment"
+            app:destination="@id/triviaRulesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_triviaTitleFragment_to_triviaAboutFragment"
+            app:destination="@id/triviaAboutFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            />
     </fragment>
     <fragment
         android:id="@+id/triviaGameFragment"

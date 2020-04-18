@@ -8,9 +8,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
-    private val navController by lazy {
-        main_nav_host_fragment.findNavController()
-    }
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +15,4 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
     }
 
-    override fun onBackPressed() {
-        if (!navController.popBackStack()) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }

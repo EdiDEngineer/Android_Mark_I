@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
@@ -56,4 +57,8 @@ fun ImageView.src(@DrawableRes drawable: Int) {
     setImageResource(drawable)
 }
 
+@BindingAdapter("src")
+fun ImageButton.src(@DrawableRes drawable: Int) {
+    setImageResource(drawable)
+}
 
