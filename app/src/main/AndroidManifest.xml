@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
+
+    <!-- Permission needed for haptic feedback -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".AndroidMarkI"
         android:allowBackup="true"
@@ -22,14 +26,13 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/title_activity_home"
-            android:launchMode="singleTask" />
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+           />
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
+            android:launchMode="singleTask"
+          />
 
         <activity
             android:name=".ui.main.Splash"

@@ -7,16 +7,11 @@ import androidx.navigation.ui.NavigationUI
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentTriviaTitleBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
-import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaTitleFragment : BaseFragment() {
 
     private lateinit var binding: FragmentTriviaTitleBinding
-    val clickListener = object : HomeListener.TriviaTitle {
-        override fun onPlay() {
-            navController.navigate(TriviaTitleFragmentDirections.actionTitleFragmentToGameFragment())
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,5 +55,7 @@ class TriviaTitleFragment : BaseFragment() {
             }
         }
     }
-
+    fun onPlay() {
+        navController.navigate(TriviaTitleFragmentDirections.actionTitleFragmentToGameFragment())
+    }
 }

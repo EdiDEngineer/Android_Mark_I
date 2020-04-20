@@ -12,7 +12,6 @@ import com.example.android.androidmarki.data.repository.AuthenticateRepository
 import com.example.android.androidmarki.databinding.FragmentSignUpBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
-import com.example.android.androidmarki.ui.main.MainListener
 import timber.log.Timber
 
 
@@ -46,10 +45,9 @@ class SignUpFragment : BaseFragment() {
 
         binding.viewModel!!.signUpResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
+                showSnackBar(it.error)
                 Timber.tag(TAG).w(it.exception, "createUserWithEmail:failure")
-                it.exception = null
+                binding.viewModel!!.clear()
             }
             if (it.isSuccessful) {
                 showShortToast(R.string.sign_up_success)

@@ -16,6 +16,8 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
     private val _verifyResult = MutableLiveData<VerifyResult>()
     val verifyResult: LiveData<VerifyResult> = _verifyResult
     val verifyUIData = VerifyUIData()
+    val authenticationState = repository.authenticationState
+
 
     init {
         _verifyResult.value = VerifyResult()
@@ -67,7 +69,6 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
     fun signOut() {
         repository.logout(object : AuthenticateDataSource.Logout {
             override fun onLoggedOut() {
-                _verifyResult.value = VerifyResult(isSignOut = true)
             }
         })
     }
@@ -91,5 +92,9 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
                 }
 
             })
+    }
+
+    fun clear(){
+        _verifyResult.value = VerifyResult()
     }
 }

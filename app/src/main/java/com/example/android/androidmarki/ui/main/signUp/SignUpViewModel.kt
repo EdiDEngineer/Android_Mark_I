@@ -14,7 +14,7 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
 
     private val _signUpResult = MutableLiveData<SignUpResult>()
     val signUpResult: LiveData<SignUpResult> = _signUpResult
-    val signUpUIData = SignUpUIData()
+    var signUpUIData = SignUpUIData()
 
     init {
         _signUpResult.value = SignUpResult()
@@ -30,7 +30,10 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
                     override fun onSignedUp(Result: Result.Success<Task<AuthResult>>) {
                         Result.data.addOnCompleteListener {
                             if (!it.isSuccessful) {
-                                _signUpResult.value = SignUpResult(error = R.string.account_failed, exception = it.exception)
+                                _signUpResult.value = SignUpResult(
+                                    error = R.string.account_failed,
+                                    exception = it.exception
+                                )
                             } else {
                                 verifyEmail()
                             }
@@ -52,7 +55,10 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
             override fun onVerify(Result: Result.Success<Task<Void>>) {
                 Result.data.addOnCompleteListener {
                     if (!it.isSuccessful) {
-                        _signUpResult.value = SignUpResult(error = R.string.verify_email_failed, exception = it.exception)
+                        _signUpResult.value = SignUpResult(
+                            error = R.string.verify_email_failed,
+                            exception = it.exception
+                        )
                     } else {
                         _signUpResult.value = SignUpResult(
                             isSuccessful = it.isSuccessful, isLoading = true
@@ -69,5 +75,9 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
 
     }
 
+
+    fun clear() {
+        _signUpResult.value = SignUpResult()
+    }
 
 }

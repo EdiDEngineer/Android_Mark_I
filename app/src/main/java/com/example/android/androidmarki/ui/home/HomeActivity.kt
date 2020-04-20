@@ -38,7 +38,7 @@ class HomeActivity : BaseActivity() {
         home_nav_host_fragment.findNavController()
     }
 
-    private lateinit var drawerLayout: DrawerLayout
+lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)//issues with nav host fragment couldnt
@@ -63,6 +63,7 @@ class HomeActivity : BaseActivity() {
                 R.id.nav_dessert_pusher,
                 R.id.nav_dice_roller,
                 R.id.triviaTitleFragment,
+                R.id.guessItTitleDestination,
                 R.id.nav_logout
             ), drawerLayout
         )
@@ -96,7 +97,7 @@ class HomeActivity : BaseActivity() {
         }
 
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.nav_dice_roller || nd.id == R.id.triviaTitleFragment) {
+            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination|| nd.id == R.id.triviaTitleFragment) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

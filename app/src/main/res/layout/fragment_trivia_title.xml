@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/play"
             android:textStyle="bold"
-            android:onClick="@{()->title.clickListener.onPlay()}"
+            android:onClick="@{()->title.onPlay()}"
             app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

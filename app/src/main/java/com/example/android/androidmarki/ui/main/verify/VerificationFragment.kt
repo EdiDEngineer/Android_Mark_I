@@ -39,6 +39,7 @@ class VerificationFragment : BaseFragment() {
             ).get(
                 VerifyViewModel::class.java
             )
+            verify = this@VerificationFragment
             lifecycleOwner = viewLifecycleOwner
         }
         layoutView = binding.root
@@ -62,10 +63,9 @@ class VerificationFragment : BaseFragment() {
 
         binding.viewModel!!.verifyResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
+                showSnackBar(it.error)
                 Timber.tag(TAG).w(it.exception, "linkUserWithPhoneNumber:failure")
-                it.exception = null
+                binding.viewModel!!.clear()
 
             }
             if (it.isSuccessful) {
@@ -73,8 +73,11 @@ class VerificationFragment : BaseFragment() {
                 navController.navigate(R.id.home_activity)
                 requireActivity().finish()
             }
-            if (it.isSignOut) {
-                navController.popBackStack(R.id.loginFragment, false)
+        })
+
+        binding.viewModel!!.authenticationState.observe(viewLifecycleOwner, Observer {
+            if (it == AuthenticateRepository.AuthenticationState.UNAUTHENTICATED){
+                navController.navigate(VerificationFragmentDirections.actionVerificationFragmentToLoginFragment())
             }
         })
 

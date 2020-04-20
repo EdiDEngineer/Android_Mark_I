@@ -7,12 +7,14 @@ import com.example.android.androidmarki.data.Result
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
 import com.example.android.androidmarki.data.source.AuthenticateDataSource
 import com.example.android.androidmarki.ui.base.BaseViewModel
+import com.example.android.androidmarki.ui.main.signUp.SignUpResult
+import com.example.android.androidmarki.ui.main.signUp.SignUpUIData
 import com.google.android.gms.tasks.Task
 
 class ResetViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _resetResult = MutableLiveData<ResetResult>()
     val resetResult: LiveData<ResetResult> = _resetResult
-    val resetUIData = ResetUIData()
+    var resetUIData = ResetUIData()
 
     init {
         _resetResult.value = ResetResult()
@@ -43,6 +45,9 @@ class ResetViewModel(private val repository: AuthenticateRepository) : BaseViewM
             _resetResult.value = ResetResult(error = R.string.invalid_details)
         }
 
+    }
+    fun clear(){
+        _resetResult.value = ResetResult()
     }
 
 }

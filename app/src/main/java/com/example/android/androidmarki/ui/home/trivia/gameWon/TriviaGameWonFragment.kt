@@ -8,16 +8,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentTriviaGameWonBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
-import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaGameWonFragment : BaseFragment() {
     private lateinit var binding: FragmentTriviaGameWonBinding
-    val clickListener = object : HomeListener.TriviaGameWon {
-        override fun onReplay() {
-            navController.navigate(TriviaGameWonFragmentDirections.actionGameWonFragmentToGameFragment())
-        }
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,4 +61,8 @@ class TriviaGameWonFragment : BaseFragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+    fun onReplay() {
+        navController.navigate(TriviaGameWonFragmentDirections.actionGameWonFragmentToGameFragment())
+    }
+
 }

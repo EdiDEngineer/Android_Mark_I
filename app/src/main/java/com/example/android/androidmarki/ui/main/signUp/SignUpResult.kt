@@ -9,6 +9,6 @@ import java.lang.Exception
 data class SignUpResult(
     val isSuccessful: Boolean = false,
     val isLoading: Boolean = false,
-    var exception: Exception? = null,
-    var error: Int? = null
+    val exception: Exception? = null,
+    val error: Int? = null
 )

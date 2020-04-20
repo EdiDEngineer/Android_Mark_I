@@ -67,5 +67,8 @@
     <include
         android:id="@+id/nav_trivia"
         app:graph="@navigation/trivia_nav_graph" />
+    <include
+        android:id="@+id/nav_guess_it"
+        app:graph="@navigation/guess_it_nav_graph" />
 
 </navigation>

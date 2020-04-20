@@ -70,25 +70,25 @@ class LoginFragment : BaseFragment() {
         binding.viewModel!!.authenticationState.observe(
             viewLifecycleOwner,
             Observer { authenticationState ->
-                if (authenticationState == BaseViewModel.AuthenticationState.AUTHENTICATED || authenticationState == BaseViewModel.AuthenticationState.EMAIL_UNVERIFIED) {
+                if (authenticationState == AuthenticateRepository.AuthenticationState.AUTHENTICATED || authenticationState == AuthenticateRepository.AuthenticationState.EMAIL_UNVERIFIED) {
+                    showShortToast(R.string.login_successful)
                     navController.navigate(R.id.home_activity)
                     requireActivity().finish()
 
-                } else if (authenticationState == BaseViewModel.AuthenticationState.PHONE_UNVERIFIED) {
+                } else if (authenticationState == AuthenticateRepository.AuthenticationState.PHONE_UNVERIFIED) {
+                    showShortToast(R.string.login_successful)
                     navController.navigate(R.id.verificationFragment)
                 }
+
             })
 
         binding.viewModel!!.loginResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
+                showSnackBar(it.error)
                 Timber.tag(TAG).w(it.exception, "signInWithEmail:failure")
-                it.exception = null
+                binding.viewModel!!.clear()
             }
-            if (it.isSuccessful) {
-                showShortToast(R.string.login_successful)
-            }
+
         })
 
         var passwordValid = binding.viewModel!!.loginUIData.isDataValid

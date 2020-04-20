@@ -2,7 +2,6 @@ package com.example.android.androidmarki.ui.main.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.Result
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
@@ -15,15 +14,8 @@ import com.google.firebase.auth.AuthResult
 class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
-    val loginUIData = LoginUIData()
-    val authenticationState = repository.userLiveData.map { user ->
-        when {
-            user == null -> AuthenticationState.UNAUTHENTICATED
-            user.phoneNumber.isNullOrEmpty() -> AuthenticationState.PHONE_UNVERIFIED
-            !user.isEmailVerified -> AuthenticationState.EMAIL_UNVERIFIED
-            else -> AuthenticationState.AUTHENTICATED
-        }
-    }
+    var loginUIData = LoginUIData()
+    val authenticationState = repository.authenticationState
 
     init {
         _loginResult.value = LoginResult()
@@ -44,11 +36,6 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
                                 _loginResult.value = LoginResult(
                                     error = R.string.account_failed,
                                     exception = it.exception
-                                )
-                            } else {
-                                _loginResult.value = LoginResult(
-                                    isSuccessful = it.isSuccessful,
-                                    isLoading = true
                                 )
                             }
                         }
@@ -75,11 +62,6 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
                     if (!it.isSuccessful) {
                         _loginResult.value =
                             LoginResult(error = R.string.account_failed, exception = it.exception)
-                    } else {
-                        _loginResult.value = LoginResult(
-                            isSuccessful = it.isSuccessful,
-                            isLoading = true
-                        )
                     }
                 }
             }
@@ -91,6 +73,10 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
         )
     }
 
+
+    fun clear() {
+        _loginResult.value = LoginResult()
+    }
 
 }
 

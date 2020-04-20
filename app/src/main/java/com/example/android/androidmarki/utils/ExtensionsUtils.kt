@@ -31,10 +31,10 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
 @BindingAdapter("error")
 fun TextInputLayout.error(error: Int?) {
-    if (error != 0 && error != null) {
-        this.error = context.getString(error)
-    } else {
+    if (error == 0 || error == null) {
         this.error = null
+    } else {
+        this.error = context.getString(error)
     }
 }
 
@@ -57,8 +57,4 @@ fun ImageView.src(@DrawableRes drawable: Int) {
     setImageResource(drawable)
 }
 
-@BindingAdapter("src")
-fun ImageButton.src(@DrawableRes drawable: Int) {
-    setImageResource(drawable)
-}
 

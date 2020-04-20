@@ -7,17 +7,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.databinding.FragmentTriviaGameOverBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
-import com.example.android.androidmarki.ui.home.HomeListener
 
 class TriviaGameOverFragment : BaseFragment() {
 
     private lateinit var binding: FragmentTriviaGameOverBinding
-    val clickListener = object : HomeListener.TriviaGameOver {
-        override fun onRetry() {
-            navController.navigate(TriviaGameOverFragmentDirections.actionGameOverFragmentToGameFragment())
-        }
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,4 +29,8 @@ class TriviaGameOverFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
     }
+    fun onRetry() {
+        navController.navigate(TriviaGameOverFragmentDirections.actionGameOverFragmentToGameFragment())
+    }
+
 }

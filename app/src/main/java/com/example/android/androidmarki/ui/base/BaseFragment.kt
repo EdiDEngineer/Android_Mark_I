@@ -1,6 +1,7 @@
 package com.example.android.androidmarki.ui.base
 
 import android.content.DialogInterface
+import android.content.pm.ActivityInfo
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -19,7 +20,7 @@ abstract class BaseFragment : Fragment() {
     }
     protected lateinit var layoutView: View
     protected lateinit var navController: NavController
-
+    open val isLandscape = false
     // fun isUserLoggedIn(): Boolean = StorageUtil(context!!).currentUser != null
 
     fun showShortToast(@StringRes message: Int) {
@@ -29,11 +30,6 @@ abstract class BaseFragment : Fragment() {
     fun showSnackBar(@StringRes error: Int) {
         Snackbar.make(layoutView, error, Snackbar.LENGTH_SHORT).show()
     }
-
-    fun showShortToast( message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
 
     fun showSnackBar(error: String, actionTitle: String, listener: View.OnClickListener) {
         Snackbar.make(layoutView, error, Snackbar.LENGTH_LONG)
@@ -70,5 +66,14 @@ abstract class BaseFragment : Fragment() {
         dialog.show()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isLandscape) {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+
+        }
+    }
 
 }

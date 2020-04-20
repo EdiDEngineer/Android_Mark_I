@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginEnd="@dimen/vertical_margin"
                 android:layout_marginBottom="64dp"
-                android:onClick="@{()->gameOver.clickListener.onRetry()}"
+                android:onClick="@{()->gameOver.onRetry()}"
                 android:text="@string/try_again"
                 android:textSize="@dimen/button_text_size"
                 android:textStyle="bold"

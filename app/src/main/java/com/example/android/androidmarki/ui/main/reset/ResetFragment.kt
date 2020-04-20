@@ -41,10 +41,9 @@ class ResetFragment : BaseFragment() {
         navController = findNavController()
         binding.viewModel!!.resetResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
+                showSnackBar(it.error)
                 Timber.tag(TAG).w(it.exception, "createUserWithEmail:failure")
-                it.exception = null
+                binding.viewModel!!.clear()
             }
             if (it.isSuccessful) {
                 showShortToast(R.string.password_reset_email_error)

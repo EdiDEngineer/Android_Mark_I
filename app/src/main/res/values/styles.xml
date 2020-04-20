@@ -54,4 +54,14 @@
         <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
         <item name="buttonBarNeutralButtonStyle">@style/Widget.App.Button</item>
     </style>
+
+
+
+
+
+    <style name="SkipButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:buttonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
+        <item name="android:textColor">@color/grey_button_color</item>
+        <item name="colorControlHighlight">@color/skip_red_color</item>
+    </style>
 </resources>

@@ -45,7 +45,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->gameWon.clickListener.onReplay()}"
+                android:onClick="@{()->gameWon.onReplay()}"
                 android:text="@string/next_match"
                 android:layout_marginBottom="64dp"
                 android:textColor="@color/youWinDark"

@@ -1,9 +1,10 @@
 package com.example.android.androidmarki.data.repository
 
 import androidx.annotation.MainThread
+import androidx.lifecycle.map
 import com.example.android.androidmarki.data.Result
-import com.example.android.androidmarki.data.source.AuthenticateDataSource
 import com.example.android.androidmarki.data.remote.firebase.FirebaseUserLiveData
+import com.example.android.androidmarki.data.source.AuthenticateDataSource
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.PhoneAuthCredential
@@ -13,13 +14,13 @@ import com.google.firebase.auth.PhoneAuthCredential
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class AuthenticateRepository(val userLiveData: FirebaseUserLiveData = FirebaseUserLiveData.get()) {
+class AuthenticateRepository(private val userLiveData: FirebaseUserLiveData = FirebaseUserLiveData.get()) {
 
     fun login(username: String, password: String, callBack: AuthenticateDataSource.Login) {
         try {
 
             callBack.onLoggedIn(
-              Result.Success(
+                Result.Success(
                     userLiveData.signIn(
                         username,
                         password
@@ -39,7 +40,7 @@ class AuthenticateRepository(val userLiveData: FirebaseUserLiveData = FirebaseUs
     }
 
     fun logout(callBack: AuthenticateDataSource.Logout) {
-        userLiveData.signOut()
+    userLiveData.signOut()
         callBack.onLoggedOut()
     }
 
@@ -85,7 +86,10 @@ class AuthenticateRepository(val userLiveData: FirebaseUserLiveData = FirebaseUs
 
     }
 
-    fun verifyPhoneNumberWithCode(code: String, callback: AuthenticateDataSource.VerifyPhoneNumber) {
+    fun verifyPhoneNumberWithCode(
+        code: String,
+        callback: AuthenticateDataSource.VerifyPhoneNumber
+    ) {
         callback.onVerify(userLiveData.verifyPhoneNumberWithCode(code))
     }
 
@@ -192,11 +196,24 @@ class AuthenticateRepository(val userLiveData: FirebaseUserLiveData = FirebaseUs
         }
     }
 
+    val authenticationState = userLiveData.map { user ->
+        when {
+            user == null -> AuthenticationState.UNAUTHENTICATED
+            user.phoneNumber.isNullOrEmpty() -> AuthenticationState.PHONE_UNVERIFIED
+            !user.isEmailVerified -> AuthenticationState.EMAIL_UNVERIFIED
+            else -> AuthenticationState.AUTHENTICATED
+        }
+    }
+
+    enum class AuthenticationState {
+        AUTHENTICATED, UNAUTHENTICATED, EMAIL_UNVERIFIED, PHONE_UNVERIFIED
+    }
+
     companion object {
         private lateinit var sInstance: AuthenticateRepository
 
         @MainThread
-        fun get(): AuthenticateRepository{
+        fun get(): AuthenticateRepository {
             sInstance = if (::sInstance.isInitialized) sInstance else AuthenticateRepository()
             return sInstance
         }
