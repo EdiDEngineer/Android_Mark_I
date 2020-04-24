@@ -32,8 +32,6 @@ import com.example.android.androidmarki.ui.base.BaseFragment
 class GuessItTitleFragment : BaseFragment() {
 
     private lateinit var binding: FragmentGuessItTitleBinding
-    override val isLandscape: Boolean
-        get() = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +44,6 @@ class GuessItTitleFragment : BaseFragment() {
             title = this@GuessItTitleFragment
         }
 
-        requireActivity().requestedOrientation
         return binding.root
     }
 

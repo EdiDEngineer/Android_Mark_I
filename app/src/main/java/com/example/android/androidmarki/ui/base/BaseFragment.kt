@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BaseFragment : Fragment() {
     private val builder: MaterialAlertDialogBuilder by lazy {
         MaterialAlertDialogBuilder(
-            requireContext(),
+            context,
             R.style.ThemeOverlay_App_MaterialAlertDialog
         )
     }
@@ -24,14 +24,14 @@ abstract class BaseFragment : Fragment() {
     // fun isUserLoggedIn(): Boolean = StorageUtil(context!!).currentUser != null
 
     fun showShortToast(@StringRes message: Int) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun showSnackBar(@StringRes error: Int) {
         Snackbar.make(layoutView, error, Snackbar.LENGTH_SHORT).show()
     }
 
-    fun showSnackBar(error: String, actionTitle: String, listener: View.OnClickListener) {
+    fun showSnackBar(@StringRes error: Int, actionTitle: String, listener: View.OnClickListener) {
         Snackbar.make(layoutView, error, Snackbar.LENGTH_LONG)
             .setAction(actionTitle, listener)
             .show()

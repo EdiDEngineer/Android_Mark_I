@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/resetFragment"
         android:name="com.example.android.androidmarki.ui.main.reset.ResetFragment"
-        android:label="ResetFragment"
+        android:label="@string/reset"
         tools:layout="@layout/fragment_reset"/>
 
     <activity
@@ -22,25 +22,23 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.android.androidmarki.ui.main.signUp.SignUpFragment"
-        android:label="fragment_signUp"
+        android:label="@string/signUp"
         tools:layout="@layout/fragment_sign_up"/>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.android.androidmarki.ui.main.login.LoginFragment"
-        android:label="fragment_login"
+        android:label="@string/login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:launchSingleTop="true"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_loginFragment_to_resetFragment"
             app:destination="@id/resetFragment"
-            app:launchSingleTop="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -50,14 +48,13 @@
     <fragment
         android:id="@+id/verificationFragment"
         android:name="com.example.android.androidmarki.ui.main.verify.VerificationFragment"
-        android:label="VerificationFragment"
+        android:label="@string/verification"
         tools:layout="@layout/fragment_verification">
         <action
             android:id="@+id/action_verificationFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpToInclusive="true"
             app:popUpTo="@id/loginFragment"
-            app:launchSingleTop="true"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"

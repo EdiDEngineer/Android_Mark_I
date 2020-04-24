@@ -116,4 +116,8 @@ class TriviaGameViewModel : BaseViewModel() {
             _gameUIData.value = GameUIData(error = R.string.invalid_choice)
         }
     }
+
+    fun onClear(){
+        _gameUIData.value = GameUIData()
+    }
 }

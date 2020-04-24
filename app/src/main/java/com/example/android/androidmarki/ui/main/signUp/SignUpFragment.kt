@@ -52,6 +52,7 @@ class SignUpFragment : BaseFragment() {
             if (it.isSuccessful) {
                 showShortToast(R.string.sign_up_success)
                 navController.navigate(R.id.verificationFragment)
+                binding.viewModel!!.clear()
             }
         })
 

@@ -26,6 +26,9 @@
     <string name="invalid_verify_info">Invalid Phone Number or Code</string>
     <string name="verification_failed">Verification Failed</string>
     <string name="invalid_code">Code must be 6 Numbers</string>
+    <string name="reset">Reset</string>
+    <string name="verification">Verification</string>
+    <string name="signUp">SignUp</string>
 
     <string name="login">Login</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -139,5 +142,51 @@
     <string name="word_is">The word is…</string>
     <string name="quote_format">\"%s\"</string>
     <string name="score_format">Current Score: %d</string>
+
+    <!-- Sleep tracker and fragment titles -->
+    <string name="sleep_tracker_name">Track My Sleep Quality</string>
+    <string name="sleep_tracker_fragment">Sleep Tracker</string>
+    <string name="sleep_quality_fragment">Sleep Quality</string>
+
+    <!-- sleep_tracker Button labels -->
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="clear">Clear</string>
+
+    <!-- sleep_tracker contentDescription strings for quality icons -->
+    <string name="quality_0">Sleep Quality 0</string>
+    <string name="quality_1">Sleep Quality 1</string>
+    <string name="quality_2">Sleep Quality 2</string>
+    <string name="quality_3">Sleep Quality 3</string>
+    <string name="quality_4">Sleep Quality 4</string>
+    <string name="quality_5">Sleep Quality 5</string>
+
+    <!-- sleep_tracker Output to TextView styled with a little HTML -->
+    <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
+    <string name="start_time"><![CDATA[<b>Start:</b>]]></string>
+    <string name="end_time"><![CDATA[<b>End:</b>]]></string>
+    <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
+    <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
+
+    <!-- sleep_tracker Sleep quality strings -->
+    <string name="how_was_hour_sleep">How was your sleep?</string>
+    <string name="zero_very_bad">Very bad</string>
+    <string name="one_poor">Poor</string>
+    <string name="two_soso">So-so</string>
+    <string name="three_ok">OK</string>
+    <string name="four_pretty_good">Pretty good</string>
+    <string name="five_excellent">Excellent!</string>
+
+    <!-- sleep_tracker Toast to play after Clear button has been pressed -->
+    <string name="cleared_message">All your data is gone forever.</string>
+    <string name="header_text">Sleep Results</string>
+    <string name="close">Close</string>
+    <string name="minutes_length">%d minutes on %s</string>
+
+    <string name="hours_length">%d hours on %s</string>
+    <string name="seconds_length">%d seconds on %s</string>
+    <string name="sleep_tracker">Sleep Tracker</string>
+    <string name="sleep_quality">Sleep Quality</string>
+
 
 </resources>

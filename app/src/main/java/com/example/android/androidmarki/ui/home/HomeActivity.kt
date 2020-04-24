@@ -1,7 +1,9 @@
 package com.example.android.androidmarki.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -41,7 +43,7 @@ class HomeActivity : BaseActivity() {
 lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)//issues with nav host fragment couldnt
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.includeAppBarHome.toolbar)
@@ -64,6 +66,7 @@ lateinit var drawerLayout: DrawerLayout
                 R.id.nav_dice_roller,
                 R.id.triviaTitleFragment,
                 R.id.guessItTitleDestination,
+                R.id.sleep_tracker_fragment,
                 R.id.nav_logout
             ), drawerLayout
         )
@@ -95,9 +98,8 @@ lateinit var drawerLayout: DrawerLayout
             finish()
             true
         }
-
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination|| nd.id == R.id.triviaTitleFragment) {
+            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.sleep_tracker_fragment || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination|| nd.id == R.id.triviaTitleFragment) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -110,11 +112,14 @@ lateinit var drawerLayout: DrawerLayout
                 fab.visibility = View.GONE
             }
         }
+
+        // Hide the keyboard.
+//        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.home_nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 

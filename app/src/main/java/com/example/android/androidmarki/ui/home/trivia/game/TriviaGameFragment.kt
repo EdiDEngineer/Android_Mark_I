@@ -47,15 +47,16 @@ class TriviaGameFragment : BaseFragment() {
                         binding.viewModel!!.numQuestions
                     )
                 )
+                binding.viewModel!!.onClear()
             }
 
             if (it.isLost) {
                 navController.navigate(TriviaGameFragmentDirections.actionGameFragmentToGameOverFragment())
+                binding.viewModel!!.onClear()
             }
             if (it.error != null) {
                 showSnackBar(it.error!!)
-                it.error = null
-            }
+                binding.viewModel!!.onClear() }
         })
         binding.viewModel!!.questionIndex.observe(viewLifecycleOwner, Observer {
             (activity as BaseActivity).supportActionBar?.title =

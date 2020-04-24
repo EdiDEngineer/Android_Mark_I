@@ -1,15 +1,15 @@
 package com.example.android.androidmarki.utils
 
-import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
-import com.google.android.material.navigation.NavigationView
+import com.example.android.androidmarki.R
+import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout
  */
 @BindingAdapter("afterTextChanged")
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
+    addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
             afterTextChanged.invoke(editable.toString())
         }
@@ -46,7 +46,6 @@ inline fun EditText.done(crossinline function: () -> Unit) {
             EditorInfo.IME_ACTION_UNSPECIFIED -> {
                 function()
             }
-
         }
         false
     }
@@ -57,4 +56,32 @@ fun ImageView.src(@DrawableRes drawable: Int) {
     setImageResource(drawable)
 }
 
+@BindingAdapter("sleepImage")
+fun ImageView.setSleepImage(item: SleepTrackerNight?) {
+    item?.let {
+        setImageResource(when (item.sleepQuality) {
+            0 -> R.drawable.sleep_tracker_ic_sleep_0
+            1 -> R.drawable.sleep_tracker_ic_sleep_1
+            2 -> R.drawable.sleep_tracker_ic_sleep_2
+            3 -> R.drawable.sleep_tracker_ic_sleep_3
+            4 -> R.drawable.sleep_tracker_ic_sleep_4
+            5 -> R.drawable.sleep_tracker_ic_sleep_5
+            else -> R.drawable.sleep_tracker_ic_sleep_active
+        })
+    }
+}
+
+@BindingAdapter("sleepDurationFormatted")
+fun TextView.setSleepDurationFormatted(item: SleepTrackerNight?) {
+    item?.let {
+        text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, context.resources)
+    }
+}
+
+@BindingAdapter("sleepQualityString")
+fun TextView.setSleepQualityString(item: SleepTrackerNight?) {
+    item?.let {
+        text = convertNumericQualityToString(item.sleepQuality, context.resources)
+    }
+}
 
