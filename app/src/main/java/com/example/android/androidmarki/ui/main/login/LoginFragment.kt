@@ -1,15 +1,20 @@
 package com.example.android.androidmarki.ui.main.login
 
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
+import com.example.android.androidmarki.data.repository.AuthenticationState
 import com.example.android.androidmarki.databinding.FragmentLoginBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModel
@@ -51,7 +56,7 @@ class LoginFragment : BaseFragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@LoginFragment, BaseViewModelFactory(
-                    LoginViewModel(AuthenticateRepository.get())
+                    LoginViewModel(AuthenticateRepository())
                 )
             ).get(
                 LoginViewModel::class.java
@@ -70,12 +75,12 @@ class LoginFragment : BaseFragment() {
         binding.viewModel!!.authenticationState.observe(
             viewLifecycleOwner,
             Observer { authenticationState ->
-                if (authenticationState == AuthenticateRepository.AuthenticationState.AUTHENTICATED || authenticationState == AuthenticateRepository.AuthenticationState.EMAIL_UNVERIFIED) {
+                if (authenticationState == AuthenticationState.AUTHENTICATED || authenticationState == AuthenticationState.EMAIL_UNVERIFIED) {
                     showShortToast(R.string.login_successful)
                     navController.navigate(R.id.home_activity)
                     requireActivity().finish()
 
-                } else if (authenticationState == AuthenticateRepository.AuthenticationState.PHONE_UNVERIFIED) {
+                } else if (authenticationState == AuthenticationState.PHONE_UNVERIFIED) {
                     showShortToast(R.string.login_successful)
                     navController.navigate(R.id.verificationFragment)
                 }
@@ -91,17 +96,17 @@ class LoginFragment : BaseFragment() {
 
         })
 
-        var passwordValid = binding.viewModel!!.loginUIData.isDataValid
-        var usernameValid = binding.viewModel!!.loginUIData.isDataValid
-        binding.viewModel!!.loginUIData.passwordError.observe(viewLifecycleOwner, Observer {
-            passwordValid = it == 0
-            binding.viewModel!!.loginUIData.isDataValid = passwordValid && usernameValid
-        })
-        binding.viewModel!!.loginUIData.usernameError.observe(viewLifecycleOwner, Observer {
-            usernameValid = it == 0
-            binding.viewModel!!.loginUIData.isDataValid = passwordValid && usernameValid
-
-        })
+        binding.loginUsername.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        binding.loginPassword.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val avd = context?.let { getDrawable(it,R.drawable.avd_android_design) } as AnimatedVectorDrawable?
+            binding.animate.setImageDrawable(avd)
+            avd?.start()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -117,6 +122,8 @@ class LoginFragment : BaseFragment() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Timber.tag(TAG).w(e, "Google sign in failed")
+                showSnackBar(R.string.account_failed)
+
                 // ...
             }
         }

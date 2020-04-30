@@ -14,22 +14,26 @@
             android:title="@string/dice_roller" />
         <item
             android:id="@+id/nav_trivia"
-            android:icon="@drawable/trivia_icon_round"
+            android:icon="@drawable/trivia_ic"
             android:title="@string/android_trivia" />
         <item
             android:id="@+id/nav_dessert_pusher"
-            android:icon="@drawable/dessert_pusher_ic_round"
+            android:icon="@drawable/dessert_pusher_ic"
             android:title="@string/dessert_pusher" />
 
         <item
             android:id="@+id/nav_guess_it"
-            android:icon="@drawable/guess_it_ic_round"
+            android:icon="@drawable/guess_it_ic"
             android:title="@string/guess_it" />
         <item
             android:id="@+id/nav_sleep_tracker"
-            android:icon="@drawable/sleep_tracker_round"
+            android:icon="@drawable/sleep_tracker_ic"
             android:title="@string/sleep_tracker" />
 
+        <item
+            android:id="@+id/nav_mars_real_estate"
+            android:icon="@drawable/mars_real_estate_ic"
+            android:title="@string/mars_real_estate" />
 
 
     </group>

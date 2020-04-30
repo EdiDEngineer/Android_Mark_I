@@ -19,6 +19,7 @@ package com.example.android.androidmarki.ui.home.sleepTracker.sleepquality
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.androidmarki.data.local.dao.SleepTrackerDao
 import com.example.android.androidmarki.ui.base.BaseViewModel
 import kotlinx.coroutines.*
@@ -34,10 +35,7 @@ class SleepTrackerSleepQualityViewModel(
 
     /** Coroutine setup variables */
 
-    /**
-     * viewModelJob allows us to cancel all coroutines started by this ViewModel.
-     */
-    private val viewModelJob = Job()
+
 
     /**
      * A [CoroutineScope] keeps track of all coroutines started by this ViewModel.
@@ -49,7 +47,6 @@ class SleepTrackerSleepQualityViewModel(
      * the main thread on Android. This is a sensible default because most coroutines started by
      * a [ViewModel] update the UI after performing some processing.
      */
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     /**
      * Variable that tells the fragment whether it should navigate to [SleepTrackerFragment].
@@ -72,7 +69,6 @@ class SleepTrackerSleepQualityViewModel(
      */
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
     }
 
     /**
@@ -88,7 +84,7 @@ class SleepTrackerSleepQualityViewModel(
      * Then navigates back to the SleepTrackerFragment.
      */
     fun onSetSleepQuality(quality: Int) {
-        uiScope.launch {
+        viewModelScope.launch {
             // IO is a thread pool for running operations that access the disk, such as
             // our Room database.
             withContext(Dispatchers.IO) {

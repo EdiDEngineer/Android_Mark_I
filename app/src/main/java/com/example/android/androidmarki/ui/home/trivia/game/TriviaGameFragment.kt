@@ -55,7 +55,7 @@ class TriviaGameFragment : BaseFragment() {
                 binding.viewModel!!.onClear()
             }
             if (it.error != null) {
-                showSnackBar(it.error!!)
+                showSnackBar(it.error)
                 binding.viewModel!!.onClear() }
         })
         binding.viewModel!!.questionIndex.observe(viewLifecycleOwner, Observer {

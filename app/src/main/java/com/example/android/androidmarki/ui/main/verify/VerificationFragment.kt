@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
+import com.example.android.androidmarki.data.repository.AuthenticationState
 import com.example.android.androidmarki.databinding.FragmentVerificationBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseFragment
@@ -34,7 +36,7 @@ class VerificationFragment : BaseFragment() {
         binding = FragmentVerificationBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@VerificationFragment, BaseViewModelFactory(
-                    VerifyViewModel(AuthenticateRepository.get())
+                    VerifyViewModel(AuthenticateRepository())
                 )
             ).get(
                 VerifyViewModel::class.java
@@ -76,23 +78,18 @@ class VerificationFragment : BaseFragment() {
         })
 
         binding.viewModel!!.authenticationState.observe(viewLifecycleOwner, Observer {
-            if (it == AuthenticateRepository.AuthenticationState.UNAUTHENTICATED){
+            if (it == AuthenticationState.UNAUTHENTICATED){
                 navController.navigate(VerificationFragmentDirections.actionVerificationFragmentToLoginFragment())
             }
         })
 
-        var phoneNumberValid = binding.viewModel!!.verifyUIData.isDataValid
-        var codeValid = binding.viewModel!!.verifyUIData.isDataValid
-        binding.viewModel!!.verifyUIData.phoneNumberError.observe(viewLifecycleOwner, Observer {
-            phoneNumberValid = it == 0
-            binding.viewModel!!.verifyUIData.isDataValid = phoneNumberValid && codeValid
-        })
-        binding.viewModel!!.verifyUIData.codeError.observe(viewLifecycleOwner, Observer {
-            codeValid = it == 0
-            binding.viewModel!!.verifyUIData.isDataValid = phoneNumberValid && codeValid
 
-        })
-
+        binding.verifyPhoneNo.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        binding.verifyCode.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
     }
 
     companion object {

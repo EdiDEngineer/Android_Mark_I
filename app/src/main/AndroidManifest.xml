@@ -27,11 +27,9 @@
             android:name=".ui.home.HomeActivity"
             android:label="@string/title_activity_home"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
            />
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
           />
 
         <activity

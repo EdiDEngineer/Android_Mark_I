@@ -1,15 +1,11 @@
 package com.example.android.androidmarki.ui.home
 
-import android.content.Context
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -20,12 +16,9 @@ import com.example.android.androidmarki.databinding.ActivityHomeBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
 import com.example.android.androidmarki.ui.home.home.HomeViewModel
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.content_home.*
 
 
 class HomeActivity : BaseActivity() {
@@ -37,10 +30,10 @@ class HomeActivity : BaseActivity() {
 //remember
     }
     private val navController by lazy {
-        home_nav_host_fragment.findNavController()
+        supportFragmentManager.findFragmentById(R.id.home_nav_host_fragment)!!.findNavController()
     }
 
-lateinit var drawerLayout: DrawerLayout
+    lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -67,7 +60,7 @@ lateinit var drawerLayout: DrawerLayout
                 R.id.triviaTitleFragment,
                 R.id.guessItTitleDestination,
                 R.id.sleep_tracker_fragment,
-                R.id.nav_logout
+                R.id.marsRealEstateOverviewFragment
             ), drawerLayout
         )
 
@@ -83,12 +76,8 @@ lateinit var drawerLayout: DrawerLayout
 //                }
 //
 //            })
-        val bottomNavView: BottomNavigationView = binding.bottomNavView
 
-        val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(R.id.navigation_dashboard)
-        badge.isVisible = true
 
-        bottomNavView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -99,17 +88,11 @@ lateinit var drawerLayout: DrawerLayout
             true
         }
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.sleep_tracker_fragment || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination|| nd.id == R.id.triviaTitleFragment) {
+            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.sleep_tracker_fragment || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination || nd.id == R.id.triviaTitleFragment || nd.id == R.id.marsRealEstateOverviewFragment
+            ) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            }
-            if (nd.id == R.id.nav_home || nd.id == R.id.navigation_dashboard || nd.id == R.id.navigation_notifications) {
-                bottomNavView.visibility = View.VISIBLE
-                fab.visibility = View.VISIBLE
-            } else {
-                bottomNavView.visibility = View.GONE
-                fab.visibility = View.GONE
             }
         }
 

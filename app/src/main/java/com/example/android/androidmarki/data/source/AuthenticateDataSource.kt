@@ -1,58 +1,41 @@
 package com.example.android.androidmarki.data.source
 
-import com.example.android.androidmarki.data.Result
+import com.example.android.androidmarki.ui.base.BaseActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-interface AuthenticateDataSource  {
-    interface Login   {
-        fun onLoggedIn(Result: Result.Success<Task<AuthResult>>)
-        fun onFail(e: Result.Error)
-    }
+interface AuthenticateDataSource {
 
-    interface Logout   {
-        fun onLoggedOut()
-    }
+    suspend fun signInWithGoogle(acct: GoogleSignInAccount): Task<AuthResult>
 
-    interface SignUp   {
-        fun onSignedUp(Result: Result.Success<Task<AuthResult>>)
-        fun onFail(e: Result.Error)
-    }
+    suspend fun createAccount(email: String, password: String): Task<AuthResult>
 
-    interface SendPhoneNumberCode   {
-        fun onSentCode()
-    }
-    interface VerifyPhoneNumber   {
-        fun onVerify(credential: PhoneAuthCredential)
-    }
+    suspend fun signIn(email: String, password: String): Task<AuthResult>
 
-    interface LinkPhoneNumber   {
-        fun onLinked(Result: Result.Success<Task<AuthResult>>)
-        fun onFail(e: Result.Error)
-    }
+    fun signOut()
 
-    interface LoginWithGoogle   {
-        fun onLoggedIn(Result: Result.Success<Task<AuthResult>>)
-        fun onFail(e: Result.Error)
-    }
+   suspend fun beginVerifyPhoneNumber(
+        baseActivity: BaseActivity,
+        phoneNumber: String)
 
-    interface VerifyEmail   {
-        fun onVerify(Result: Result.Success<Task<Void>>)
-        fun onFail(e: Result.Error)
-    }
+    suspend  fun resendVerificationCode(
+        baseActivity: BaseActivity,
+        phoneNumber: String
+    )
 
-    interface DeleteUser   {
-        fun onDeleted(Result: Result.Success<Task<Void>>)
-        fun onFail(e: Result.Error)
-    }
+    fun verifyPhoneNumberWithCode( code: String): PhoneAuthCredential
 
-    interface ResetPassword   {
-        fun onReset(Result: Result.Success<Task<Void>>)
-        fun onFail(e: Result.Error)
-    }
+    suspend fun linkPhoneNumberWithUserEmail(credential: PhoneAuthCredential): Task<AuthResult>
+
+    suspend fun verifyEmail(): Task<Void>
+
+    suspend fun resetPassword(emailAddress: String): Task<Void>
+
 }
 

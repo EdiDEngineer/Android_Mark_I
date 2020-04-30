@@ -45,7 +45,6 @@ class SleepTrackerSleepDetailViewModel(
     /**
      * viewModelJob allows us to cancel all coroutines started by this ViewModel.
      */
-    private val viewModelJob = Job()
 
     private val night = MediatorLiveData<SleepTrackerNight>()
 
@@ -76,7 +75,6 @@ class SleepTrackerSleepDetailViewModel(
      */
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
     }
 
 

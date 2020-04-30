@@ -24,12 +24,14 @@
     <string name="verify_email_failed">"Verify Email Link failed"</string>
     <string name="invalid_phone_number">Invalid Phone Number</string>
     <string name="invalid_verify_info">Invalid Phone Number or Code</string>
-    <string name="verification_failed">Verification Failed</string>
+    <string name="number_link_failed">Phone number Link Failed</string>
     <string name="invalid_code">Code must be 6 Numbers</string>
     <string name="reset">Reset</string>
     <string name="verification">Verification</string>
     <string name="signUp">SignUp</string>
-
+    <string name="network_error">Check Network Connectivity…</string>
+    <string name="details_error">Invalid Account Details</string>
+    <string name="details_error_phone">Invalid Number or code Code Detail</string>
     <string name="login">Login</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -161,12 +163,6 @@
     <string name="quality_4">Sleep Quality 4</string>
     <string name="quality_5">Sleep Quality 5</string>
 
-    <!-- sleep_tracker Output to TextView styled with a little HTML -->
-    <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
-    <string name="start_time"><![CDATA[<b>Start:</b>]]></string>
-    <string name="end_time"><![CDATA[<b>End:</b>]]></string>
-    <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
-    <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
 
     <!-- sleep_tracker Sleep quality strings -->
     <string name="how_was_hour_sleep">How was your sleep?</string>
@@ -188,5 +184,16 @@
     <string name="sleep_tracker">Sleep Tracker</string>
     <string name="sleep_quality">Sleep Quality</string>
 
+    <!-- sleep_tracker Toast to play after Clear button has been pressed -->
+    <string name="mars_real_estate_name">Real Estate on Mars</string>
+    <string name="show_all">Show all</string>
+    <string name="show_rent">Rent</string>
+    <string name="show_buy">Buy</string>
+    <string name="type_rent">Rent</string>
+    <string name="type_sale">Sale</string>
+    <string name="display_type">For %s</string>
+    <string name="display_price_monthly_rental">$%,.0f/month</string>
+    <string name="display_price">$%,.0f</string>
+    <string name="mars_real_estate">Mars Real Estate</string>
 
 </resources>

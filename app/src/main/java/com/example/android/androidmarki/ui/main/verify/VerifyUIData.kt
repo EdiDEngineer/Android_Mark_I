@@ -10,10 +10,10 @@ data class VerifyUIData(
     val phoneNumber: MutableLiveData<String> = MutableLiveData<String>(),
     val code: MutableLiveData<String> = MutableLiveData<String>(),
     val phoneNumberError: LiveData<Int> = Transformations.map(phoneNumber) {
-        if (!it.startsWith("+")||it.length<12) R.string.invalid_number else 0
+        if (!it.startsWith("+")||it.length<12) R.string.invalid_number else null
     },
     val codeError: LiveData<Int> = Transformations.map(code) {
-        if (it.length!=6) R.string.invalid_code else 0
+        if (it.length!=6) R.string.invalid_code else null
     },
     var isDataValid:Boolean = false,
     val isCode : MutableLiveData<Boolean> = MutableLiveData<Boolean>()

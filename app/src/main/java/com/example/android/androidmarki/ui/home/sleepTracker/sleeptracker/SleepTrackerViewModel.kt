@@ -17,15 +17,11 @@
 package com.example.android.androidmarki.ui.home.sleepTracker.sleeptracker
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.example.android.androidmarki.AndroidMarkI
 import com.example.android.androidmarki.data.local.dao.SleepTrackerDao
 import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
 import com.example.android.androidmarki.ui.base.BaseViewModel
-import com.example.android.androidmarki.utils.formatNights
 import kotlinx.coroutines.*
 
 /**
@@ -35,10 +31,7 @@ import kotlinx.coroutines.*
 class SleepTrackerViewModel(
         val database: SleepTrackerDao) :  BaseViewModel() {
 
-    /**
-     * viewModelJob allows us to cancel all coroutines started by this ViewModel.
-     */
-    private var viewModelJob = Job()
+
 
     /**
      * A [CoroutineScope] keeps track of all coroutines started by this ViewModel.
@@ -50,18 +43,11 @@ class SleepTrackerViewModel(
      * the main thread on Android. This is a sensible default because most coroutines started by
      * a [ViewModel] update the UI after performing some processing.
      */
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private var tonight = MutableLiveData<SleepTrackerNight?>()
 
     val nights = database.getAllNights()
 
-    /**
-     * Converted nights to Spanned for displaying.
-     */
-    val nightsString = Transformations.map(nights) { nights ->
-        formatNights(nights, getApplication<AndroidMarkI>().resources)
-    }
 
     /**
      * If tonight has not been set, then the START button should be visible.
@@ -148,7 +134,7 @@ class SleepTrackerViewModel(
     }
 
     private fun initializeTonight() {
-        uiScope.launch {
+       viewModelScope.launch {
             tonight.value = getTonightFromDatabase()
         }
     }
@@ -192,7 +178,7 @@ class SleepTrackerViewModel(
      * Executes when the START button is clicked.
      */
     fun onStartTracking() {
-        uiScope.launch {
+        viewModelScope.launch {
             // Create a new night, which captures the current time,
             // and insert it into the database.
             val newNight = SleepTrackerNight()
@@ -207,7 +193,7 @@ class SleepTrackerViewModel(
      * Executes when the STOP button is clicked.
      */
     fun onStopTracking() {
-        uiScope.launch {
+        viewModelScope.launch {
             // In Kotlin, the return@label syntax is used for specifying which function among
             // several nested ones this statement returns from.
             // In this case, we are specifying to return from launch(),
@@ -228,7 +214,9 @@ class SleepTrackerViewModel(
      * Executes when the CLEAR button is clicked.
      */
     fun onClear() {
-        uiScope.launch {
+        // Coroutine that will be canceled when the ViewModel is cleared.
+
+        viewModelScope.launch {
             // Clear the database table.
             clear()
 
@@ -248,6 +236,5 @@ class SleepTrackerViewModel(
      */
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
     }
 }

@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
+import com.example.android.androidmarki.data.repository.AuthenticationState
 import com.example.android.androidmarki.databinding.FragmentSignUpBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
@@ -26,7 +28,7 @@ class SignUpFragment : BaseFragment() {
         binding = FragmentSignUpBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@SignUpFragment, BaseViewModelFactory(
-                    SignUpViewModel(AuthenticateRepository.get())
+                    SignUpViewModel(AuthenticateRepository())
                 )
             ).get(
                 SignUpViewModel::class.java
@@ -52,21 +54,19 @@ class SignUpFragment : BaseFragment() {
             if (it.isSuccessful) {
                 showShortToast(R.string.sign_up_success)
                 navController.navigate(R.id.verificationFragment)
-                binding.viewModel!!.clear()
             }
         })
-
-        var passwordValid = binding.viewModel!!.signUpUIData.isDataValid
-        var usernameValid = binding.viewModel!!.signUpUIData.isDataValid
-        binding.viewModel!!.signUpUIData.passwordError.observe(viewLifecycleOwner, Observer {
-            passwordValid = it == 0
-            binding.viewModel!!.signUpUIData.isDataValid = passwordValid && usernameValid
+        binding.viewModel!!.authenticationState.observe(viewLifecycleOwner, Observer {
+            if (it == AuthenticationState.PHONE_UNVERIFIED) {
+                binding.viewModel!!.verifyEmail()
+            }
         })
-        binding.viewModel!!.signUpUIData.usernameError.observe(viewLifecycleOwner, Observer {
-            usernameValid = it == 0
-            binding.viewModel!!.signUpUIData.isDataValid = passwordValid && usernameValid
-
-        })
+        binding.signUpUsername.doAfterTextChanged {
+            binding.viewModel!!.validate()
+        }
+        binding.signUpPassword.doAfterTextChanged {
+            binding.viewModel!!.validate()
+        }
     }
 
     companion object {

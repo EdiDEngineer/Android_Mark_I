@@ -9,6 +9,7 @@ import com.example.android.androidmarki.R
 data class ResetUIData(
     val username: MutableLiveData<String> = MutableLiveData<String>(),
     val usernameError: LiveData<Int> = Transformations.map(username) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(it).matches()) R.string.invalid_username else 0
-    }
+        if (!Patterns.EMAIL_ADDRESS.matcher(it).matches()) R.string.invalid_username else null
+    },
+    var isDataValid: Boolean = false
 )

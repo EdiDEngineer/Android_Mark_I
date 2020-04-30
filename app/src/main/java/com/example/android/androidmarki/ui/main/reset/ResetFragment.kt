@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,7 +25,7 @@ class ResetFragment : BaseFragment() {
         binding = FragmentResetBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@ResetFragment, BaseViewModelFactory(
-                    ResetViewModel(AuthenticateRepository.get())
+                    ResetViewModel(AuthenticateRepository())
                 )
             ).get(
                 ResetViewModel::class.java
@@ -50,6 +51,12 @@ class ResetFragment : BaseFragment() {
                 navController.popBackStack(R.id.loginFragment, false)
             }
         })
+
+
+        binding.resetUsername.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+
     }
 
     companion object {

@@ -40,13 +40,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/animate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:tint="@color/colorPrimary"
+                    app:layout_constraintEnd_toStartOf="@id/guide"
+                    app:layout_constraintTop_toBottomOf="@id/and"
+            />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="1.01"
+                    android:orientation="vertical"
+                    />
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/and"
                     android:layout_width="0dp"
                     android:layout_height="192dp"
                     android:layout_margin="16dp"
                     app:tint="@color/colorPrimary"
+                    app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -56,7 +72,7 @@
                     android:id="@+id/welcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="56dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                     android:text="@string/welcome_back"
                     app:layout_constraintEnd_toEndOf="parent"

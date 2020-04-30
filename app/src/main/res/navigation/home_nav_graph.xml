@@ -34,17 +34,7 @@
         android:label="@string/dessert_pusher"
         tools:layout="@layout/fragment_dessert_pusher" />
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.android.androidmarki.ui.home.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.android.androidmarki.ui.home.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/action_settings"
@@ -65,13 +55,11 @@
         tools:layout="@layout/fragment_dice"
         />
     <include
-        android:id="@+id/nav_trivia"
         app:graph="@navigation/trivia_nav_graph" />
     <include
-        android:id="@+id/nav_guess_it"
         app:graph="@navigation/guess_it_nav_graph" />
-    <include     android:id="@+id/nav_sleep_tracker"
-
+    <include
         app:graph="@navigation/sleep_tracker_nav_graph" />
+    <include app:graph="@navigation/mars_real_estate_nav_graph" />
 
 </navigation>

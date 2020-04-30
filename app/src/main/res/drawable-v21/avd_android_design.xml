@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/android_design">
+
+    <target
+        android:name="andro"
+        android:animation="@animator/andro" />
+
+    <target
+        android:name="id"
+        android:animation="@animator/id" />
+
+    <target
+        android:name="a_stroke"
+        android:animation="@animator/a_stroke" />
+
+    <target
+        android:name="i_dot"
+        android:animation="@animator/i_dot" />
+
+
+</animated-vector>

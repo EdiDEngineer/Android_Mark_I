@@ -2,14 +2,17 @@ package com.example.android.androidmarki.ui.main.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.android.androidmarki.R
-import com.example.android.androidmarki.data.Result
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
-import com.example.android.androidmarki.data.source.AuthenticateDataSource
 import com.example.android.androidmarki.ui.base.BaseViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _loginResult = MutableLiveData<LoginResult>()
@@ -26,27 +29,37 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
             _loginResult.value = LoginResult(
                 isLoading = true
             )
-            repository.login(
-                loginUIData.username.value!!,
-                loginUIData.password.value!!,
-                object : AuthenticateDataSource.Login {
-                    override fun onLoggedIn(Result: Result.Success<Task<AuthResult>>) {
-                        Result.data.addOnCompleteListener {
-                            if (!it.isSuccessful) {
-                                _loginResult.value = LoginResult(
-                                    error = R.string.account_failed,
-                                    exception = it.exception
-                                )
-                            }
-                        }
-
-                    }
-
-                    override fun onFail(e: Result.Error) {
-                        _loginResult.value = LoginResult(error = R.string.login_failed)
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    try {
+                        repository.signIn(
+                            loginUIData.username.value!!,
+                            loginUIData.password.value!!
+                        ).await()
+                    } catch (e: FirebaseNetworkException) {
+                        _loginResult.postValue(
+                            LoginResult(
+                                error = R.string.network_error,
+                                exception = e
+                            )
+                        )
+                    } catch (e: FirebaseAuthInvalidCredentialsException) {
+                        _loginResult.postValue(
+                            LoginResult(
+                                error = R.string.details_error,
+                                exception = e
+                            )
+                        )
+                    } catch (e: Exception) {
+                        _loginResult.postValue(
+                            LoginResult(
+                                error = R.string.account_failed,
+                                exception = e
+                            )
+                        )
                     }
                 }
-            )
+            }
         } else {
             _loginResult.value = LoginResult(error = R.string.invalid_details)
         }
@@ -56,21 +69,36 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
         _loginResult.value = LoginResult(
             isLoading = true
         )
-        repository.loginWithGoogle(account, object : AuthenticateDataSource.LoginWithGoogle {
-            override fun onLoggedIn(Result: Result.Success<Task<AuthResult>>) {
-                Result.data.addOnCompleteListener {
-                    if (!it.isSuccessful) {
-                        _loginResult.value =
-                            LoginResult(error = R.string.account_failed, exception = it.exception)
-                    }
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    repository.signInWithGoogle(
+                        account
+                    ).await()
+                } catch (e: FirebaseNetworkException) {
+                    _loginResult.postValue(
+                        LoginResult(
+                            error = R.string.network_error,
+                            exception = e
+                        )
+                    )
+                } catch (e: FirebaseAuthInvalidCredentialsException) {
+                    _loginResult.postValue(
+                        LoginResult(
+                            error = R.string.details_error,
+                            exception = e
+                        )
+                    )
+                } catch (e: Exception) {
+                    _loginResult.postValue(
+                        LoginResult(
+                            error = R.string.account_failed,
+                            exception = e
+                        )
+                    )
                 }
             }
-
-            override fun onFail(e: Result.Error) {
-                _loginResult.value = LoginResult(error = R.string.login_failed)
-            }
         }
-        )
     }
 
 
@@ -78,6 +106,10 @@ class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewM
         _loginResult.value = LoginResult()
     }
 
+    fun validate() {
+        loginUIData.isDataValid =
+            loginUIData.passwordError.value == null && loginUIData.usernameError.value == null
+    }
 }
 
 
