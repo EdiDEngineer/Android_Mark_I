@@ -20,7 +20,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.android.androidmarki.data.local.dao.DevbyteViewerVideoDao
 import com.example.android.androidmarki.data.local.dao.SleepTrackerDao
+import com.example.android.androidmarki.data.local.entity.DatabaseVideo
 import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
 
 /**
@@ -30,13 +32,15 @@ import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [SleepTrackerNight::class], version = 1, exportSchema = false)
+@Database(entities = [SleepTrackerNight::class, DatabaseVideo::class], version = 1, exportSchema = false)
 abstract class AndroidMarkIDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
      */
     abstract val sleepTrackerDao: SleepTrackerDao
+
+    abstract val videoDao: DevbyteViewerVideoDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
@@ -55,7 +59,7 @@ abstract class AndroidMarkIDatabase : RoomDatabase() {
          *  thread to shared data are visible to other threads.
          */
         @Volatile
-        private var INSTANCE: AndroidMarkIDatabase? = null
+        private lateinit var INSTANCE: AndroidMarkIDatabase
 
         /**
          * Helper function to get the database.
@@ -74,20 +78,20 @@ abstract class AndroidMarkIDatabase : RoomDatabase() {
          *
          * @param context The application context Singleton, used to get access to the filesystem.
          */
-        fun getInstance(context: Context): AndroidMarkIDatabase {
+
+        fun getDatabaseInstance(context: Context): AndroidMarkIDatabase {
             // Multiple threads can ask for the database at the same time, ensure we only initialize
             // it once by using synchronized. Only one thread may enter a synchronized block at a
             // time.
             synchronized(this) {
                 // Copy the current value of INSTANCE to a local variable so Kotlin can smart cast.
                 // Smart cast is only available to local variables.
-                var instance = INSTANCE
                 // If instance is `null` make a new database instance.
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
+                if (!::INSTANCE.isInitialized) {
+                   INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
                             AndroidMarkIDatabase::class.java,
-                            "sleep_history_database"
+                            "Android_MarkI_Database"
                     )
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this lesson. You can learn more about
@@ -95,11 +99,10 @@ abstract class AndroidMarkIDatabase : RoomDatabase() {
                             // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
                             .fallbackToDestructiveMigration()
                             .build()
-                    // Assign INSTANCE to the newly created database.
-                    INSTANCE = instance
+
                 }
                 // Return instance; smart cast to be non-null.
-                return instance
+                return INSTANCE
             }
         }
     }

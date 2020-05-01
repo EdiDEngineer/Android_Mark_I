@@ -196,4 +196,8 @@
     <string name="display_price">$%,.0f</string>
     <string name="mars_real_estate">Mars Real Estate</string>
 
+    <!-- DevByte Viewer -->
+
+    <string name="devByte_viewer_name">DevByte Viewer</string>
+
 </resources>

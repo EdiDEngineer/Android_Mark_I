@@ -60,7 +60,7 @@ class SleepTrackerSleepDetailFragment : BaseFragment() {
                 BaseViewModelFactory(
                     SleepTrackerSleepDetailViewModel(
                         navArgs<SleepTrackerSleepDetailFragmentArgs>().value.sleepNightKey,
-                        AndroidMarkIDatabase.getInstance(requireActivity().application).sleepTrackerDao
+                        AndroidMarkIDatabase.getDatabaseInstance(requireActivity().application).sleepTrackerDao
                     )
                 )
             ).get(

@@ -55,7 +55,7 @@ class SleepTrackerFragment : BaseFragment() {
             viewModel =
                 ViewModelProvider(
                     this@SleepTrackerFragment, BaseViewModelFactory(
-                        SleepTrackerViewModel(AndroidMarkIDatabase.getInstance(requireActivity().application).sleepTrackerDao)
+                        SleepTrackerViewModel(AndroidMarkIDatabase.getDatabaseInstance(requireActivity().application).sleepTrackerDao)
                     )
                 ).get(SleepTrackerViewModel::class.java).apply {
                     // Add an Observer on the state variable for showing a Snackbar message

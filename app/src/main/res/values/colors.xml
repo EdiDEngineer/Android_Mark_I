@@ -32,4 +32,9 @@
     <color name="grey_button_color">#606060</color>
     <color name="white_text_color">#ffffff</color>
 
+    <!-- DevByte Viewer -->
+
+    <color name="background_grey">#ffDDDDDD</color>
+    <color name="text_light">#ff666666</color>
+    <color name="text_black">#ff222222</color>
 </resources>

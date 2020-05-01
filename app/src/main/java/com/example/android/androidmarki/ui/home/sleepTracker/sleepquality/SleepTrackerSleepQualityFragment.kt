@@ -60,7 +60,7 @@ class SleepTrackerSleepQualityFragment : BaseFragment() {
                             SleepTrackerSleepQualityViewModel(
                                 SleepTrackerSleepQualityFragmentArgs.fromBundle(requireArguments()).sleepNightKey
                                 ,
-                                AndroidMarkIDatabase.getInstance(requireActivity().application).sleepTrackerDao
+                                AndroidMarkIDatabase.getDatabaseInstance(requireActivity().application).sleepTrackerDao
                             )
                         )
                     ).get(SleepTrackerSleepQualityViewModel::class.java).apply {

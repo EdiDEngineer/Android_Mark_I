@@ -60,7 +60,8 @@ class HomeActivity : BaseActivity() {
                 R.id.triviaTitleFragment,
                 R.id.guessItTitleDestination,
                 R.id.sleep_tracker_fragment,
-                R.id.marsRealEstateOverviewFragment
+                R.id.marsRealEstateOverviewFragment,
+                R.id.devByte
             ), drawerLayout
         )
 
@@ -88,7 +89,9 @@ class HomeActivity : BaseActivity() {
             true
         }
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.sleep_tracker_fragment || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination || nd.id == R.id.triviaTitleFragment || nd.id == R.id.marsRealEstateOverviewFragment
+            if (nd.id == R.id.nav_home || nd.id == R.id.nav_dessert_pusher || nd.id == R.id.sleep_tracker_fragment || nd.id == R.id.nav_dice_roller || nd.id == R.id.guessItTitleDestination || nd.id == R.id.triviaTitleFragment
+                || nd.id == R.id.marsRealEstateOverviewFragment || nd.id == R.id.devByte
+
             ) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             } else {

@@ -1,4 +1,4 @@
-package com.example.android.androidmarki.utils
+package com.example.android.androidmarki.util
 
 import androidx.room.TypeConverter
 import java.util.*

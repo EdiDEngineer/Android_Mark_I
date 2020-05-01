@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.androidmarki.utils
+package com.example.android.androidmarki.util
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
@@ -98,4 +98,38 @@ fun convertNumericQualityToString(quality: Int, resources: Resources): String {
 fun convertLongToDateString(systemTime: Long): String {
     return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
             .format(systemTime).toString()
+}
+
+
+
+private val PUNCTUATION = listOf(", ", "; ", ": ", " ")
+
+/**
+ * Truncate long text with a preference for word boundaries and without trailing punctuation.
+ */
+fun String.smartTruncate(length: Int): String {
+    val words = split(" ")
+    var added = 0
+    var hasMore = false
+    val builder = StringBuilder()
+    for (word in words) {
+        if (builder.length > length) {
+            hasMore = true
+            break
+        }
+        builder.append(word)
+        builder.append(" ")
+        added += 1
+    }
+
+    PUNCTUATION.map {
+        if (builder.endsWith(it)) {
+            builder.replace(builder.length - it.length, builder.length, "")
+        }
+    }
+
+    if (hasMore) {
+        builder.append("...")
+    }
+    return builder.toString()
 }

@@ -1,4 +1,4 @@
-package com.example.android.androidmarki.utils
+package com.example.android.androidmarki.util
 
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -76,30 +76,30 @@ fun TextView.setSleepQualityString(item: SleepTrackerNight?) {
 }
 
 
-
 /**
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
-    val adapter = recyclerView.adapter as MarsRealEstatePhotoGridAdapter
+fun RecyclerView.bindRecyclerView(data: List<MarsProperty>?) {
+    val adapter = adapter as MarsRealEstatePhotoGridAdapter
     adapter.submitList(data)
 }
 
 /**
  * Uses the Glide library to load an image by URL into an [ImageView]
  */
-@BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, imgUrl: String?) {
+@BindingAdapter("bindTmageUrl")
+fun ImageView.bindImage(imgUrl: String?) {
     imgUrl?.let {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-        Glide.with(imgView.context)
+        Glide.with(context)
             .load(imgUri)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
-            .into(imgView)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(this)
     }
 }
 
@@ -110,20 +110,35 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
  * hides the image view.
  */
 @BindingAdapter("marsApiStatus")
-fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
+fun ImageView.bindStatus(status: MarsApiStatus?) {
     when (status) {
         MarsApiStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.loading_animation)
         }
         MarsApiStatus.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_connection_error)
         }
         MarsApiStatus.DONE -> {
-            statusImageView.visibility = View.GONE
+            visibility = View.GONE
         }
     }
 }
 
 
+/**
+ * Binding adapter used to hide the spinner once data is available
+ */
+@BindingAdapter("goneIfNotNull")
+fun View.goneIfNotNull(it: Any?) {
+    visibility = if (it != null) View.GONE else View.VISIBLE
+}
+
+/**
+ * Binding adapter used to display images from URL using Glide
+ */
+@BindingAdapter("imageUrl")
+fun ImageView.setImageUrl(url: String) {
+    Glide.with(context).load(url).into(this)
+}

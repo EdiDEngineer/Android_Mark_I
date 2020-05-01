@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright 2018, The Android Open Source Project
   ~
@@ -17,21 +16,15 @@
   ~
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="property"
-            type="com.example.android.androidmarki.data.remote.network.MarsProperty" />
-    </data>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/mars_image"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        app:bindTmageUrl="@{property.imgSrcUrl}"
-        tools:src="@tools:sample/backgrounds/scenic"/>
-</layout>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_devbyte_viewer"
+    app:startDestination="@id/devByte">
+
+    <fragment
+        android:id="@+id/devByte"
+        android:name="com.example.android.androidmarki.ui.home.devByteViewer.DevByteFragment"
+        android:label="@string/devByte_viewer_name"
+        tools:layout="@layout/fragment_dev_byte" />
+</navigation>

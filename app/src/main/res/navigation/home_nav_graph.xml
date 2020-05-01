@@ -61,5 +61,6 @@
     <include
         app:graph="@navigation/sleep_tracker_nav_graph" />
     <include app:graph="@navigation/mars_real_estate_nav_graph" />
+    <include app:graph="@navigation/devbyte_viewer_nav_graph" />
 
 </navigation>
