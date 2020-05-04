@@ -15,8 +15,9 @@
  *
  */
 
-package com.example.android.androidmarki.data.remote.network
+package com.example.android.androidmarki.data.remote.network.service
 
+import com.example.android.androidmarki.data.remote.network.entity.MarsProperty
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -67,5 +68,6 @@ interface MarsApiService {
  * A public Api object that exposes the lazy-initialized Retrofit service
  */
 object MarsApi {
-    val retrofitService : MarsApiService by lazy { retrofit.create(MarsApiService::class.java) }
+    val retrofitService : MarsApiService by lazy { retrofit.create(
+        MarsApiService::class.java) }
 }

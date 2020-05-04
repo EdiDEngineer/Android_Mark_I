@@ -69,6 +69,11 @@ class SignUpFragment : BaseFragment() {
         }
     }
 
+    fun onLogin(){
+        navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+
+    }
+
     companion object {
         const val TAG = "Sign Up Fragment"
     }

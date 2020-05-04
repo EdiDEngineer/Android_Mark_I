@@ -6,6 +6,9 @@
     <data>
 
         <import type="android.view.View" />
+        <variable
+            name="direction"
+            type="com.example.android.androidmarki.ui.main.signUp.SignUpFragmentDirections"/>
 
         <variable
             name="viewModel"
@@ -26,10 +29,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_vertical_margin"
             tools:context=".ui.main.signUp.SignUpFragment">
             <ProgressBar
                 android:id="@+id/signUp_loading"
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:onClick="@{()->signUp.requireActivity().onBackPressed()}"
+                    android:onClick="@{()->signUp.onLogin()}"
                     android:text="@string/login"
                     android:textColor="@color/google_green"
                     app:layout_constraintBaseline_toBaselineOf="@id/sign"

@@ -16,7 +16,7 @@ class SignUpViewModel(private val repository: AuthenticateRepository) : BaseView
 
     private val _signUpResult = MutableLiveData<SignUpResult>()
     val signUpResult: LiveData<SignUpResult> = _signUpResult
-    var signUpUIData = SignUpUIData()
+    val signUpUIData = SignUpUIData()
 val authenticationState = repository.authenticationState
     init {
         _signUpResult.value = SignUpResult()

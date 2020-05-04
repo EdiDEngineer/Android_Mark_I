@@ -24,7 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.android.androidmarki.R
-import com.example.android.androidmarki.data.remote.network.MarsApiFilter
+import com.example.android.androidmarki.data.remote.network.service.MarsApiFilter
 import com.example.android.androidmarki.databinding.FragmentMarsRealEstateOverviewBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory

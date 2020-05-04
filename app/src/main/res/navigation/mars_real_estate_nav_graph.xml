@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_mars_real_estate_detail">
         <argument
             android:name="selectedProperty"
-            app:argType="com.example.android.androidmarki.data.remote.network.MarsProperty"
+            app:argType="com.example.android.androidmarki.data.remote.network.entity.MarsProperty"
             />
     </fragment>
 

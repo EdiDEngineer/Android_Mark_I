@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/menu_home" />
+<!--        <item-->
+<!--            android:id="@+id/nav_home"-->
+<!--            android:icon="@drawable/ic_home_black_24dp"-->
+<!--            android:title="@string/menu_home" />-->
         <item
             android:id="@+id/nav_dice_roller"
             android:icon="@drawable/dice_roller_dice_1"
@@ -38,7 +38,10 @@
             android:id="@+id/nav_devbyte_viewer"
             android:icon="@drawable/ic_play_circle_outline_black_48dp"
             android:title="@string/devByte_viewer_name" />
-
+        <item
+            android:id="@+id/nav_gdg_finder"
+            android:icon="@drawable/ic_gdg"
+            android:title="@string/gdg_finder" />
     </group>
 
     <item android:title="@string/title_1">

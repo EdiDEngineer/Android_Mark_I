@@ -42,6 +42,7 @@ class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
 
     // The number of seconds counted since the timer started
     var secondsCount = MutableLiveData(0)
+        private set
 
     /**
      * [Handler] is a class meant to process a queue of messages (known as [android.os.Message]s)

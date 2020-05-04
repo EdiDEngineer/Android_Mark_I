@@ -15,7 +15,7 @@
  *
  */
 
-package com.example.android.androidmarki.data.remote.network
+package com.example.android.androidmarki.data.remote.network.entity
 
 import com.example.android.androidmarki.data.domain.model.Video
 import com.example.android.androidmarki.data.local.entity.DatabaseVideo

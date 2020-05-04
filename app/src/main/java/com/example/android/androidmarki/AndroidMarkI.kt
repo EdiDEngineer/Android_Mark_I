@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.example.android.androidmarki.work.RefreshDataWorker
+import com.facebook.stetho.Stetho
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit
  */
 class AndroidMarkI : MultiDexApplication() {
 
-    val applicationScope = CoroutineScope(Dispatchers.Default)
+    private val applicationScope = CoroutineScope(Dispatchers.Default)
 
     private fun delayedInit() {
         applicationScope.launch {
@@ -53,8 +54,7 @@ class AndroidMarkI : MultiDexApplication() {
      */
     override fun onCreate() {
         super.onCreate()
-
-//        Stetho.initializeWithDefaults(this)
+        Stetho.initializeWithDefaults(this)
         sInstance = this
         Timber.plant(Timber.DebugTree())
         delayedInit()
@@ -62,7 +62,7 @@ class AndroidMarkI : MultiDexApplication() {
 
     companion object {
         private lateinit var sInstance: AndroidMarkI
-        fun get(): AndroidMarkI {
+        fun getApp(): AndroidMarkI {
             return sInstance
         }
     }

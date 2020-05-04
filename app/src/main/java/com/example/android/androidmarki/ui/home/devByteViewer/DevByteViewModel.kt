@@ -22,8 +22,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.androidmarki.data.local.AndroidMarkIDatabase.Companion.getDatabaseInstance
 import com.example.android.androidmarki.data.repository.VideosRepository
 import com.example.android.androidmarki.ui.base.BaseViewModel
-
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 /**
  * DevByteViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
-class DevByteViewModel : BaseViewModel(){
+class DevByteViewModel : BaseViewModel() {
 
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -58,7 +58,10 @@ class DevByteViewModel : BaseViewModel(){
      */
     init {
         viewModelScope.launch {
-            videosRepository.refreshVideos()
+            try {
+                videosRepository.refreshVideos()
+            } catch (e: Exception) {
+            }
         }
     }
 

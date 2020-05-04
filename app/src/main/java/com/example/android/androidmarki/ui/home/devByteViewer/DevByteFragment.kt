@@ -96,7 +96,7 @@ class DevByteFragment : BaseFragment() {
             .get(DevByteViewModel::class.java)
         }
 
-        viewModelAdapter = DevByteAdapter(VideoClick {
+        viewModelAdapter = DevByteAdapter(DevByteAdapter.VideoClick {
             // When a video is clicked this block or lambda will be called by DevByteAdapter
 
             // context is not around, we can safely discard this click since the Fragment is no

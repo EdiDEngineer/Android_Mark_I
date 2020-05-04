@@ -7,14 +7,18 @@
 
     </data>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             tools:openDrawer="start">
-
-            <include
+        <include
                 layout="@layout/app_bar_home"
                 android:id="@+id/include_app_bar_home"
                 android:layout_width="match_parent"
@@ -27,11 +31,17 @@
                 android:animateLayoutChanges="true"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:scrollbars="none"
                 app:headerLayout="@layout/nav_header_home"
                 app:menu="@menu/activity_home_drawer" />
 
         </androidx.drawerlayout.widget.DrawerLayout>
-
-
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            style="@style/Widget.MaterialComponents.BottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:labelVisibilityMode="selected"
+            app:menu="@menu/bottom_nav_menu" />
+</LinearLayout>
 </layout>

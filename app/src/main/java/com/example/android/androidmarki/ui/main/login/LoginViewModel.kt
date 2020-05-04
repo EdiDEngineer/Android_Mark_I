@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 class LoginViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
-    var loginUIData = LoginUIData()
+    val loginUIData = LoginUIData()
     val authenticationState = repository.authenticationState
 
     init {

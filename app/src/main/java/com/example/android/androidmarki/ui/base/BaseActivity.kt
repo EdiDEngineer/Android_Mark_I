@@ -42,20 +42,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
 //    private lateinit var locationUtil: LocationUtil
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        locationUtil = LocationUtil(this, this)
-
-        //initCustomFonts()
-
-        //Fabric.with(this, Crashlytics())
-//
-//        checkLocationPermission()
-//        changeLocationSettings()
-//        getLocation()
-    }
-
     fun getLocationUpdates() = locationString
 
 //    fun getLatLonUpdates() = locationUtil.latLon
@@ -213,12 +199,6 @@ abstract class BaseActivity : AppCompatActivity() {
         Snackbar.make(snackView, error, Snackbar.LENGTH_LONG)
             .setAction(actionTitle, listener)
             .show()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_CHECK_SETTINGS && resultCode == Activity.RESULT_OK) getLocation()
-//        else changeLocationSettings()
     }
 
     fun showLoadingDialog(){

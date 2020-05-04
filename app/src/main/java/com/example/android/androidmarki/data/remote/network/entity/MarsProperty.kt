@@ -15,7 +15,7 @@
  *
  */
 
-package com.example.android.androidmarki.data.remote.network
+package com.example.android.androidmarki.data.remote.network.entity
 
 import android.os.Parcelable
 import androidx.lifecycle.LiveData

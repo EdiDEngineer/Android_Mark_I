@@ -1,5 +1,6 @@
 package com.example.android.androidmarki.ui.main.login
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Build
@@ -7,6 +8,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.registerForActivityResult
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
@@ -44,7 +48,26 @@ class LoginFragment : BaseFragment() {
                     .requestEmail()
                     .build()
             ).signInIntent
-            startActivityForResult(signInIntent, SIGN_IN_RESULT_CODE)
+//            startActivityForResult(signInIntent, SIGN_IN_RESULT_CODE)
+
+
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    binding.viewModel!!.loginWithGoogle(
+                        task.getResult(ApiException::class.java)!!
+                    )
+
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Timber.tag(TAG).w(e, "Google sign in failed")
+                    showSnackBar(R.string.account_failed)
+
+                    // ...
+                }
+            }.launch(signInIntent)
+
         }
     }
 

@@ -63,15 +63,6 @@ class SleepTrackerSleepQualityViewModel(
         get() = _navigateToSleepTracker
 
     /**
-     * Cancels all coroutines when the ViewModel is cleared, to cleanup any pending work.
-     *
-     * onCleared() gets called when the ViewModel is destroyed.
-     */
-    override fun onCleared() {
-        super.onCleared()
-    }
-
-    /**
      * Call this immediately after navigating to [SleepTrackerFragment]
      */
     fun doneNavigating() {

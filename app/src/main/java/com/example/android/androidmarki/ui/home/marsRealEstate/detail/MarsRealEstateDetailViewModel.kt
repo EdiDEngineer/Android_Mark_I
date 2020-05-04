@@ -22,7 +22,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.android.androidmarki.AndroidMarkI
 import com.example.android.androidmarki.R
-import com.example.android.androidmarki.data.remote.network.MarsProperty
+import com.example.android.androidmarki.data.remote.network.entity.MarsProperty
 import com.example.android.androidmarki.ui.base.BaseViewModel
 
 /**

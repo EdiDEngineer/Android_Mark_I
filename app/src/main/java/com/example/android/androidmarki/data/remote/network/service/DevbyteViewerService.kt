@@ -15,8 +15,9 @@
  *
  */
 
-package com.example.android.androidmarki.data.remote.network
+package com.example.android.androidmarki.data.remote.network.service
 
+import com.example.android.androidmarki.data.remote.network.entity.NetworkVideoContainer
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -56,5 +57,6 @@ object Network {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
-    val devbytes = retrofit.create(DevbyteService::class.java)
+    val devbytes = retrofit.create(
+        DevbyteService::class.java)
 }

@@ -21,14 +21,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.androidmarki.data.remote.network.MarsApi
-import com.example.android.androidmarki.data.remote.network.MarsApiFilter
-import com.example.android.androidmarki.data.remote.network.MarsProperty
+import com.example.android.androidmarki.data.remote.network.service.MarsApi
+import com.example.android.androidmarki.data.remote.network.service.MarsApiFilter
+import com.example.android.androidmarki.data.remote.network.entity.MarsProperty
 import com.example.android.androidmarki.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
+
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
@@ -57,7 +60,6 @@ class OverviewViewModel : BaseViewModel() {
         get() = _navigateToSelectedProperty
 
 
-
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
@@ -71,19 +73,22 @@ class OverviewViewModel : BaseViewModel() {
      * returns a coroutine Deferred, which we await to get the result of the transaction.
      * @param filter the [MarsApiFilter] that is sent as part of the web server request
      */
-     private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
+    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
         viewModelScope.launch {
             // Get the Deferred object for our Retrofit request
-            val getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
-            try {
-                _status.value = MarsApiStatus.LOADING
-                // this will run on a thread managed by Retrofit
-                val listResult = getPropertiesDeferred.await()
-                _status.value = MarsApiStatus.DONE
-                _properties.value = listResult
-            } catch (e: Exception) {
-                _status.value = MarsApiStatus.ERROR
-                _properties.value = ArrayList()
+            withContext(Dispatchers.IO) {
+                val getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
+                try {
+                    _status.postValue(MarsApiStatus.LOADING)
+
+                    // this will run on a thread managed by Retrofit
+                    val listResult = getPropertiesDeferred.await()
+                    _status.postValue(MarsApiStatus.DONE)
+                    _properties.postValue(listResult)
+                } catch (e: Exception) {
+                    _status.postValue(MarsApiStatus.ERROR)
+                    _properties.postValue(ArrayList())
+                }
             }
         }
     }

@@ -200,4 +200,11 @@
 
     <string name="devByte_viewer_name">DevByte Viewer</string>
 
+    <!-- GDG Finder -->
+
+    <string name="waiting_for_location_and_network">Waiting for location and network result.\n\n If running on an
+        emulator open the Maps app to enable location services.
+    </string>
+    <string name="gdg_finder">GDG Finder</string>
+    <string name="gdg_search">GDG Search</string>
 </resources>

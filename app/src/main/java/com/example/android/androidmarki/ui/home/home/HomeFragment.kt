@@ -1,7 +1,9 @@
 package com.example.android.androidmarki.ui.home.home
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -15,6 +17,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 private const val NUM_PAGES = 5
 
+private const val LOCATION_PERMISSION_REQUEST = 1
+
+private const val LOCATION_PERMISSION = "android.permission.ACCESS_FINE_LOCATION"
 
 class HomeFragment : BaseFragment() {
 
@@ -49,7 +54,6 @@ class HomeFragment : BaseFragment() {
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()
     }
-
 
     private inner class ScreenSlidePagerAdapter(fa: BaseActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = NUM_PAGES

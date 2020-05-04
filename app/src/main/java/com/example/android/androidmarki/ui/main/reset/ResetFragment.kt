@@ -48,7 +48,7 @@ class ResetFragment : BaseFragment() {
             }
             if (it.isSuccessful) {
                 showShortToast(R.string.password_reset_email_error)
-                navController.popBackStack(R.id.loginFragment, false)
+                navController.navigate(ResetFragmentDirections.actionResetFragmentToLoginFragment())
             }
         })
 

@@ -22,8 +22,8 @@ import androidx.lifecycle.Transformations
 import com.example.android.androidmarki.data.domain.model.Video
 import com.example.android.androidmarki.data.local.AndroidMarkIDatabase
 import com.example.android.androidmarki.data.local.entity.asDomainModel
-import com.example.android.androidmarki.data.remote.network.Network
-import com.example.android.androidmarki.data.remote.network.asDatabaseModel
+import com.example.android.androidmarki.data.remote.network.service.Network
+import com.example.android.androidmarki.data.remote.network.entity.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

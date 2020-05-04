@@ -10,7 +10,17 @@
         android:id="@+id/resetFragment"
         android:name="com.example.android.androidmarki.ui.main.reset.ResetFragment"
         android:label="@string/reset"
-        tools:layout="@layout/fragment_reset"/>
+        tools:layout="@layout/fragment_reset">
+        <action
+            android:id="@+id/action_resetFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <activity
         android:id="@+id/home_activity"
@@ -23,7 +33,17 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.android.androidmarki.ui.main.signUp.SignUpFragment"
         android:label="@string/signUp"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.android.androidmarki.ui.main.login.LoginFragment"

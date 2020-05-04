@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_nav_home_to_nav_home_second"
             app:destination="@id/nav_home_second" />
-        </fragment>
+    </fragment>
     <fragment
         android:id="@+id/nav_home_second"
         android:name="com.example.android.androidmarki.ui.home.second.HomeSecondFragment"
@@ -62,5 +62,22 @@
         app:graph="@navigation/sleep_tracker_nav_graph" />
     <include app:graph="@navigation/mars_real_estate_nav_graph" />
     <include app:graph="@navigation/devbyte_viewer_nav_graph" />
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.android.androidmarki.ui.home.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.android.androidmarki.ui.home.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/nav_gdg_finder"
+        android:name="com.example.android.androidmarki.ui.home.gdgFinder.GdgListFragment"
+        android:label="@string/gdg_search"
+        tools:layout="@layout/fragment_gdg_list"
+        />
 
 </navigation>

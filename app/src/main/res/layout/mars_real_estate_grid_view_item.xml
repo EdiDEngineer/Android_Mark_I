@@ -23,7 +23,7 @@
     <data>
         <variable
             name="property"
-            type="com.example.android.androidmarki.data.remote.network.MarsProperty" />
+            type="com.example.android.androidmarki.data.remote.network.entity.MarsProperty" />
     </data>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/mars_image"
@@ -32,6 +32,6 @@
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        app:bindTmageUrl="@{property.imgSrcUrl}"
+        app:imageUrl="@{property.imgSrcUrl}"
         tools:src="@tools:sample/backgrounds/scenic"/>
 </layout>

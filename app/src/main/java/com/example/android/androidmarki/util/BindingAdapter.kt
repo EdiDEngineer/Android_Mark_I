@@ -13,7 +13,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
-import com.example.android.androidmarki.data.remote.network.MarsProperty
+import com.example.android.androidmarki.data.remote.network.entity.GdgChapter
+import com.example.android.androidmarki.data.remote.network.entity.MarsProperty
+import com.example.android.androidmarki.ui.home.gdgFinder.GdgListAdapter
 import com.example.android.androidmarki.ui.home.marsRealEstate.overview.MarsApiStatus
 import com.example.android.androidmarki.ui.home.marsRealEstate.overview.MarsRealEstatePhotoGridAdapter
 import com.google.android.material.textfield.TextInputLayout
@@ -79,8 +81,8 @@ fun TextView.setSleepQualityString(item: SleepTrackerNight?) {
 /**
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
-@BindingAdapter("listData")
-fun RecyclerView.bindRecyclerView(data: List<MarsProperty>?) {
+@BindingAdapter("listMarsPropertyData")
+fun RecyclerView.bindMarsRealEstateRecyclerView(data: List<MarsProperty>?) {
     val adapter = adapter as MarsRealEstatePhotoGridAdapter
     adapter.submitList(data)
 }
@@ -88,7 +90,11 @@ fun RecyclerView.bindRecyclerView(data: List<MarsProperty>?) {
 /**
  * Uses the Glide library to load an image by URL into an [ImageView]
  */
-@BindingAdapter("bindTmageUrl")
+/**
+ * Binding adapter used to display images from URL using Glide
+ */
+
+@BindingAdapter("imageUrl")
 fun ImageView.bindImage(imgUrl: String?) {
     imgUrl?.let {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
@@ -135,10 +141,23 @@ fun View.goneIfNotNull(it: Any?) {
     visibility = if (it != null) View.GONE else View.VISIBLE
 }
 
+
 /**
- * Binding adapter used to display images from URL using Glide
+ * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
-@BindingAdapter("imageUrl")
-fun ImageView.setImageUrl(url: String) {
-    Glide.with(context).load(url).into(this)
+@BindingAdapter("listGdgChapterData")
+fun RecyclerView.bindRecyclerView(data: List<GdgChapter>?) {
+    val adapter = adapter as GdgListAdapter
+    adapter.submitList(data) {
+        // scroll the list to the top after the diffs are calculated and posted
+        scrollToPosition(0)
+    }
+}
+
+@BindingAdapter("showOnlyWhenEmpty")
+fun View.showOnlyWhenEmpty(data: List<Any>?) {
+    visibility = when {
+        data == null || data.isEmpty() -> View.VISIBLE
+        else -> View.GONE
+    }
 }

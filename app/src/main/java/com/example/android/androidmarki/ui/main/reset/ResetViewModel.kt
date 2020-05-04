@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 class ResetViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _resetResult = MutableLiveData<ResetResult>()
     val resetResult: LiveData<ResetResult> = _resetResult
-    var resetUIData = ResetUIData()
+    val resetUIData = ResetUIData()
 
     init {
         _resetResult.value = ResetResult()
