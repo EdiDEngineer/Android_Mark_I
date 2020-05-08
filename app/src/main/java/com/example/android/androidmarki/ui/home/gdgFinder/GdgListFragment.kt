@@ -30,7 +30,6 @@ class GdgListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requestLastLocationOrStartLocationUpdates()
 
         binding = FragmentGdgListBinding.inflate(inflater, container, false).apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
@@ -60,6 +59,8 @@ class GdgListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requestLastLocationOrStartLocationUpdates()
+
         binding.viewModel!!.showNeedLocation.observe(viewLifecycleOwner,
             Observer { show -> // Snackbar is like Toast but it lets us show forever
                 if (show == true) {

@@ -1,4 +1,4 @@
-package com.example.android.androidmarki.ui.home.notifications
+package com.example.android.androidmarki.ui.firebase.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.androidmarki.R
-import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_notifications.*
+import com.example.android.androidmarki.ui.base.BaseFragment
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : BaseFragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 
@@ -28,10 +28,5 @@ class NotificationsFragment : Fragment() {
 //            textView.text = it
 //        })
         return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 }

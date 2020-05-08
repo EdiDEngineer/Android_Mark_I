@@ -15,7 +15,7 @@
  *
  */
 
-package com.example.android.androidmarki.work
+package com.example.android.androidmarki.worker
 
 import android.content.Context
 import androidx.work.CoroutineWorker
@@ -23,6 +23,7 @@ import androidx.work.WorkerParameters
 import com.example.android.androidmarki.data.local.AndroidMarkIDatabase.Companion.getDatabaseInstance
 import com.example.android.androidmarki.data.repository.VideosRepository
 import retrofit2.HttpException
+import timber.log.Timber
 
 class RefreshDataWorker(appContext: Context, params: WorkerParameters):
         CoroutineWorker(appContext, params) {

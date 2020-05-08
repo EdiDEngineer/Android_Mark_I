@@ -56,11 +56,7 @@ class HomeActivity : BaseActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications
-            ), drawerLayout
+      navController.graph, drawerLayout
         )
 
         navView.itemIconTintList = null
@@ -76,12 +72,7 @@ class HomeActivity : BaseActivity() {
 //
 //            })
 
-        val bottomNavView: BottomNavigationView = binding.bottomNavView
 
-        val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(R.id.navigation_dashboard)
-        badge.isVisible = true
-
-        bottomNavView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -94,26 +85,20 @@ class HomeActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _: NavController, nd: NavDestination, _: Bundle? ->
 
-            if (nd.id == R.id.nav_home || nd.id == R.id.navigation_dashboard || nd.id == R.id.navigation_notifications) {
+            if (nd.id == R.id.nav_home) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                bottomNavView.visibility = View.VISIBLE
                 fab.visibility = View.VISIBLE
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                bottomNavView.visibility = View.GONE
                 fab.visibility = View.GONE
-
             }
             if (nd.id == R.id.nav_gdg_finder) {
                 supportActionBar?.setDisplayShowTitleEnabled(false)
                 binding.includeAppBarHome.heroImage.visibility = View.VISIBLE
             } else {
                 supportActionBar?.setDisplayShowTitleEnabled(true)
-
                 binding.includeAppBarHome.heroImage.visibility = View.GONE
             }
-
-
         }
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 

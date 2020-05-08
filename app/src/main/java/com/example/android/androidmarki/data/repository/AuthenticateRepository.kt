@@ -121,5 +121,6 @@ class AuthenticateRepository(private val userAuthLiveData: FirebaseUserAuthLiveD
     override suspend fun resetPassword(emailAddress: String) =
         userAuthLiveData.resetPassword(emailAddress)
 
+    companion object
 }
 

@@ -1,4 +1,4 @@
-package com.example.android.androidmarki.ui.home.dashboard
+package com.example.android.androidmarki.ui.firebase.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.androidmarki.R
+import com.example.android.androidmarki.ui.base.BaseFragment
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 

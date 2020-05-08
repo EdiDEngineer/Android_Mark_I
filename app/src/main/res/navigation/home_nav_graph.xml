@@ -9,24 +9,7 @@
         android:id="@+id/nav_home"
         android:name="com.example.android.androidmarki.ui.home.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_nav_home_to_nav_home_second"
-            app:destination="@id/nav_home_second" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.example.android.androidmarki.ui.home.second.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/nav_dessert_pusher"
@@ -61,23 +44,32 @@
     <include
         app:graph="@navigation/sleep_tracker_nav_graph" />
     <include app:graph="@navigation/mars_real_estate_nav_graph" />
-    <include app:graph="@navigation/devbyte_viewer_nav_graph" />
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.android.androidmarki.ui.home.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.android.androidmarki.ui.home.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_devbyte_viewer"
+        android:name="com.example.android.androidmarki.ui.home.devByteViewer.DevByteFragment"
+        android:label="@string/devByte_viewer_name"
+        tools:layout="@layout/fragment_dev_byte" />
     <fragment
         android:id="@+id/nav_gdg_finder"
         android:name="com.example.android.androidmarki.ui.home.gdgFinder.GdgListFragment"
-        android:label="@string/gdg_search"
         tools:layout="@layout/fragment_gdg_list"
         />
 
+    <fragment
+        android:id="@+id/nav_egg_timer"
+        android:name="com.example.android.androidmarki.ui.home.eggTimer.EggTimerFragment"
+        tools:layout="@layout/fragment_egg_timer"
+        android:label="@string/egg_timer_name"
+        />
+    <activity
+        android:id="@+id/nav_firebase"
+        tools:layout="@layout/activity_firebase"
+        android:name="com.example.android.androidmarki.ui.firebase.FirebaseActivity"
+        android:label="FirebaseActivity"
+        />
+    <fragment
+        android:id="@+id/nav_property_animator"
+        tools:layout="@layout/fragment_property_animation"
+        android:name="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimation"
+        android:label="@string/property_animation_app_name" />
 </navigation>

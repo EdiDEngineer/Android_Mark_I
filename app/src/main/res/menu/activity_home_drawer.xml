@@ -42,6 +42,18 @@
             android:id="@+id/nav_gdg_finder"
             android:icon="@drawable/ic_gdg"
             android:title="@string/gdg_finder" />
+        <item
+            android:id="@+id/nav_egg_timer"
+            android:icon="@drawable/egg_icon"
+            android:title="@string/egg_timer_name" />
+        <item
+            android:id="@+id/nav_property_animator"
+            android:icon="@drawable/ic_star"
+            android:title="@string/property_animation_app_name" />
+        <item
+            android:id="@+id/nav_firebase"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="@string/firebase" />
     </group>
 
     <item android:title="@string/title_1">

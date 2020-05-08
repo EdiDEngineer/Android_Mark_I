@@ -5,14 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-feature android:name="android.hardware.camera" />
-
-    <!-- Permission needed for haptic feedback -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- Permission needed for haptic feedback -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -25,26 +22,71 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.home.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-           />
+            android:name=".ui.firebase.FirebaseActivity"
+            android:label="@string/title_activity_firebase"
+            android:parentActivityName=".ui.home.HomeActivity"
+            />
         <activity
-            android:name=".ui.main.MainActivity"
-          />
-
+            android:name=".ui.home.HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_home" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.main.Splash"
-            android:theme="@style/SplashTheme"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name=".receiver.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".receiver.SnoozeReceiver"
+            android:enabled="true"
+            android:exported="false" /> <!-- AndroidManifest.xml -->
+        <!-- TODO: Step 3.0 uncomment to start the service -->
+        <service
+            android:name=".data.remote.firebase.FirebaseUserMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- [START fcm_default_icon] -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/common_google_signin_btn_icon_dark" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" /> <!-- [END fcm_default_icon] -->
+        <!-- [START fcm_default_channel] -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/breakfast_notification_channel_id" />
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
     </application>
 
 </manifest>

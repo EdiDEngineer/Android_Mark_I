@@ -53,7 +53,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_1">Title 1</string>
+    <string name="title_1">Logout</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -206,5 +206,35 @@
         emulator open the Maps app to enable location services.
     </string>
     <string name="gdg_finder">GDG Finder</string>
-    <string name="gdg_search">GDG Search</string>
+    <!-- Egg Timer -->
+
+    <string name="egg_timer_name">Egg Timer</string>
+    <string name="egg_prompt">How do you like your egg?</string>
+    <string name="timer_on">Start</string>
+    <string name="timer_off">Stop</string>
+    <string name="notification_title">Egg Timer</string>
+    <string name="notification_text">Your egg is ready!!</string>
+
+    <string name="fcm_message">FCM Message</string>
+    <string name="message_subscribe_failed">Failed to subscribe to topic</string>
+    <string name="message_subscribed">Subscribed to topic</string>
+    <string name="egg_notification_channel_id" translatable="false">egg_channel</string>
+    <string name="egg_notification_channel_name" translatable="true">Egg</string>
+    <string name="breakfast_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="breakfast_notification_channel_name" translatable="true">Breakfast</string>
+    <string name="eggs_ready">It is time! Bon appetit!</string>
+    <string name="timer_running">Egg timer is running…</string>
+    <string name="breakfast_notification_channel_description">Breakfast reminder</string>
+    <string name="snooze">Snooze</string>
+    <string name="title_activity_firebase">FirebaseActivity</string>
+    <string name="firebase">Firebase</string>
+
+    <!--PropertyAnimation -->
+    <string name="property_animation_app_name">Property Animation</string>
+    <string name="rotate">Rotate</string>
+    <string name="translate">Translate</string>
+    <string name="scale">Scale</string>
+    <string name="fade">Fade</string>
+    <string name="shower">Shower</string>
+    <string name="background_color">Background Color</string>
 </resources>

@@ -53,7 +53,7 @@ class SignUpFragment : BaseFragment() {
             }
             if (it.isSuccessful) {
                 showShortToast(R.string.sign_up_success)
-                navController.navigate(R.id.verificationFragment)
+                navController.navigate(R.id.action_global_verificationFragment)
             }
         })
         binding.viewModel!!.authenticationState.observe(viewLifecycleOwner, Observer {
@@ -69,7 +69,7 @@ class SignUpFragment : BaseFragment() {
         }
     }
 
-    fun onLogin(){
+    fun onLogin() {
         navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
 
     }

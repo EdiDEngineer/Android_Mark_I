@@ -81,9 +81,13 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
 
     //firebase
-    implementation "com.google.firebase:firebase-analytics-ktx:$analytics_version"
-    implementation "com.google.firebase:firebase-auth-ktx:$auth_version"
-
+    implementation "com.google.firebase:firebase-analytics-ktx:$firebase_analytics_version"
+    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
+    //for fcm
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    implementation "com.google.firebase:firebase-iid:$firebase_iid_version"
+    implementation "com.google.firebase:firebase-messaging:$firebase_message_version"
+    implementation 'android.arch.work:work-runtime:1.0.1'
     //multidex Lib
     implementation "androidx.multidex:multidex:$rootProject.multidexVersion"
 
@@ -100,7 +104,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation "androidx.room:room-runtime:$room_version"
-   kapt "androidx.room:room-compiler:$room_version"    // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
@@ -143,7 +148,6 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
-
 
 
     // Coroutines

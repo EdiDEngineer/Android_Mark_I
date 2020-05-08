@@ -16,6 +16,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
 import com.example.android.androidmarki.data.repository.AuthenticationState
@@ -105,7 +106,7 @@ class LoginFragment : BaseFragment() {
 
                 } else if (authenticationState == AuthenticationState.PHONE_UNVERIFIED) {
                     showShortToast(R.string.login_successful)
-                    navController.navigate(R.id.verificationFragment)
+                    navController.navigate(R.id.action_global_verificationFragment)
                 }
 
             })
@@ -126,34 +127,14 @@ class LoginFragment : BaseFragment() {
             binding.viewModel!!.validate()
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val avd = context?.let { getDrawable(it,R.drawable.avd_android_design) } as AnimatedVectorDrawable?
+            val avd = context?.let { getDrawable(it,R.drawable.avd_android_design) } as AnimatedVectorDrawableCompat?
             binding.animate.setImageDrawable(avd)
             avd?.start()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SIGN_IN_RESULT_CODE) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                binding.viewModel!!.loginWithGoogle(
-                    task.getResult(ApiException::class.java)!!
-                )
-
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Timber.tag(TAG).w(e, "Google sign in failed")
-                showSnackBar(R.string.account_failed)
-
-                // ...
-            }
-        }
-    }
 
     companion object {
-        const val SIGN_IN_RESULT_CODE = 1001
         const val TAG = "Login Fragment"
     }
 }

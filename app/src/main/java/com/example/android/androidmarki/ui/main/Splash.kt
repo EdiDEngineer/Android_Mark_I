@@ -1,8 +1,6 @@
 package com.example.android.androidmarki.ui.main
 
-import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -25,33 +23,35 @@ class Splash : BaseActivity() {
                     if (authenticationState == AuthenticationState.AUTHENTICATED || authenticationState == AuthenticationState.EMAIL_UNVERIFIED) {
 
                         // Check if we're running on Android 5.0 or higher
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // Apply activity transition
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        // Apply activity transition
 
-                            startActivity(
-                                Intent(this@Splash, HomeActivity::class.java)
-                                ,
-                                ActivityOptions.makeSceneTransitionAnimation(this@Splash).toBundle()
-                            )
-                            finishAfterTransition()
-                        } else {
-                            startActivity(
-                                Intent(this@Splash, HomeActivity::class.java))
-                        }
+//                            startActivity(
+//                                Intent(this@Splash, HomeActivity::class.java)
+//                                ,
+//                                ActivityOptions.makeSceneTransitionAnimation(this@Splash).toBundle()
+//                            )
+//                            finishAfterTransition()
+//                        } else {
+                        startActivity(
+                            Intent(this@Splash, HomeActivity::class.java)
+                        )
+//                        }
                     } else {
                         // Check if we're running on Android 5.0 or higher
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            // Apply activity transition
-                            startActivity(
-                                Intent(this@Splash, MainActivity::class.java)
-                                ,
-                                ActivityOptions.makeSceneTransitionAnimation(this@Splash).toBundle()
-                            )
-                            finishAfterTransition()
-                        } else {
-                            startActivity(
-                                Intent(this@Splash,MainActivity::class.java))
-                        }
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        // Apply activity transition
+//                            startActivity(
+//                                Intent(this@Splash, MainActivity::class.java)
+//                                ,
+//                                ActivityOptions.makeSceneTransitionAnimation(this@Splash).toBundle()
+//                            )
+//                            finishAfterTransition()
+//                        } else {
+                        startActivity(
+                            Intent(this@Splash, MainActivity::class.java)
+                        )
+//                        }
                     }
                 }
             })
