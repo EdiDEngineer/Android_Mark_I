@@ -51,6 +51,26 @@
             android:icon="@drawable/ic_star"
             android:title="@string/property_animation_app_name" />
         <item
+            android:id="@+id/nav_mini_paint"
+            android:icon="@drawable/mini_paint"
+            android:title="@string/mini_Paint_app_name" />
+        <item
+        android:id="@+id/nav_clipping_example"
+        android:icon="@drawable/splash_icon"
+        android:title="@string/clipping_example_app_name" />
+        <item
+            android:id="@+id/nav_custom_fan_controller"
+            android:icon="@drawable/splash_icon"
+            android:title="@string/custom_fan_controller_app_name" />
+        <item
+            android:id="@+id/nav_heart_fill"
+            android:icon="@drawable/ic_heart"
+            android:title="@string/heart_fill_app_name" />
+        <item
+            android:id="@+id/nav_tick_cross"
+            android:icon="@drawable/ic_cross"
+            android:title="@string/tick_cross_app_name" />
+        <item
             android:id="@+id/nav_firebase"
             android:icon="@drawable/googleg_standard_color_18"
             android:title="@string/firebase" />

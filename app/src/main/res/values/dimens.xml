@@ -35,4 +35,26 @@
 
     <dimen name="standard_margin">8dp</dimen>
 
+
+    <!--ClippingExample-->
+
+    <dimen name="clipRectRight">90dp</dimen>
+    <dimen name="clipRectBottom">90dp</dimen>
+    <dimen name="clipRectTop">0dp</dimen>
+    <dimen name="clipRectLeft">0dp</dimen>
+
+    <dimen name="rectInset">8dp</dimen>
+    <dimen name="smallRectOffset">40dp</dimen>
+
+    <dimen name="circleRadius">30dp</dimen>
+    <dimen name="textOffset">20dp</dimen>
+    <dimen name="strokeWidth">4dp</dimen>
+
+    <dimen name="textSize">18sp</dimen>
+    <!--CustomFanController-->
+
+    <dimen name="text_view_padding">16dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="margin_top">24dp</dimen>
+    <dimen name="fan_dimen">250dp</dimen>
 </resources>

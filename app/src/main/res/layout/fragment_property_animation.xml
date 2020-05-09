@@ -18,13 +18,13 @@
     <data>
 <variable
     name="propertyAnimator"
-    type="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimation" />
+    type="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.propertyAnimation.PropertyAnimation">
+        tools:context=".ui.home.propertyAnimation.PropertyAnimationFragment">
 
 
         <com.google.android.material.button.MaterialButton

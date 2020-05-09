@@ -237,4 +237,35 @@
     <string name="fade">Fade</string>
     <string name="shower">Shower</string>
     <string name="background_color">Background Color</string>
+
+    <!--mini_Paint-->
+
+    <string name="mini_Paint_app_name">Mini Paint</string>
+    <string name="drawingAnnouncement">You are drawing on the screen.</string>
+    <string name="canvasContentDescription">Mini Paint is a simple line drawing app.
+        Drag your fingers to draw. Rotate the phone to clear.</string>
+
+    <!--ClippingExample-->
+
+    <string name="clipping_example_app_name">Clipping Example</string>
+    <string name="clipping">Clipping</string>
+    <string name="translated">translated text</string>
+    <string name="skewed">"Skewed and "</string>
+
+    <!--CustomFanController-->
+
+    <string name="custom_fan_controller_app_name">Custom Fan Controller</string>
+    <string name="fan_control">Fan Control</string>
+    <string name="fan_off">off</string>
+    <string name="fan_low">1</string>
+    <string name="fan_medium">2</string>
+    <string name="fan_high">3</string>
+    <string name="change">Change</string>
+
+    <!--Heart Fill-->
+
+    <string name="heart_fill_app_name">Heart Fill</string>
+    <!--Tick Cross-->
+
+    <string name="tick_cross_app_name">Tick Cross</string>
 </resources>

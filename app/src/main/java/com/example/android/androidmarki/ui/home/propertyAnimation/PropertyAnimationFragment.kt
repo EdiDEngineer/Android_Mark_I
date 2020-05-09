@@ -18,10 +18,10 @@ import com.example.android.androidmarki.databinding.FragmentPropertyAnimationBin
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PropertyAnimation.newInstance] factory method to
+ * Use the [PropertyAnimationFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PropertyAnimation : Fragment() {
+class PropertyAnimationFragment : Fragment() {
     private lateinit var binding: FragmentPropertyAnimationBinding
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class PropertyAnimation : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPropertyAnimationBinding.inflate(inflater, container, false).apply {
-            propertyAnimator = this@PropertyAnimation
+            propertyAnimator = this@PropertyAnimationFragment
         }
         return binding.root
     }

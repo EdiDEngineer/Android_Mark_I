@@ -70,6 +70,35 @@
     <fragment
         android:id="@+id/nav_property_animator"
         tools:layout="@layout/fragment_property_animation"
-        android:name="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimation"
+        android:name="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimationFragment"
         android:label="@string/property_animation_app_name" />
+    <fragment
+        android:id="@+id/nav_mini_paint"
+        android:name="com.example.android.androidmarki.ui.home.miniPaint.MiniPaintFragment"
+        android:label="@string/mini_Paint_app_name"
+       />
+    <fragment
+        android:id="@+id/nav_clipping_example"
+        android:name="com.example.android.androidmarki.ui.home.clippingExample.ClippingExampleFragment"
+        android:label="@string/clipping_example_app_name"
+        />
+    <fragment
+    android:id="@+id/nav_custom_fan_controller"
+    android:name="com.example.android.androidmarki.ui.home.customFanController.CustomFanControllerFragment"
+    android:label="@string/custom_fan_controller_app_name"
+    tools:layout="@layout/fragment_custom_fan_controller"
+    />
+
+    <fragment
+        android:id="@+id/nav_heart_fill"
+        android:name="com.example.android.androidmarki.ui.home.heartFill.HeartFillFragment"
+        android:label="@string/heart_fill_app_name"
+        tools:layout="@layout/fragment_heart_fill"
+        />
+    <fragment
+        android:id="@+id/nav_tick_cross"
+        android:name="com.example.android.androidmarki.ui.home.tickCross.TickCrossFragment"
+        android:label="@string/tick_cross_app_name"
+        tools:layout="@layout/fragment_tick_cross"
+        />
 </navigation>
