@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.signUp.SignUpFragment">
 
     <data>
 
         <import type="android.view.View" />
-        <variable
-            name="direction"
-            type="com.example.android.androidmarki.ui.main.signUp.SignUpFragmentDirections"/>
 
         <variable
             name="viewModel"
@@ -22,29 +20,27 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
         android:fillViewport="true"
-        >
+        android:scrollbars="none">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_vertical_margin"
-            tools:context=".ui.main.signUp.SignUpFragment">
+            >
+
             <ProgressBar
                 android:id="@+id/signUp_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{viewModel.signUpResult.loading  ? View.VISIBLE : View.GONE}"
-     android:layout_gravity="center"
-                />
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.signUpResult.loading  ? View.VISIBLE : View.GONE}" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/signUp_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{viewModel.signUpResult.loading ? View.GONE: View.VISIBLE}"
-         >
+                android:visibility="@{viewModel.signUpResult.loading ? View.GONE: View.VISIBLE}">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUp_back"
@@ -61,12 +57,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/let_s_get_started"
-                    app:layout_constraintVertical_chainStyle="packed"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                     app:layout_constraintBottom_toTopOf="@+id/signUp_info"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/signUp_info"
@@ -160,18 +156,17 @@
                     app:layout_constraintBottom_toTopOf="@+id/sign"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/signUp_password_layout"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/signUp_password_layout" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintHorizontal_bias="0.5"
                     android:text="@string/already_have_an_account"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/in"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -185,8 +180,7 @@
                     android:textColor="@color/google_green"
                     app:layout_constraintBaseline_toBaselineOf="@id/sign"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/sign"
-                    />
+                    app:layout_constraintStart_toEndOf="@id/sign" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

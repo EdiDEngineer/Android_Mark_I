@@ -17,15 +17,21 @@
 package com.example.android.androidmarki.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -84,23 +90,27 @@ fun convertNumericQualityToString(quality: Int, resources: Resources): String {
     return qualityString
 }
 
-
-/**
- * Take the Long milliseconds returned by the system and stored in Room,
- * and convert it to a nicely formatted string for display.
- *
- * EEEE - Display the long letter version of the weekday
- * MMM - Display the letter abbreviation of the nmotny
- * dd-yyyy - day in month and full year numerically
- * HH:mm - Hours and minutes in 24hr format
- */
-@SuppressLint("SimpleDateFormat")
-fun convertLongToDateString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
-            .format(systemTime).toString()
+//    util method that generates a bitmap from your vector drawable resource.
+fun generateBitmapDescriptorFromRes(
+    context:Context?,
+    resId: Int
+): BitmapDescriptor? {
+    val drawable = context?.let { ContextCompat.getDrawable(it, resId) }
+    drawable!!.setBounds(
+        0,
+        0,
+        drawable.intrinsicWidth,
+        drawable.intrinsicHeight
+    )
+    val bitmap = Bitmap.createBitmap(
+        drawable.intrinsicWidth,
+        drawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    drawable.draw(canvas)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
-
-
 
 private val PUNCTUATION = listOf(", ", "; ", ": ", " ")
 

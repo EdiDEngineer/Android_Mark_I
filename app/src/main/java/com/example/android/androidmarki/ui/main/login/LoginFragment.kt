@@ -1,5 +1,6 @@
 package com.example.android.androidmarki.ui.main.login
 
+import android.animation.AnimatorInflater.loadStateListAnimator
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -127,6 +128,8 @@ class LoginFragment : BaseFragment() {
             binding.viewModel!!.validate()
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            binding.loginGoogle.stateListAnimator =    loadStateListAnimator(context,  R.animator.raise)
             val avd = context?.let { getDrawable(it,R.drawable.avd_android_design) } as AnimatedVectorDrawableCompat?
             binding.animate.setImageDrawable(avd)
             avd?.start()

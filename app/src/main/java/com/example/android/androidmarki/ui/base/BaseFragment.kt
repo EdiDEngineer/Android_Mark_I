@@ -21,7 +21,6 @@ abstract class BaseFragment : Fragment() {
     protected lateinit var layoutView: View
     protected lateinit var navController: NavController
     open val isLandscape = false
-    // fun isUserLoggedIn(): Boolean = StorageUtil(context!!).currentUser != null
 
     fun showShortToast(@StringRes message: Int) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

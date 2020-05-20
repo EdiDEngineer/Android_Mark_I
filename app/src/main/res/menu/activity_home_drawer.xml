@@ -70,13 +70,26 @@
             android:id="@+id/nav_tick_cross"
             android:icon="@drawable/ic_cross"
             android:title="@string/tick_cross_app_name" />
+
+        <item
+            android:id="@+id/nav_geo_maps"
+            android:icon="@drawable/splash_icon"
+            android:title="@string/wander_app_name" />
+        <item
+            android:id="@+id/nav_geo_fence"
+            android:icon="@drawable/geo_fence_ic"
+            android:title="@string/treasure_hunt_app_name" />
+        <item
+            android:id="@+id/nav_motion_layout"
+            android:icon="@drawable/splash_icon"
+            android:title="@string/motion_layout_app_name" />
         <item
             android:id="@+id/nav_firebase"
             android:icon="@drawable/googleg_standard_color_18"
             android:title="@string/firebase" />
     </group>
 
-    <item android:title="@string/title_1">
+    <item android:title="@string/logout">
         <menu>
             <item
                 android:id="@+id/nav_logout"

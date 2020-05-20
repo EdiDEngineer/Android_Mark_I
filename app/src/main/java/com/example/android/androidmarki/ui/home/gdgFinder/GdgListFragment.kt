@@ -1,5 +1,6 @@
 package com.example.android.androidmarki.ui.home.gdgFinder
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -19,8 +20,6 @@ import com.google.android.gms.location.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 
-
-private const val LOCATION_PERMISSION = "android.permission.ACCESS_FINE_LOCATION"
 
 class GdgListFragment : BaseFragment() {
     private lateinit var binding: FragmentGdgListBinding
@@ -112,7 +111,7 @@ class GdgListFragment : BaseFragment() {
             if (it) {
                 requestLastLocationOrStartLocationUpdates()
             }
-        }.launch(LOCATION_PERMISSION)
+        }.launch(Manifest.permission.ACCESS_FINE_LOCATION)
 
     }
 
@@ -125,7 +124,7 @@ class GdgListFragment : BaseFragment() {
         // if we don't have permission ask for it and wait until the user grants it
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                LOCATION_PERMISSION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             requestLocationPermission()
@@ -150,8 +149,7 @@ class GdgListFragment : BaseFragment() {
         // if we don't have permission ask for it and wait until the user grants it
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                LOCATION_PERMISSION
-            ) != PackageManager.PERMISSION_GRANTED
+                Manifest.permission.ACCESS_FINE_LOCATION            ) != PackageManager.PERMISSION_GRANTED
         ) {
             requestLocationPermission()
             return

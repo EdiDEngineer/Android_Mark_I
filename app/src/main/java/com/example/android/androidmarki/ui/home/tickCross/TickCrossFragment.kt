@@ -1,12 +1,12 @@
 package com.example.android.androidmarki.ui.home.tickCross
 
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentTickCrossBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
@@ -34,12 +34,12 @@ class TickCrossFragment : BaseFragment() {
 
     fun animate() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val drawable: AnimatedVectorDrawable =
-                if (tick) (context?.getDrawable(R.drawable.avd_tick_to_cross) as AnimatedVectorDrawable) else (context?.getDrawable(
-                    R.drawable.avd_cross_to_tick
-                ) as AnimatedVectorDrawable)
+            val drawable = if (tick) context?.let { AnimatedVectorDrawableCompat.create(it, R.drawable.avd_tick_to_cross) } else context?.let {
+                AnimatedVectorDrawableCompat.create(
+                    it, R.drawable.avd_cross_to_tick)
+            }
             binding.tickCross.setImageDrawable(drawable)
-            drawable.start()
+            drawable?.start()
             tick = !tick
         } else {
 

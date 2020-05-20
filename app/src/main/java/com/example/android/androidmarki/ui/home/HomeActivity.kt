@@ -1,5 +1,6 @@
 package com.example.android.androidmarki.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -16,9 +17,8 @@ import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.ActivityHomeBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseViewModelFactory
+import com.example.android.androidmarki.ui.home.geoFence.GeoFenceFragment
 import com.example.android.androidmarki.ui.home.home.HomeViewModel
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -56,7 +56,7 @@ class HomeActivity : BaseActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-      navController.graph, drawerLayout
+            navController.graph, drawerLayout
         )
 
         navView.itemIconTintList = null
@@ -119,4 +119,20 @@ class HomeActivity : BaseActivity() {
             super.onBackPressed()
         }
     }
+
+    /*
+ *  When the user clicks on the notification, this method will be called, letting us know that
+ *  the geofence has been triggered, and it's time to move to the next one in the treasure
+ *  hunt.
+ */
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        if (fragment is GeoFenceFragment) {
+            fragment.onNewIntent(
+                intent?.extras
+            )
+        }
+    }
+
 }

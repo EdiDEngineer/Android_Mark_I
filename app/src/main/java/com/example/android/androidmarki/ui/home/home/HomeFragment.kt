@@ -1,21 +1,11 @@
 package com.example.android.androidmarki.ui.home.home
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.android.androidmarki.R
-import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseFragment
-import com.example.android.androidmarki.ui.home.second.HomeSecondFragment
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
 

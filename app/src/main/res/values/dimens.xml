@@ -57,4 +57,8 @@
     <dimen name="default_margin">8dp</dimen>
     <dimen name="margin_top">24dp</dimen>
     <dimen name="fan_dimen">250dp</dimen>
+
+    <!--    GEOFENCE (Treasure Hunt)-->
+
+    <dimen name="hint_text_size">24sp</dimen>
 </resources>

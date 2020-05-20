@@ -1,12 +1,17 @@
 package com.example.android.androidmarki.ui.home.heartFill
 
+import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat.postOnAnimation
 import androidx.fragment.app.Fragment
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentHeartFillBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
@@ -30,12 +35,15 @@ class HeartFillFragment : BaseFragment() {
 
     fun animate() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val drawable: AnimatedVectorDrawable =
-                if (full) (context?.getDrawable(R.drawable.avd_heart_empty) as AnimatedVectorDrawable) else (context?.getDrawable(
+
+            val drawable =
+                if (full) context?.getDrawable(R.drawable.avd_heart_empty) else context?.getDrawable(
                     R.drawable.avd_heart_fill
-                ) as AnimatedVectorDrawable)
+                )
             binding.imageView.setImageDrawable(drawable)
-            drawable.start()
+            (drawable as Animatable).start()
+
+
             full = !full
         } else {
             showSnackBar(R.string.heart_fill_app_name)

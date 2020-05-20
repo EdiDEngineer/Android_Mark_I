@@ -101,4 +101,16 @@
         android:label="@string/tick_cross_app_name"
         tools:layout="@layout/fragment_tick_cross"
         />
+    <fragment
+        android:id="@+id/nav_geo_maps"
+        android:name="com.example.android.androidmarki.ui.home.geoMaps.GeoMapsFragment"
+        android:label="@string/wander_app_name"
+        />
+    <fragment
+        android:id="@+id/nav_geo_fence"
+        android:name="com.example.android.androidmarki.ui.home.geoFence.GeoFenceFragment"
+        android:label="@string/treasure_hunt_app_name"
+        tools:layout="@layout/fragment_geo_fence"
+        />
+    <include app:graph="@navigation/motion_layout_nav_graph" />
 </navigation>

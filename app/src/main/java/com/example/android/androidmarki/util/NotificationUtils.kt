@@ -16,11 +16,14 @@
 
 package com.example.android.androidmarki.util
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.android.androidmarki.R
@@ -29,7 +32,7 @@ import com.example.android.androidmarki.ui.home.HomeActivity
 
 
 // Notification ID.
-private val NOTIFICATION_ID = 0
+private val EGG_TIMER_NOTIFICATION_ID = 0
 private val REQUEST_CODE = 0
 private val FLAGS = 0
 
@@ -48,7 +51,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     val contentPendingIntent
             = PendingIntent.getActivity(
         applicationContext,
-        NOTIFICATION_ID,
+        EGG_TIMER_NOTIFICATION_ID,
         contentIntent,
         PendingIntent.FLAG_UPDATE_CURRENT
     )
@@ -108,7 +111,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // TODO: Step 2.5 set priority
         .setPriority(NotificationCompat.PRIORITY_HIGH)
     // TODO: Step 1.4 call notify
-    notify(NOTIFICATION_ID, builder.build())
+    notify(EGG_TIMER_NOTIFICATION_ID, builder.build())
 }
 
 // TODO: Step 1.14 Cancel all notifications
@@ -119,3 +122,71 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 fun NotificationManager.cancelNotifications() {
     cancelAll()
 }
+
+
+
+/*
+ * We need to create a NotificationChannel associated with our CHANNEL_ID before sending a
+ * notification.
+ */
+fun createChannel(context: Context?) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val notificationChannel = NotificationChannel(
+            CHANNEL_ID,
+            context?.getString(R.string.channel_name),
+
+            NotificationManager.IMPORTANCE_HIGH
+        )
+            .apply {
+                setShowBadge(false)
+            }
+
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.RED
+        notificationChannel.enableVibration(true)
+        notificationChannel.description = context?.getString(R.string.notification_channel_description)
+
+        val notificationManager = context?.getSystemService(NotificationManager::class.java)
+        notificationManager?.createNotificationChannel(notificationChannel)
+    }
+}
+
+/*
+ * A Kotlin extension function for AndroidX's NotificationCompat that sends our Geofence
+ * entered notification.  It sends a custom notification based on the name string associated
+ * with the LANDMARK_DATA from GeofencingConstatns in the GeofenceUtils file.
+ */
+fun NotificationManager.sendGeoFenceEnteredNotification(context: Context, foundIndex: Int) {
+    val contentIntent = Intent(context, HomeActivity::class.java)
+    contentIntent.putExtra(GeofencingConstants.EXTRA_GEOFENCE_INDEX, foundIndex)
+    val contentPendingIntent = PendingIntent.getActivity(
+        context,
+       GEO_FENCE_NOTIFICATION_ID,
+        contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
+    val mapImage = BitmapFactory.decodeResource(
+        context.resources,
+        R.drawable.geo_fence_map_small
+    )
+    val bigPicStyle = NotificationCompat.BigPictureStyle()
+        .bigPicture(mapImage)
+        .bigLargeIcon(null)
+
+    // We use the name resource ID from the LANDMARK_DATA along with content_text to create
+    // a custom message when a Geofence triggers.
+    val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        .setContentTitle(context.getString(R.string.app_name))
+        .setContentText(context.getString(R.string.content_text,
+            context.getString(GeofencingConstants.LANDMARK_DATA[foundIndex].name)))
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setContentIntent(contentPendingIntent)
+        .setSmallIcon(R.drawable.geo_fence_map_small)
+        .setStyle(bigPicStyle)
+        .setLargeIcon(mapImage)
+
+    notify(GEO_FENCE_NOTIFICATION_ID, builder.build())
+}
+
+private const val GEO_FENCE_NOTIFICATION_ID = 33
+private const val CHANNEL_ID = "GeofenceChannel"

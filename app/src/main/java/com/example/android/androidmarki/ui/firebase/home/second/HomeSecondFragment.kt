@@ -1,4 +1,4 @@
-package com.example.android.androidmarki.ui.home.second
+package com.example.android.androidmarki.ui.firebase.home.second
 
 import android.os.Bundle
 import android.view.LayoutInflater

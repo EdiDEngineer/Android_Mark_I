@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentPropertyAnimationBinding
+import com.example.android.androidmarki.ui.base.BaseFragment
 
 
 /**
@@ -21,7 +22,7 @@ import com.example.android.androidmarki.databinding.FragmentPropertyAnimationBin
  * Use the [PropertyAnimationFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PropertyAnimationFragment : Fragment() {
+class PropertyAnimationFragment : BaseFragment() {
     private lateinit var binding: FragmentPropertyAnimationBinding
 
     override fun onCreateView(

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Android Mark I</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -51,9 +51,6 @@
     <string name="code">Enter Code Here</string>
     <string name="logout">LogOut</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_1">Logout</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -268,4 +265,107 @@
     <!--Tick Cross-->
 
     <string name="tick_cross_app_name">Tick Cross</string>
+
+    <!--GEOMAPS (Wander)-->
+    <string name="wander_app_name">Wander</string>
+    <string name="title_activity_maps">Wander</string>
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+    <string name="zoom">15f</string>
+
+
+    <!--    GEOFENCE (Treasure Hunt)-->
+
+    <string name="treasure_hunt_app_name">Treasure Hunt</string>
+    <string name="title_activity_hunt">Treasure Hunt</string>
+
+    <!--    Permissions Strings-->
+    <string name="permission_rationale">Location permission needed for core functionality of the game.
+    </string>
+
+    <string name="permission_denied_explanation">
+        You need to grant location permission in order to play this game.
+    </string>
+    <string name="settings">Settings</string>
+    <string name="location_setting_off">Please turn on device location in Settings and try again.
+    </string>
+
+    <!--    Geofence Status Strings-->
+    <string name="geofences_added">Clue Geofence added.</string>
+    <string name="geofences_removed">Geofences removed.</string>
+    <string name="geofence_entered">Geofence entered.</string>
+    <string name="geofence_over">You have found the treasure! Congratulations!</string>
+
+    <!-- Geofence Hints -->
+    <string name="not_started_hint"></string>
+    <string name="golden_gate_bridge_hint">Go to a bridge with a name that does not match the color that it is!</string>
+    <string name="ferry_building_hint">Go to a market with an amazing assortment of delicious foods. It is a San Francisco classic!</string>
+    <string name="pier_39_hint">Go to a pier popular for tourist attractions, carnival games, fresh fish, and delicious sourdough bread!</string>
+    <string name="union_square_hint">Go to a square named after Civil War rallies held there, but now known for its amazing shopping!</string>
+
+    <!-- Geofence Locations -->
+    <string name="golden_gate_bridge_location">at the Golden Gate bridge</string>
+    <string name="ferry_building_location">in the Ferry Building</string>
+    <string name="pier_39_location">at Pier 39</string>
+    <string name="union_square_location">in Union Square</string>
+
+    <!-- Error strings -->
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="location_required_error">Location services must be enabled for this game.</string>
+
+    <string name="geofences_not_removed">Geofences not removed.</string>
+    <string name="geofences_not_added">Problem in adding geofences.</string>
+    <string name="insufficient_permissions">Insufficient permissions.</string>
+    <string name="geofence_error">There was an error in finding your treasure</string>
+
+    <!-- Notification Strings-->
+    <string name="channel_name">GeofenceStatus</string>
+    <string name="content_text">You found a clue <xliff:g id="geofence_location">%1$s</xliff:g>.</string>
+    <string name="notification_channel_description">Geofence status notification</string>
+
+    <!-- Content Description Strings -->
+    <string name="android_map_description">An Android robot with a map</string>
+
+
+    <!--    Motion Layout codelab-->
+
+    <string name="motion_layout_app_name">Motion Layout</string>
+    <string name="title_activity_step1">Animations with Motion Layout</string>
+    <string name="title_activity_step2">Animating with drag events</string>
+    <string name="star">Star</string>
+    <string name="credits">Virginia P @ Google</string>
+    <string name="title_activity_step3">Modifying a path</string>
+    <string name="step_3_modifying_animations">Step 3: Modifying a path</string>
+    <string name="pinwheel_galaxy">Pinwheel galaxy</string>
+    <string name="title_activity_step4">Building complex paths</string>
+    <string name="title_activity_step5">Changing attributes during motion</string>
+    <string name="title_activity_step6">Changing custom attributes</string>
+    <string name="title_activity_step7">OnSwipe with complex paths</string>
+    <string name="swipe_towards_the_right">Swipe towards the right</string>
+    <string name="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a. Est placerat in egestas erat imperdiet sed. Ut lectus arcu bibendum at varius. Purus in mollis nunc sed id semper risus in hendrerit. Volutpat est velit egestas dui. Id diam vel quam elementum pulvinar etiam non. Tristique magna sit amet purus gravida quis blandit. Gravida in fermentum et sollicitudin ac orci. Sed augue lacus viverra vitae congue eu. Sapien nec sagittis aliquam malesuada bibendum. Tortor aliquam nulla facilisi cras fermentum odio. Egestas sed tempus urna et pharetra pharetra massa. Amet purus gravida quis blandit. Orci a scelerisque purus semper eget duis at tellus.
+
+    Volutpat lacus laoreet non curabitur. Urna cursus eget nunc scelerisque viverra mauris. Turpis massa sed elementum tempus egestas sed sed risus pretium. Quam nulla porttitor massa id neque aliquam. Tempus quam pellentesque nec nam aliquam sem et. Ut eu sem integer vitae justo. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. Cras fermentum odio eu feugiat pretium nibh ipsum. Posuere morbi leo urna molestie at elementum eu facilisis sed. Augue eget arcu dictum varius duis at. Lacinia at quis risus sed vulputate odio. Massa tincidunt dui ut ornare.
+
+    Auctor augue mauris augue neque gravida in fermentum et. Varius vel pharetra vel turpis nunc eget. Condimentum mattis pellentesque id nibh tortor id aliquet. In massa tempor nec feugiat nisl pretium fusce. Dolor sed viverra ipsum nunc aliquet bibendum. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed. Mauris a diam maecenas sed. Tortor aliquam nulla facilisi cras fermentum. Mattis rhoncus urna neque viverra. Dui sapien eget mi proin sed. In dictum non consectetur a. Eu consequat ac felis donec et odio pellentesque. Eget egestas purus viverra accumsan in nisl. Dui nunc mattis enim ut tellus elementum. Lobortis elementum nibh tellus molestie nunc non. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Pulvinar mattis nunc sed blandit libero volutpat sed. Ut faucibus pulvinar elementum integer.
+
+    Scelerisque varius morbi enim nunc faucibus a pellentesque. Scelerisque in dictum non consectetur a erat nam at lectus. Sed euismod nisi porta lorem mollis aliquam. Nunc mi ipsum faucibus vitae aliquet. Nibh cras pulvinar mattis nunc. Sed viverra tellus in hac habitasse platea. Ac tortor vitae purus faucibus ornare. Laoreet sit amet cursus sit amet dictum sit amet. Risus sed vulputate odio ut enim. Massa sapien faucibus et molestie ac feugiat sed. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Eget sit amet tellus cras adipiscing enim eu. Ullamcorper dignissim cras tincidunt lobortis feugiat. Arcu ac tortor dignissim convallis aenean et tortor at. Aliquet risus feugiat in ante metus. Sit amet luctus venenatis lectus magna. Egestas maecenas pharetra convallis posuere morbi leo. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem.
+
+        Ac orci phasellus egestas tellus rutrum tellus. Ultrices neque ornare aenean euismod elementum nisi quis. Vel pharetra vel turpis nunc eget. Quis lectus nulla at volutpat diam ut venenatis tellus in. Egestas congue quisque egestas diam in arcu. Tincidunt praesent semper feugiat nibh sed pulvinar. Tristique senectus et netus et malesuada fames. Tristique nulla aliquet enim tortor. Aliquet nibh praesent tristique magna sit amet purus. Diam maecenas ultricies mi eget mauris pharetra et ultrices neque. Morbi tristique senectus et netus et malesuada. Venenatis tellus in metus vulputate eu scelerisque felis. Risus pretium quam vulputate dignissim suspendisse in. Ut venenatis tellus in metus vulputate. Turpis in eu mi bibendum. Pellentesque elit eget gravida cum sociis natoque. Tristique risus nec feugiat in fermentum posuere urna. Senectus et netus et malesuada fames ac turpis.</string>
+    <string name="title_activity_step7_completed">Complex motion with KeyFrames</string>
+    <string name="title_activity_step8">Running motion with code</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
