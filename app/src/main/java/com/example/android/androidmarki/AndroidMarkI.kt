@@ -3,6 +3,7 @@ package com.example.android.androidmarki
 import android.os.Build
 import androidx.multidex.MultiDexApplication
 import androidx.work.*
+import com.example.android.androidmarki.BuildConfig.DEBUG
 import com.example.android.androidmarki.worker.RefreshDataWorker
 import com.facebook.stetho.Stetho
 import kotlinx.coroutines.CoroutineScope
@@ -56,7 +57,9 @@ class AndroidMarkI : MultiDexApplication() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
         sInstance = this
-        Timber.plant(Timber.DebugTree())
+        if (DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
         delayedInit()
     }
 

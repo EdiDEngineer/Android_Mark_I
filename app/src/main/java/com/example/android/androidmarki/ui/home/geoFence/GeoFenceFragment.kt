@@ -33,9 +33,9 @@ import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.databinding.library.BuildConfig
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
+import com.example.android.androidmarki.BuildConfig
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentGeoFenceBinding
 import com.example.android.androidmarki.receiver.GeoFenceBroadcastReceiver
@@ -265,7 +265,8 @@ class GeoFenceFragment : BaseFragment() {
                         // Displays App settings screen.
                         startActivity(Intent().apply {
                             action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                            data = Uri.fromParts("package", BuildConfig.LIBRARY_PACKAGE_NAME, null)
+                            data = Uri.fromParts("package",        BuildConfig.APPLICATION_ID, null)
+
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         })
                     }.show()
