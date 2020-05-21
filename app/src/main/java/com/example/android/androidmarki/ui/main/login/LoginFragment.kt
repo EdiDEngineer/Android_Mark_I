@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.registerForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -130,7 +129,7 @@ class LoginFragment : BaseFragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             binding.loginGoogle.stateListAnimator =    loadStateListAnimator(context,  R.animator.raise)
-            val avd = context?.let { getDrawable(it,R.drawable.avd_android_design) } as AnimatedVectorDrawableCompat?
+            val avd = context?.let { AnimatedVectorDrawableCompat.create(it, R.drawable.avd_android_design) }
             binding.animate.setImageDrawable(avd)
             avd?.start()
         }

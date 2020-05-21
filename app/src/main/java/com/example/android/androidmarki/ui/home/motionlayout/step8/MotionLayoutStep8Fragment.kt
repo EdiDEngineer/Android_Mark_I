@@ -38,7 +38,7 @@ class MotionLayoutStep8Fragment : BaseFragment() {
     private fun coordinateMotion() {
 
 
-        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
+        val listener = AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             val seekPosition = -verticalOffset / binding.appbarLayout.totalScrollRange.toFloat()
             binding.motionLayout.progress = seekPosition
         }

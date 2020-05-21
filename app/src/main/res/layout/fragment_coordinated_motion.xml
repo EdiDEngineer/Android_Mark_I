@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.coordinatedMotion.CoordinatedMotionFragment">
+
+    <data>
+<variable
+    name="coordinateMotion"
+    type="com.example.android.androidmarki.ui.home.coordinatedMotion.CoordinatedMotionFragment" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical"
+  >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiple_elements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:actionBarSize"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{()->coordinateMotion.multipleElementsClick()}"
+            android:text="Multiple Elements" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiple_incoherent_elements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:actionBarSize"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{()->coordinateMotion.multipleChaoticElementsClick()}"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="Multiple Incoherent Elements" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/curved_motion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:actionBarSize"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{()->coordinateMotion.curvedMotionClick()}"
+            android:text="Curved Motion" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/size_changes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:actionBarSize"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{()->coordinateMotion.sizeChangeClick()}"
+            android:text="Size Changes" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

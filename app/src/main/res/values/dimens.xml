@@ -61,4 +61,8 @@
     <!--    GEOFENCE (Treasure Hunt)-->
 
     <dimen name="hint_text_size">24sp</dimen>
+
+    <!--    Coordinate motion-->
+
+    <dimen name="offset_y">300dp</dimen>
 </resources>
