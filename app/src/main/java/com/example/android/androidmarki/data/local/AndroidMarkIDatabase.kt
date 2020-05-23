@@ -22,8 +22,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.android.androidmarki.data.local.dao.DevbyteViewerVideoDao
 import com.example.android.androidmarki.data.local.dao.SleepTrackerDao
+import com.example.android.androidmarki.data.local.dao.TasksDao
 import com.example.android.androidmarki.data.local.entity.DatabaseVideo
 import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
+import com.example.android.androidmarki.data.local.entity.Task
 
 /**
  * A database that stores SleepNight information.
@@ -32,7 +34,7 @@ import com.example.android.androidmarki.data.local.entity.SleepTrackerNight
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [SleepTrackerNight::class, DatabaseVideo::class], version = 1, exportSchema = false)
+@Database(entities = [SleepTrackerNight::class, Task::class,  DatabaseVideo::class], version =2, exportSchema = false)
 abstract class AndroidMarkIDatabase : RoomDatabase() {
 
     /**
@@ -41,6 +43,7 @@ abstract class AndroidMarkIDatabase : RoomDatabase() {
     abstract val sleepTrackerDao: SleepTrackerDao
 
     abstract val videoDao: DevbyteViewerVideoDao
+    abstract val taskDao: TasksDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.

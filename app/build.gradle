@@ -7,13 +7,13 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 /**firebase**/
 apply plugin: 'com.google.gms.google-services'
 android {
-    compileSdkVersion 29
+    compileSdkVersion  rootProject.compileSdkVersion
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.example.android.androidmarki"
-        minSdkVersion 17
-        targetSdkVersion 29
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
         //multisexapplication
@@ -60,6 +60,12 @@ android {
         experimental = true
     }
 
+    // Always show the result of every unit test when running via command line, even if it passes.
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
+
 }
 
 dependencies {
@@ -68,33 +74,37 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.core:core-ktx:$core_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation "com.google.android.material:material:$material_version" //material
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.legacy:legacy-support-v4:$androidX_legacy_support"
     implementation 'com.android.volley:volley:1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "androidx.cardview:cardview:$card_version"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    implementation "androidx.annotation:annotation:$androidX_annotations"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation "androidx.preference:preference-ktx:$preference_version"
+    implementation platform('com.google.firebase:firebase-bom:25.3.1')
+
+//timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //androidx fragment and activity
+    implementation "androidx.activity:activity-ktx: $activity_version"
+    implementation "androidx.fragment:fragment-ktx: $fragment_version"
 
     //firebase
-    implementation "com.google.firebase:firebase-analytics-ktx:$firebase_analytics_version"
-    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
-    //for fcm
-    implementation "com.google.firebase:firebase-core:$firebase_core_version"
-    implementation "com.google.firebase:firebase-iid:$firebase_iid_version"
-    implementation "com.google.firebase:firebase-messaging:$firebase_message_version"
-    implementation 'android.arch.work:work-runtime:1.0.1'
+    implementation "com.google.firebase:firebase-analytics-ktx"
+    implementation "com.google.firebase:firebase-auth-ktx"
+    implementation "com.google.firebase:firebase-iid" //for fcm
+    implementation "com.google.firebase:firebase-messaging" //for fcm
+
+    // WorkManager
+    implementation "android.arch.work:work-runtime-ktx:$work_version"
+
     //multidex Lib
     implementation "androidx.multidex:multidex:$rootProject.multidexVersion"
-
-    //Timber
-    implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Stetho is a sophisticated debug bridge for Android applications. When enabled, developers have access to the Chrome Developer Tools feature natively part of the Chrome desktop browser.
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
@@ -105,52 +115,25 @@ dependencies {
     }
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //googleplay serices
+    implementation 'com.google.android.gms:play-services-auth:18.0.0' //Google Account Login
+    implementation "com.google.android.gms:play-services-location:$play_services_version"  // Client for retrieving location
+    implementation "com.google.android.gms:play-services-maps:$play_services_version" // Client for maps
+
+    // Architecture Components
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    // For Kotlin use kapt instead of annotationProcessor
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$room_version"
-
-    // Test helpers
-    testImplementation "androidx.room:room-testing:$room_version"
-
-    //navigation
+    implementation "androidx.room:room-ktx:$room_version"     // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"     //live data viewmodel lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"     // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"     // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"     // optional - helpers for implementing LifecycleOwner in a Service
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"     // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"     // optional - ReactiveStreams support for LiveData
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
-    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-
-    //androidx fragment and activity
-    implementation 'androidx.activity:activity-ktx:1.2.0-alpha05'
-    implementation 'androidx.fragment:fragment-ktx:1.3.0-alpha05'
-
-
-    //live data viewmodel lifecycle
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // Saved state module for ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-
-    // alternately - if using Java8, use the following instead of lifecycle-compiler
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
-    // optional - helpers for implementing LifecycleOwner in a Service
-    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
-
-    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
-    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-
-    // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-
-    // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:$arch_version"
-    //live data viewmodel lifecycle
-    implementation 'androidx.preference:preference-ktx:1.1.1'
-
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
-
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
@@ -164,20 +147,40 @@ dependencies {
     // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter_version"      // Retrofit Coroutines Support
 
-    // Retrofit Coroutines Support
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter_version"
-
-    // RecyclerView
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     // Joda time library for dealing with time
     implementation "joda-time:joda-time:$joda_version"
-    // WorkManager
-    implementation "android.arch.work:work-runtime-ktx:$work_version"
 
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_version"     // optional - Test helpers for LiveData
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    testImplementation "androidx.room:room-testing:$room_version"     // Test helpers
 
-    // Client for retrieving location
-    implementation "com.google.android.gms:play-services-location:$play_services_version"
-    implementation "com.google.android.gms:play-services-maps:$play_services_version"
+    // Dependencies for Android instrumented unit tests
+    androidTestImplementation "junit:junit:$junit_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dex_maker_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+
+    // Testing code should not be included in the main code.
+    // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+    implementation "androidx.test:core:$androidX_test_core_version"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:$androidX_test_core_version"
+    testImplementation "androidx.test.ext:junit:$androidX_test_ext_kotlin_runner_version"
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation "androidx.test.ext:junit:$androidX_test_ext_kotlin_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
 
 }

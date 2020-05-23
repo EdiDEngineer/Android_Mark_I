@@ -114,4 +114,5 @@
         />
     <include app:graph="@navigation/motion_layout_nav_graph" />
     <include app:graph="@navigation/coordinated_motion_nav_graph" />
+    <include app:graph="@navigation/todo_nav_graph" />
 </navigation>

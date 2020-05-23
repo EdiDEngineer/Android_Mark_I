@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.androidmarki">
+    package="com.example.android.androidmarki"
+    android:installLocation="auto">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -33,18 +34,6 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".ui.firebase.FirebaseActivity"
             android:label="@string/title_activity_firebase"
@@ -61,9 +50,12 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
             android:name=".ui.home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_home"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:theme="@style/AppTheme.OverlapSystemBar"/>
 
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ui.main.Splash"
             android:noHistory="true"
@@ -123,7 +115,6 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -135,7 +126,6 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
 
         <receiver android:name=".receiver.GeoFenceBroadcastReceiver" />
 

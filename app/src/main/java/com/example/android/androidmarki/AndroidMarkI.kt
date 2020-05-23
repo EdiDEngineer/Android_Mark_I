@@ -4,6 +4,8 @@ import android.os.Build
 import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.example.android.androidmarki.BuildConfig.DEBUG
+import com.example.android.androidmarki.data.source.TasksRepository
+import com.example.android.androidmarki.di.ServiceLocator
 import com.example.android.androidmarki.worker.RefreshDataWorker
 import com.facebook.stetho.Stetho
 import kotlinx.coroutines.CoroutineScope
@@ -15,10 +17,18 @@ import java.util.concurrent.TimeUnit
 /**
  * Override application to setup background work via WorkManager
  */
+/**
+ * An application that lazily provides a repository. Note that this Service Locator pattern is
+ * used to simplify the sample. Consider a Dependency Injection framework.
+ *
+ * Also, sets up Timber in the DEBUG BuildConfig. Read Timber's documentation for production setups.
+ */
 class AndroidMarkI : MultiDexApplication() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
+    val taskRepository: TasksRepository
+        get() = ServiceLocator.provideTasksRepository(this)
     private fun delayedInit() {
         applicationScope.launch {
             setupRecurringWork()

@@ -4,10 +4,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-<!--        <item-->
-<!--            android:id="@+id/nav_home"-->
-<!--            android:icon="@drawable/ic_home_black_24dp"-->
-<!--            android:title="@string/menu_home" />-->
+
         <item
             android:id="@+id/nav_dice_roller"
             android:icon="@drawable/dice_roller_dice_1"
@@ -56,11 +53,11 @@
             android:title="@string/mini_Paint_app_name" />
         <item
         android:id="@+id/nav_clipping_example"
-        android:icon="@drawable/splash_icon"
+        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/clipping_example_app_name" />
         <item
             android:id="@+id/nav_custom_fan_controller"
-            android:icon="@drawable/splash_icon"
+            android:icon="@mipmap/ic_launcher_round"
             android:title="@string/custom_fan_controller_app_name" />
         <item
             android:id="@+id/nav_heart_fill"
@@ -73,7 +70,7 @@
 
         <item
             android:id="@+id/nav_geo_maps"
-            android:icon="@drawable/splash_icon"
+            android:icon="@mipmap/ic_launcher_round"
             android:title="@string/wander_app_name" />
         <item
             android:id="@+id/nav_geo_fence"
@@ -81,12 +78,16 @@
             android:title="@string/treasure_hunt_app_name" />
         <item
             android:id="@+id/nav_motion_layout"
-            android:icon="@drawable/splash_icon"
+            android:icon="@mipmap/ic_launcher_round"
             android:title="@string/motion_layout_app_name" />
         <item
             android:id="@+id/nav_coordinate_motion"
-            android:icon="@drawable/splash_icon"
+            android:icon="@mipmap/ic_launcher_round"
             android:title="@string/coordinated_motion_app_name" />
+        <item
+            android:id="@+id/nav_to_do"
+            android:icon="@drawable/to_do_ic"
+            android:title="@string/todo_app_name" />
         <item
             android:id="@+id/nav_firebase"
             android:icon="@drawable/googleg_standard_color_18"

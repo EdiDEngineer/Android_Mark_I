@@ -49,7 +49,10 @@ class HomeActivity : BaseActivity() {
                 .setAction("Action", null).show()
         }
 
-        drawerLayout = binding.drawerLayout
+        drawerLayout = binding.drawerLayout.apply {
+            setStatusBarBackground(R.color.colorPrimaryDark)
+
+        }
         val navView: NavigationView = binding.navView
 
 

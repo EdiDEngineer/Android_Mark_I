@@ -22,17 +22,15 @@ import kotlinx.android.synthetic.main.fragment_curved_motion_detail.*
 class CurvedMotionDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentCurvedMotionDetailBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
 
-//        binding = FragmentCurvedMotionDetailBinding.inflate(inflater, container, true)
+        binding = FragmentCurvedMotionDetailBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-//        return binding.root
-        return inflater.inflate(R.layout.fragment_curved_motion_detail, container, false);
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

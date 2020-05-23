@@ -19,13 +19,17 @@ class CoordinatedMotionFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCoordinatedMotionBinding.inflate(inflater, container, false).apply {
-        navController= findNavController()
             coordinateMotion = this@CoordinatedMotionFragment
         }
         // Inflate the layout for this fragment
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController= findNavController()
+
+    }
     fun multipleElementsClick() {
         navController.navigate(CoordinatedMotionFragmentDirections.actionCoordinatedMotionToMultipleElementsFragment())
     }

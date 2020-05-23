@@ -65,4 +65,11 @@
     <!--    Coordinate motion-->
 
     <dimen name="offset_y">300dp</dimen>
+    <!-- testing to do -->
+
+    <dimen name="list_item_padding">8dp</dimen>
+    <dimen name="header_height">192dp</dimen>
+    <dimen name="header_padding">16dp</dimen>
+    <dimen name="header_image_width">100dp</dimen>
+
 </resources>

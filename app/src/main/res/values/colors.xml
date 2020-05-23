@@ -5,6 +5,7 @@
     <color name="colorAccent">#7affb4</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="windowBackground">#F5F5F5</color>
+    <color name="colorGrey">#757575</color>
 
     <color name="secondaryColor">#4285f4</color>
     <color name="secondaryLightColor">#80b4ff</color>
@@ -46,6 +47,11 @@
 
     <color name="colorBackground">#FFFF5500</color>
     <color name="colorPaint">#FFFFEB3B</color>
+
+<!-- testing to do -->
+    <drawable name="completedTaskBackground">#CCCCCC</drawable>
+
+    <drawable name="touchFeedback">#CFD8DC</drawable>
 
 
 </resources>
