@@ -4,22 +4,97 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
 
+        <item
+            android:id="@+id/nav_dice_roller"
+            android:icon="@drawable/dice_roller_dice_1"
+            android:title="@string/dice_roller" />
+        <item
+            android:id="@+id/nav_trivia"
+            android:icon="@drawable/trivia_ic"
+            android:title="@string/android_trivia" />
+        <item
+            android:id="@+id/nav_dessert_pusher"
+            android:icon="@drawable/dessert_pusher_ic"
+            android:title="@string/dessert_pusher" />
+
+        <item
+            android:id="@+id/nav_guess_it"
+            android:icon="@drawable/guess_it_ic"
+            android:title="@string/guess_it" />
+        <item
+            android:id="@+id/nav_sleep_tracker"
+            android:icon="@drawable/sleep_tracker_ic"
+            android:title="@string/sleep_tracker" />
+
+        <item
+            android:id="@+id/nav_mars_real_estate"
+            android:icon="@drawable/mars_real_estate_ic"
+            android:title="@string/mars_real_estate" />
+        <item
+            android:id="@+id/nav_devbyte_viewer"
+            android:icon="@drawable/ic_play_circle_outline_black_48dp"
+            android:title="@string/devByte_viewer_name" />
+        <item
+            android:id="@+id/nav_gdg_finder"
+            android:icon="@drawable/ic_gdg"
+            android:title="@string/gdg_finder" />
+        <item
+            android:id="@+id/nav_egg_timer"
+            android:icon="@drawable/egg_icon"
+            android:title="@string/egg_timer_name" />
+        <item
+            android:id="@+id/nav_property_animator"
+            android:icon="@drawable/ic_star"
+            android:title="@string/property_animation_app_name" />
+        <item
+            android:id="@+id/nav_mini_paint"
+            android:icon="@drawable/mini_paint"
+            android:title="@string/mini_Paint_app_name" />
+        <item
+        android:id="@+id/nav_clipping_example"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/clipping_example_app_name" />
+        <item
+            android:id="@+id/nav_custom_fan_controller"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="@string/custom_fan_controller_app_name" />
+        <item
+            android:id="@+id/nav_heart_fill"
+            android:icon="@drawable/ic_heart"
+            android:title="@string/heart_fill_app_name" />
+        <item
+            android:id="@+id/nav_tick_cross"
+            android:icon="@drawable/ic_cross"
+            android:title="@string/tick_cross_app_name" />
+
+        <item
+            android:id="@+id/nav_geo_maps"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="@string/wander_app_name" />
+        <item
+            android:id="@+id/nav_geo_fence"
+            android:icon="@drawable/geo_fence_ic"
+            android:title="@string/treasure_hunt_app_name" />
+        <item
+            android:id="@+id/nav_motion_layout"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="@string/motion_layout_app_name" />
+        <item
+            android:id="@+id/nav_coordinate_motion"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="@string/coordinated_motion_app_name" />
+        <item
+            android:id="@+id/nav_to_do"
+            android:icon="@drawable/to_do_ic"
+            android:title="@string/todo_app_name" />
+        <item
+            android:id="@+id/nav_firebase"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="@string/firebase" />
     </group>
 
-    <item android:title="@string/title_1">
+    <item android:title="@string/logout">
         <menu>
             <item
                 android:id="@+id/nav_logout"

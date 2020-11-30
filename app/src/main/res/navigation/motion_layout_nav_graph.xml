@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_motion_layout"
+    app:startDestination="@id/motionLayoutFragment">
+
+    <fragment
+        android:id="@+id/motionLayoutFragment"
+        android:name="com.example.android.androidmarki.ui.home.motionlayout.main.MotionLayoutFragment"
+        android:label="@string/motion_layout_app_name"
+        tools:layout="@layout/fragment_motion_layout" >
+        <action
+            android:id="@+id/action_motionLayoutFragment_to_motionLayoutStep8Fragment"
+            app:destination="@id/motionLayoutStep8Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_motionLayoutFragment_to_motionLayoutStep1Fragment"
+            app:destination="@id/motionLayoutStep1Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_motionLayoutFragment_to_motionLayoutStep2_7Fragment"
+            app:destination="@id/motionLayoutStep2_7Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/motionLayoutStep2_7Fragment"
+        android:name="com.example.android.androidmarki.ui.home.motionlayout.step2_7.MotionLayoutStep2_7Fragment"
+        android:label="@string/title_activity_step7_completed"
+        tools:layout="@layout/fragment_motion_layout_step2_7" />
+    <fragment
+        android:id="@+id/motionLayoutStep1Fragment"
+        android:name="com.example.android.androidmarki.ui.home.motionlayout.step1.MotionLayoutStep1Fragment"
+        android:label="@string/title_activity_step1"
+        tools:layout="@layout/fragment_motion_layout_step1" />
+    <fragment
+        android:id="@+id/motionLayoutStep8Fragment"
+        android:name="com.example.android.androidmarki.ui.home.motionlayout.step8.MotionLayoutStep8Fragment"
+        android:label="@string/title_activity_step8"
+        tools:layout="@layout/fragment_motion_layout_step8" />
+
+</navigation>

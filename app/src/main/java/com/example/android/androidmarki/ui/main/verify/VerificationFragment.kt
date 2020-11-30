@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
+import com.example.android.androidmarki.data.repository.AuthenticationState
 import com.example.android.androidmarki.databinding.FragmentVerificationBinding
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseFragment
@@ -19,11 +21,7 @@ import timber.log.Timber
 
 class VerificationFragment : BaseFragment() {
     private lateinit var binding: FragmentVerificationBinding
-    private val clickListener = object : MainListener.Verify {
-        override fun onBack() {
-            requireActivity().onBackPressed()
-        }
-
+    val clickListener = object : MainListener.Verify {
         override fun onSendCode() {
             binding.viewModel!!.sendCode(requireActivity() as BaseActivity)
         }
@@ -38,16 +36,16 @@ class VerificationFragment : BaseFragment() {
         binding = FragmentVerificationBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@VerificationFragment, BaseViewModelFactory(
-                    VerifyViewModel(AuthenticateRepository.get())
+                    VerifyViewModel(AuthenticateRepository())
                 )
             ).get(
                 VerifyViewModel::class.java
             )
-            clickListener = this@VerificationFragment.clickListener
+            verify = this@VerificationFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
 
@@ -64,14 +62,12 @@ class VerificationFragment : BaseFragment() {
                     binding.viewModel!!.signOut()
                 })
         }
-binding.verify.setOnClickListener {  }
 
         binding.viewModel!!.verifyResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
+                showSnackBar(it.error)
                 Timber.tag(TAG).w(it.exception, "linkUserWithPhoneNumber:failure")
-                it.exception = null
+                binding.viewModel!!.clear()
 
             }
             if (it.isSuccessful) {
@@ -79,23 +75,21 @@ binding.verify.setOnClickListener {  }
                 navController.navigate(R.id.home_activity)
                 requireActivity().finish()
             }
-            if (it.isSignOut) {
-                navController.popBackStack(R.id.loginFragment, false)
+        })
+
+        binding.viewModel!!.authenticationState.observe(viewLifecycleOwner, Observer {
+            if (it == AuthenticationState.UNAUTHENTICATED){
+                navController.navigate(VerificationFragmentDirections.actionVerificationFragmentToLoginFragment())
             }
         })
 
-        var phoneNumberValid = binding.viewModel!!.verifyUIData.isDataValid
-        var codeValid = binding.viewModel!!.verifyUIData.isDataValid
-        binding.viewModel!!.verifyUIData.phoneNumberError.observe(viewLifecycleOwner, Observer {
-            phoneNumberValid = it == 0
-            binding.viewModel!!.verifyUIData.isDataValid = phoneNumberValid && codeValid
-        })
-        binding.viewModel!!.verifyUIData.codeError.observe(viewLifecycleOwner, Observer {
-            codeValid = it == 0
-            binding.viewModel!!.verifyUIData.isDataValid = phoneNumberValid && codeValid
 
-        })
-
+        binding.verifyPhoneNo.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        binding.verifyCode.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
     }
 
     companion object {

@@ -2,8 +2,7 @@ package com.example.android.androidmarki.ui.home.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.android.androidmarki.data.remote.firebase.FirebaseUserLiveData
+import com.example.android.androidmarki.data.remote.firebase.FirebaseUserAuthLiveData
 import com.example.android.androidmarki.ui.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
@@ -13,5 +12,5 @@ class HomeViewModel : BaseViewModel() {
     }
     val text: LiveData<String> = _text
 
-    val userLiveData = FirebaseUserLiveData.get()
+    val userLiveData = FirebaseUserAuthLiveData()
 }

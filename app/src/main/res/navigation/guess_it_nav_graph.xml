@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_guess_it"
+    android:label="@string/guess_it_name"
+    app:startDestination="@id/guessItTitleDestination"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/guessItTitleDestination"
+        android:label="@string/guess_it_name"
+        android:name="com.example.android.androidmarki.ui.home.guessIt.title.GuessItTitleFragment"
+        tools:layout="@layout/fragment_guess_it_title">
+        <action
+            android:id="@+id/action_title_to_game"
+            app:destination="@id/guessItGameDestination"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/guessItGameDestination"
+        android:label="@string/guess_it_name"
+        android:name="com.example.android.androidmarki.ui.home.guessIt.game.GuessItGameFragment"
+        tools:layout="@layout/fragment_guess_it_game">
+        <action
+            android:id="@+id/action_game_to_score"
+            app:destination="@id/guessItScoreDestination"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/guessItTitleDestination" />
+    </fragment>
+    <fragment
+        android:id="@+id/guessItScoreDestination"
+        android:name="com.example.android.androidmarki.ui.home.guessIt.score.GuessItScoreFragment"
+        android:label="@string/guess_it_name"
+        tools:layout="@layout/fragment_guess_it_score">
+        <action
+            android:id="@+id/action_restart"
+            app:destination="@+id/guessItGameDestination"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/guessItTitleDestination" />
+        <argument
+            android:name="score"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+</navigation>

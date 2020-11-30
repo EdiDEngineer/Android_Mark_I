@@ -1,4 +1,7 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.settings.SettingsFragment"
+    >
 
     <PreferenceCategory app:title="@string/messages_header">
 

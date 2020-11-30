@@ -2,60 +2,63 @@ package com.example.android.androidmarki.ui.main.verify
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.android.androidmarki.R
-import com.example.android.androidmarki.data.Result
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
-import com.example.android.androidmarki.data.source.AuthenticateDataSource
 import com.example.android.androidmarki.ui.base.BaseActivity
 import com.example.android.androidmarki.ui.base.BaseViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class VerifyViewModel(private val repository: AuthenticateRepository) : BaseViewModel() {
     private val _verifyResult = MutableLiveData<VerifyResult>()
     val verifyResult: LiveData<VerifyResult> = _verifyResult
     val verifyUIData = VerifyUIData()
+    val authenticationState = repository.authenticationState
 
     init {
         _verifyResult.value = VerifyResult()
     }
 
     fun verify() {
+        _verifyResult.value = VerifyResult(isLoading = true)
         if (verifyUIData.isDataValid) {
-            repository.verifyPhoneNumberWithCode(verifyUIData.code.value!!,
-                object : AuthenticateDataSource.VerifyPhoneNumber {
-                    override fun onVerify(credential: PhoneAuthCredential) {
-                        linkPhoneNumber(credential)
-                    }
-                })
-
+            linkPhoneNumber(
+                repository.verifyPhoneNumberWithCode(
+                    verifyUIData.code.value!!
+                )
+            )
         } else {
             _verifyResult.value = VerifyResult(error = R.string.invalid_verify_info)
         }
     }
 
     fun sendCode(baseActivity: BaseActivity) {
-        if (verifyUIData.phoneNumberError.value == 0) {
-            if (verifyUIData.isCode.value == true) {
-                repository.resendVerificationCode(
-                    baseActivity,
-                    verifyUIData.phoneNumber.value!!,
-                    object : AuthenticateDataSource.SendPhoneNumberCode {
-                        override fun onSentCode() {
-                        }
+        if (verifyUIData.phoneNumberError.value == null && verifyUIData.phoneNumber.value!=null) {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    if (verifyUIData.isCode.value == true) {
+                        repository.resendVerificationCode(
+                            baseActivity,
+                            verifyUIData.phoneNumber.value!!
+                        )
+                    } else {
+                        repository.beginVerifyPhoneNumber(
+                            baseActivity,
+                            verifyUIData.phoneNumber.value!!
+                        )
+                        verifyUIData.isCode.postValue(true)
                     }
-                )
-            } else {
-                repository.beginVerifyPhoneNumber(
-                    baseActivity,
-                    verifyUIData.phoneNumber.value!!,
-                    object : AuthenticateDataSource.SendPhoneNumberCode {
-                        override fun onSentCode() {
-                            verifyUIData.isCode.value = true
-                        }
-                    }
-                )
+                }
             }
 
         } else {
@@ -64,31 +67,44 @@ class VerifyViewModel(private val repository: AuthenticateRepository) : BaseView
     }
 
     fun signOut() {
-        repository.logout(object : AuthenticateDataSource.Logout {
-            override fun onLoggedOut() {
-                _verifyResult.value = VerifyResult(isSignOut = true)
-            }
-        })
+        repository.signOut()
     }
 
-   private fun linkPhoneNumber(credential: PhoneAuthCredential) {
-        repository.linkPhoneNumberWithUserEmail(
-            credential,
-            object : AuthenticateDataSource.LinkPhoneNumber {
-                override fun onLinked(Result: Result.Success<Task<AuthResult>>) {
-                 Result.data.addOnCompleteListener {
-                     if(!it.isSuccessful){
-                         _verifyResult.value = VerifyResult(error = R.string.verification_failed, exception = it.exception)
-                     }
-                     else{
-                         _verifyResult.value = VerifyResult(isSuccessful = true, isLoading = MutableLiveData(true))
-                     }
-                 }
+    private fun linkPhoneNumber(credential: PhoneAuthCredential) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    repository.linkPhoneNumberWithUserEmail(
+                        credential
+                    ).await()
+                    _verifyResult.postValue(VerifyResult(isSuccessful = true, isLoading = true))
+                } catch (e: FirebaseNetworkException) {
+                    _verifyResult.postValue(VerifyResult(
+                        error = R.string.network_error,
+                        exception = e
+                    ))
+                } catch (e: FirebaseAuthInvalidCredentialsException){
+                    _verifyResult.postValue(VerifyResult(
+                        error = R.string.details_error_phone,
+                        exception = e
+                    ))
+                }catch (e: Exception) {
+                    _verifyResult.postValue( VerifyResult(
+                        error = R.string.number_link_failed,
+                        exception = e
+                    ))
                 }
+            }
+        }
 
-                override fun onFail(e: Result.Error) {
-                }
+    }
 
-            })
+    fun clear() {
+        _verifyResult.value = VerifyResult()
+    }
+
+    fun validate() {
+        verifyUIData.isDataValid =
+            verifyUIData.phoneNumberError.value == null && verifyUIData.codeError.value == null
     }
 }

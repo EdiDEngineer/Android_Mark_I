@@ -4,7 +4,7 @@ import androidx.annotation.CallSuper
 import androidx.lifecycle.AndroidViewModel
 import com.example.android.androidmarki.AndroidMarkI
 
-open class BaseViewModel(application: AndroidMarkI = AndroidMarkI.get()) : AndroidViewModel(application) {
+open class BaseViewModel(application: AndroidMarkI= AndroidMarkI.getApp()) : AndroidViewModel(application) {
 
 //    private val disposable = CompositeDisposable()
 //
@@ -18,20 +18,7 @@ open class BaseViewModel(application: AndroidMarkI = AndroidMarkI.get()) : Andro
 //        disposable.clear()
     }
 
-    enum class AuthenticationState {
-        AUTHENTICATED, UNAUTHENTICATED, EMAIL_UNVERIFIED, PHONE_UNVERIFIED
-    }
-//    val userLiveData =  repository.userLiveData
-//
-//
-//    val authenticationState = repository.userLiveData.map { user ->
-//        when {
-//            user == null -> AuthenticationState.UNAUTHENTICATED
-//            user.phoneNumber.isNullOrEmpty()-> AuthenticationState.PHONE_UNVERIFIED
-//            !user.isEmailVerified -> AuthenticationState.EMAIL_UNVERIFIED
-//            else -> AuthenticationState.AUTHENTICATED
-//        }
-//    }
+
 
 //    fun getFactToDisplay(context: Context): String {
 //        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)

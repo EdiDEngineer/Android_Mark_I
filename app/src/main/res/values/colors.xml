@@ -4,15 +4,54 @@
     <color name="colorPrimaryDark">#00a956</color>
     <color name="colorAccent">#7affb4</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="windowBackground">#F5F5F5</color>
+    <color name="colorGrey">#757575</color>
 
+    <color name="secondaryColor">#4285f4</color>
+    <color name="secondaryLightColor">#80b4ff</color>
+    <color name="secondaryDarkColor">#0059c1</color>
     <color name="ic_launcher_background">#3DDC84</color>
 
     <color name="google_blue">#4285f4</color>
-
     <color name="google_green">#34a853</color>
-
     <color name="google_yellow">#fbbc05</color>
-
     <color name="google_red">#ea4335</color>
+
+    <!--Trivia-->
+    <color name="youWinDark">#34a853</color>
+    <color name="youWinBackground">#B7F8C9</color>
+    <color name="gameOverBackground">#f8bbd0</color>
+    <color name="background">#68EFEFEF</color>
+
+    <!--Desert pusher-->
+    <color name="green">#6ab343</color>
+    <color name="grey">#99000000</color>
+
+    <!-- Guess it-->
+    <color name="ok_green_color">#6ab343</color>
+    <color name="selected_green_color">#388310</color>
+    <color name="skip_red_color">#f44336</color>
+    <color name="selected_red_color">#ba000d</color>
+    <color name="black_text_color">#de000000</color>
+    <color name="grey_text_color">#99000000</color>
+    <color name="grey_button_color">#606060</color>
+    <color name="white_text_color">#ffffff</color>
+
+    <!-- DevByte Viewer -->
+
+    <color name="background_grey">#ffDDDDDD</color>
+    <color name="text_light">#ff666666</color>
+    <color name="text_black">#ff222222</color>
+
+    <!--mini_Paint-->
+
+    <color name="colorBackground">#FFFF5500</color>
+    <color name="colorPaint">#FFFFEB3B</color>
+
+<!-- testing to do -->
+    <drawable name="completedTaskBackground">#CCCCCC</drawable>
+
+    <drawable name="touchFeedback">#CFD8DC</drawable>
+
 
 </resources>

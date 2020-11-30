@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_coordinate_motion"
+    app:startDestination="@id/coordinatedMotion">
+
+    <fragment
+        android:id="@+id/coordinatedMotion"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.CoordinatedMotionFragment"
+        android:label="@string/coordinated_motion_app_name"
+        tools:layout="@layout/fragment_coordinated_motion" >
+        <action
+            android:id="@+id/action_coordinatedMotion_to_multipleChaoticElementsFragment"
+            app:destination="@id/multipleChaoticElementsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_coordinatedMotion_to_multipleElementsFragment"
+            app:destination="@id/multipleElementsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_coordinatedMotion_to_coordinateMotionSizeChangeFragment"
+            app:destination="@id/coordinateMotionSizeChangeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_coordinatedMotion_to_curveMotionListFragment"
+            app:destination="@id/curveMotionListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/multipleChaoticElementsFragment"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.MultipleChaoticElementsFragment"
+        android:label="Multiple Chaotic Elements"
+        tools:layout="@layout/fragment_multiple_elements" />
+    <fragment
+        android:id="@+id/multipleElementsFragment"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.MultipleElementsFragment"
+        android:label="Multiple Elements"
+        tools:layout="@layout/fragment_multiple_elements" />
+    <fragment
+        android:id="@+id/coordinateMotionSizeChangeFragment"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.CoordinateMotionSizeChangeFragment"
+        android:label="Size Change"
+        tools:layout="@layout/fragment_coordinate_motion_size_change" />
+    <fragment
+        android:id="@+id/curvedMotionDetailFragment"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.CurvedMotionDetailFragment"
+        android:label="Curve Motion Detail"
+        tools:layout="@layout/fragment_curved_motion_detail" >
+        <argument
+            android:name="EXTRA_COLOR"
+            app:argType="integer"
+            android:defaultValue="-65281"/>
+        <argument
+            android:name="EXTRA_CURVE"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/curveMotionListFragment"
+        android:name="com.example.android.androidmarki.ui.home.coordinatedMotion.CurveMotionListFragment"
+        android:label="Curve Motion List"
+        tools:layout="@layout/motion_layout_list_item">
+        <action
+            android:id="@+id/action_curveMotionListFragment_to_curvedMotionDetailFragment"
+            app:destination="@id/curvedMotionDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+         />
+    </fragment>
+</navigation>

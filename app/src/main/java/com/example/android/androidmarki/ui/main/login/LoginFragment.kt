@@ -1,15 +1,25 @@
 package com.example.android.androidmarki.ui.main.login
 
+import android.animation.AnimatorInflater.loadStateListAnimator
+import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.repository.AuthenticateRepository
+import com.example.android.androidmarki.data.repository.AuthenticationState
 import com.example.android.androidmarki.databinding.FragmentLoginBinding
 import com.example.android.androidmarki.ui.base.BaseFragment
 import com.example.android.androidmarki.ui.base.BaseViewModel
@@ -23,7 +33,7 @@ import timber.log.Timber
 
 class LoginFragment : BaseFragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val clickListener = object : MainListener.Login {
+    val clickListener = object : MainListener.Login {
         override fun onReset() {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToResetFragment())
         }
@@ -39,7 +49,26 @@ class LoginFragment : BaseFragment() {
                     .requestEmail()
                     .build()
             ).signInIntent
-            startActivityForResult(signInIntent, SIGN_IN_RESULT_CODE)
+//            startActivityForResult(signInIntent, SIGN_IN_RESULT_CODE)
+
+
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    binding.viewModel!!.loginWithGoogle(
+                        task.getResult(ApiException::class.java)!!
+                    )
+
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Timber.tag(TAG).w(e, "Google sign in failed")
+                    showSnackBar(R.string.account_failed)
+
+                    // ...
+                }
+            }.launch(signInIntent)
+
         }
     }
 
@@ -51,79 +80,63 @@ class LoginFragment : BaseFragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false).apply {
             viewModel = ViewModelProvider(
                 this@LoginFragment, BaseViewModelFactory(
-                    LoginViewModel(AuthenticateRepository.get())
+                    LoginViewModel(AuthenticateRepository())
                 )
             ).get(
                 LoginViewModel::class.java
             )
-            clickListener = this@LoginFragment.clickListener
+            login = this@LoginFragment
             lifecycleOwner = viewLifecycleOwner
         }
-        snackView = binding.root
-        return snackView
+        layoutView = binding.root
+        return layoutView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
-
         binding.viewModel!!.authenticationState.observe(
             viewLifecycleOwner,
             Observer { authenticationState ->
-                if (authenticationState == BaseViewModel.AuthenticationState.AUTHENTICATED || authenticationState == BaseViewModel.AuthenticationState.EMAIL_UNVERIFIED) {
+                if (authenticationState == AuthenticationState.AUTHENTICATED || authenticationState == AuthenticationState.EMAIL_UNVERIFIED) {
+                    showShortToast(R.string.login_successful)
                     navController.navigate(R.id.home_activity)
-//                    requireActivity().finish()
-                } else if (authenticationState == BaseViewModel.AuthenticationState.PHONE_UNVERIFIED) {
-                    navController.navigate(R.id.verificationFragment)
+                    requireActivity().finish()
+
+                } else if (authenticationState == AuthenticationState.PHONE_UNVERIFIED) {
+                    showShortToast(R.string.login_successful)
+                    navController.navigate(R.id.action_global_verificationFragment)
                 }
+
             })
 
         binding.viewModel!!.loginResult.observe(viewLifecycleOwner, Observer {
             if (it.error != null) {
-                showSnackBar(it.error!!)
-                it.error = null
-                Timber.tag(TAG).w ( it.exception,"signInWithEmail:failure")
-                it.exception = null
+                showSnackBar(it.error)
+                Timber.tag(TAG).w(it.exception, "signInWithEmail:failure")
+                binding.viewModel!!.clear()
             }
-            if (it.isSuccessful) {
-                showShortToast(R.string.login_successful)
-            }
+
         })
 
-        var passwordValid = binding.viewModel!!.loginUIData.isDataValid
-        var usernameValid = binding.viewModel!!.loginUIData.isDataValid
-        binding.viewModel!!.loginUIData.passwordError.observe(viewLifecycleOwner, Observer {
-            passwordValid = it == 0
-            binding.viewModel!!.loginUIData.isDataValid = passwordValid && usernameValid
-        })
-        binding.viewModel!!.loginUIData.usernameError.observe(viewLifecycleOwner, Observer {
-            usernameValid = it == 0
-            binding.viewModel!!.loginUIData.isDataValid = passwordValid && usernameValid
+        binding.loginUsername.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        binding.loginPassword.doAfterTextChanged{
+            binding.viewModel!!.validate()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-        })
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SIGN_IN_RESULT_CODE) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                binding.viewModel!!.loginWithGoogle(
-                    task.getResult(ApiException::class.java)!!
-                )
-
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Timber.tag(TAG).w(e, "Google sign in failed")
-                // ...
-            }
+            binding.loginGoogle.stateListAnimator =    loadStateListAnimator(context,  R.animator.raise)
+            val avd = context?.let { AnimatedVectorDrawableCompat.create(it, R.drawable.avd_android_design) }
+            binding.animate.setImageDrawable(avd)
+            avd?.start()
         }
     }
 
+
     companion object {
-        const val SIGN_IN_RESULT_CODE = 1001
         const val TAG = "Login Fragment"
     }
 }

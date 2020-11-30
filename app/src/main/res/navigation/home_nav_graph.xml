@@ -9,60 +9,110 @@
         android:id="@+id/nav_home"
         android:name="com.example.android.androidmarki.ui.home.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_nav_home_to_nav_home_second"
-            app:destination="@id/nav_home_second" />
-        <action
-            android:id="@+id/action_nav_home_to_settings"
-            app:destination="@id/settings" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.example.android.androidmarki.ui.home.second.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.android.androidmarki.ui.home.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_dessert_pusher"
+        android:name="com.example.android.androidmarki.ui.home.dessertPusher.DessertPusherFragment"
+        android:label="@string/dessert_pusher"
+        tools:layout="@layout/fragment_dessert_pusher" />
+
+
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.android.androidmarki.ui.home.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.android.androidmarki.ui.home.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.android.androidmarki.ui.home.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
-        android:id="@+id/settings"
+        android:id="@+id/action_settings"
+        tools:layout="@xml/settings"
         android:name="com.example.android.androidmarki.ui.home.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="Settings"
+        />
     <activity
         android:id="@+id/mainActivity"
         tools:layout="@layout/activity_main"
         android:name="com.example.android.androidmarki.ui.main.MainActivity"
-        android:label="MainActivity" />
+        android:label="MainActivity"
+        />
+    <fragment
+        android:id="@+id/nav_dice_roller"
+        android:name="com.example.android.androidmarki.ui.home.dice.DiceFragment"
+        android:label="@string/dice_roller"
+        tools:layout="@layout/fragment_dice"
+        />
+    <include
+        app:graph="@navigation/trivia_nav_graph" />
+    <include
+        app:graph="@navigation/guess_it_nav_graph" />
+    <include
+        app:graph="@navigation/sleep_tracker_nav_graph" />
+    <include app:graph="@navigation/mars_real_estate_nav_graph" />
+    <fragment
+        android:id="@+id/nav_devbyte_viewer"
+        android:name="com.example.android.androidmarki.ui.home.devByteViewer.DevByteFragment"
+        android:label="@string/devByte_viewer_name"
+        tools:layout="@layout/fragment_dev_byte" />
+    <fragment
+        android:id="@+id/nav_gdg_finder"
+        android:name="com.example.android.androidmarki.ui.home.gdgFinder.GdgListFragment"
+        tools:layout="@layout/fragment_gdg_list"
+        />
 
+    <fragment
+        android:id="@+id/nav_egg_timer"
+        android:name="com.example.android.androidmarki.ui.home.eggTimer.EggTimerFragment"
+        tools:layout="@layout/fragment_egg_timer"
+        android:label="@string/egg_timer_name"
+        />
+    <activity
+        android:id="@+id/nav_firebase"
+        tools:layout="@layout/activity_firebase"
+        android:name="com.example.android.androidmarki.ui.firebase.FirebaseActivity"
+        android:label="FirebaseActivity"
+        />
+    <fragment
+        android:id="@+id/nav_property_animator"
+        tools:layout="@layout/fragment_property_animation"
+        android:name="com.example.android.androidmarki.ui.home.propertyAnimation.PropertyAnimationFragment"
+        android:label="@string/property_animation_app_name" />
+    <fragment
+        android:id="@+id/nav_mini_paint"
+        android:name="com.example.android.androidmarki.ui.home.miniPaint.MiniPaintFragment"
+        android:label="@string/mini_Paint_app_name"
+       />
+    <fragment
+        android:id="@+id/nav_clipping_example"
+        android:name="com.example.android.androidmarki.ui.home.clippingExample.ClippingExampleFragment"
+        android:label="@string/clipping_example_app_name"
+        />
+    <fragment
+    android:id="@+id/nav_custom_fan_controller"
+    android:name="com.example.android.androidmarki.ui.home.customFanController.CustomFanControllerFragment"
+    android:label="@string/custom_fan_controller_app_name"
+    tools:layout="@layout/fragment_custom_fan_controller"
+    />
+
+    <fragment
+        android:id="@+id/nav_heart_fill"
+        android:name="com.example.android.androidmarki.ui.home.heartFill.HeartFillFragment"
+        android:label="@string/heart_fill_app_name"
+        tools:layout="@layout/fragment_heart_fill"
+        />
+    <fragment
+        android:id="@+id/nav_tick_cross"
+        android:name="com.example.android.androidmarki.ui.home.tickCross.TickCrossFragment"
+        android:label="@string/tick_cross_app_name"
+        tools:layout="@layout/fragment_tick_cross"
+        />
+    <fragment
+        android:id="@+id/nav_geo_maps"
+        android:name="com.example.android.androidmarki.ui.home.geoMaps.GeoMapsFragment"
+        android:label="@string/wander_app_name"
+        />
+    <fragment
+        android:id="@+id/nav_geo_fence"
+        android:name="com.example.android.androidmarki.ui.home.geoFence.GeoFenceFragment"
+        android:label="@string/treasure_hunt_app_name"
+        tools:layout="@layout/fragment_geo_fence"
+        />
+    <include app:graph="@navigation/motion_layout_nav_graph" />
+    <include app:graph="@navigation/coordinated_motion_nav_graph" />
+    <include app:graph="@navigation/todo_nav_graph" />
 </navigation>
