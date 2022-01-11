@@ -1,6 +1,7 @@
 package com.example.android.androidmarki.ui.home.propertyAnimation
 
 import android.animation.*
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -81,6 +82,7 @@ class PropertyAnimationFragment : BaseFragment() {
         animator.start()
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     fun colorizer() {
 
         // Animate the color of the star's container from black to red over a half
@@ -114,14 +116,13 @@ class PropertyAnimationFragment : BaseFragment() {
         var starH: Float = binding.star.height.toFloat()
 
         // Create the new star (an ImageView holding our drawable) and add it to the container
-        val newStar = AppCompatImageView(context)
+        val newStar = context?.let { AppCompatImageView(it) } ?:return
         newStar.setImageResource(R.drawable.ic_star)
         newStar.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         )
         container.addView(newStar)
-
         // Scale the view randomly between 10-160% of its default size
         newStar.scaleX = Math.random().toFloat() * 1.5f + .1f
         newStar.scaleY = newStar.scaleX

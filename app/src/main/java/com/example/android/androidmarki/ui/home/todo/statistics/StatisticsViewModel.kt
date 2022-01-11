@@ -16,19 +16,22 @@
 
 package com.example.android.androidmarki.ui.home.todo.statistics
 
+import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.androidmarki.data.local.entity.Task
 import com.example.android.androidmarki.data.source.TasksRepository
 import com.example.android.androidmarki.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import  com.example.android.androidmarki.data.Result as Result
+import  com.example.android.androidmarki.data.Result.Error
 
 /**
  * ViewModel for the statistics screen.
  */
 class StatisticsViewModel(
-    private val tasksRepository: TasksRepository
-) : BaseViewModel() {
+    private val tasksRepository: TasksRepository,
+    applicationContext: Application
+) : BaseViewModel(applicationContext) {
 
     private val tasks: LiveData<Result<List<Task>>> = tasksRepository.observeTasks()
     private val _dataLoading = MutableLiveData<Boolean>(false)

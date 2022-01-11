@@ -23,6 +23,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.withFragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.IdlingResource
 import com.example.android.androidmarki.ui.base.BaseActivity
@@ -108,7 +109,7 @@ fun DataBindingIdlingResource.monitorActivity(
 /**
  * Sets the fragment from a [FragmentScenario] to be used from [DataBindingIdlingResource].
  */
-fun DataBindingIdlingResource.monitorFragment(fragmentScenario: FragmentScenario<out BaseFragment>) {
+fun DataBindingIdlingResource.monitorFragment(fragmentScenario: FragmentScenario< BaseFragment>) {
     fragmentScenario.onFragment {
         this.activity = it.requireActivity() as BaseActivity
     }

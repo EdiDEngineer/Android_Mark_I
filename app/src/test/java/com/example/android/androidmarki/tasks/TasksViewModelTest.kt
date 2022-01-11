@@ -16,7 +16,11 @@
 
 package com.example.android.androidmarki.tasks
 
+import android.app.Application
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.androidmarki.MainCoroutineRule
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.data.local.entity.Task
@@ -31,25 +35,28 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Unit tests for the implementation of [TasksViewModel]
  */
+
+@RunWith(AndroidJUnit4::class) //android x
 @ExperimentalCoroutinesApi
 class TasksViewModelTest {
 
     // Subject under test
     private lateinit var tasksViewModel: TasksViewModel
-
+//androidx test to test android components for bot local and instrumented
     // Use a fake repository to be injected into the viewmodel
     private lateinit var tasksRepository: FakeTestRepository
 
     // Set the main coroutines dispatcher for unit testing.
     @ExperimentalCoroutinesApi
     @get:Rule
-    var mainCoroutineRule = MainCoroutineRule()
+    var mainCoroutineRule = MainCoroutineRule() //Custom rule class to be ruses
 
-    // Executes each task synchronously using Architecture Components.
+    // Executes each task synchronously using Architecture Components. to test live data
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
@@ -62,7 +69,7 @@ class TasksViewModelTest {
         val task3 = Task("Title3", "Description3", true)
         tasksRepository.addTasks(task1, task2, task3)
 
-        tasksViewModel = TasksViewModel(tasksRepository)
+        tasksViewModel = TasksViewModel(tasksRepository, ApplicationProvider.getApplicationContext<Application>())
     }
 
     @Test

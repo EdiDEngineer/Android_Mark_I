@@ -36,7 +36,9 @@ class StatisticsFragment : BaseFragment() {
     private val viewModel by viewModels<StatisticsViewModel> {
         BaseViewModelFactory(
 
-           StatisticsViewModel( (requireContext().applicationContext as AndroidMarkI).taskRepository)
+           StatisticsViewModel( (requireContext().applicationContext as AndroidMarkI).taskRepository,
+               AndroidMarkI.getApp()
+           )
         )
     }
     override fun onCreateView(

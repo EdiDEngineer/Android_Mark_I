@@ -15,7 +15,10 @@
  */
 package com.example.android.androidmarki.statistics
 
+import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.androidmarki.ui.home.todo.statistics.StatisticsViewModel
 import com.example.android.androidmarki.MainCoroutineRule
 import com.example.android.androidmarki.source.FakeTestRepository
@@ -26,10 +29,12 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Unit tests for the implementation of [StatisticsViewModel]
  */
+@RunWith(AndroidJUnit4::class) //android x
 @ExperimentalCoroutinesApi
 class StatisticsViewModelTest {
 
@@ -53,7 +58,8 @@ class StatisticsViewModelTest {
         // We initialise the repository with no tasks
         tasksRepository = FakeTestRepository()
 
-        statisticsViewModel = StatisticsViewModel(tasksRepository)
+        statisticsViewModel = StatisticsViewModel(tasksRepository, ApplicationProvider.getApplicationContext<Application>())
+
     }
 
     @Test

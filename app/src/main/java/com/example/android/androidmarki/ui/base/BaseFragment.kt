@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BaseFragment : Fragment() {
     private val builder: MaterialAlertDialogBuilder by lazy {
         MaterialAlertDialogBuilder(
-            context,
+            requireContext(),
             R.style.ThemeOverlay_App_MaterialAlertDialog
         )
     }

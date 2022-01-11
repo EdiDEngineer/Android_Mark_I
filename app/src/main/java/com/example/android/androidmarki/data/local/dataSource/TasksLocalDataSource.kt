@@ -33,7 +33,7 @@ import kotlinx.coroutines.withContext
 class TasksLocalDataSource internal constructor(
     private val tasksDao: TasksDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : TasksDataSource {
+) : TasksDataSource { // inject dispatcher to swap for testing
 
     override fun observeTasks(): LiveData<Result<List<Task>>> {
         return tasksDao.observeTasks().map {

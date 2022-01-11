@@ -24,6 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
+import androidx.test.core.app.ApplicationProvider
 import com.example.android.androidmarki.AndroidMarkI
 import com.example.android.androidmarki.R
 import com.example.android.androidmarki.databinding.FragmentTodoTasksBinding
@@ -42,7 +43,10 @@ import timber.log.Timber
 class TasksFragment : BaseFragment() {
 
     private val viewModel by viewModels<TasksViewModel> {
-        BaseViewModelFactory(TasksViewModel((requireContext().applicationContext as AndroidMarkI).taskRepository))
+        BaseViewModelFactory(TasksViewModel(
+            (requireContext().applicationContext as AndroidMarkI).taskRepository,
+            AndroidMarkI.getApp()
+        ))
     }
 
     private val args: TasksFragmentArgs by navArgs()
@@ -60,7 +64,6 @@ class TasksFragment : BaseFragment() {
         ).apply {
             viewmodel = viewModel
         }
-        navController = findNavController()
 
         setHasOptionsMenu(true)
         return binding.root
@@ -81,12 +84,12 @@ class TasksFragment : BaseFragment() {
                 true
             }
             R.id.statistics_fragment_dest -> {
-                navController.navigate(TasksFragmentDirections.actionTasksFragmentToStatisticsFragment())
+                findNavController().navigate(TasksFragmentDirections.actionTasksFragmentToStatisticsFragment())
                 true
             }
             else -> NavigationUI.onNavDestinationSelected(
                 item,
-                navController
+                findNavController()
             )
                     || super.onOptionsItemSelected(item)
         }
@@ -156,12 +159,12 @@ class TasksFragment : BaseFragment() {
                 null,
                 resources.getString(R.string.add_task)
             )
-        navController.navigate(action)
+        findNavController().navigate(action)
     }
 
     private fun openTaskDetails(taskId: String) {
         val action = TasksFragmentDirections.actionTasksFragmentToTaskDetailFragment(taskId)
-        navController.navigate(action)
+        findNavController().navigate(action)
     }
 
     private fun setupListAdapter() {

@@ -31,7 +31,7 @@ class AndroidMarkI : MultiDexApplication() {
         get() = ServiceLocator.provideTasksRepository(this)
     private fun delayedInit() {
         applicationScope.launch {
-            setupRecurringWork()
+//            setupRecurringWork()
         }
     }
 

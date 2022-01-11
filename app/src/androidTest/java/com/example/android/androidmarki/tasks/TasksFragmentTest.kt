@@ -72,6 +72,8 @@ class TasksFragmentTest {
         // GIVEN - On the home screen
         val scenario = launchFragmentInContainer<TasksFragment>(Bundle(), R.style.AppTheme)
         val navController = mock(NavController::class.java)
+        //mock test double that sees if function is properly called not result not implementaion but statechange
+///good for something that will rarely change and outside the current scope
         scenario.onFragment {
             Navigation.setViewNavController(it.view!!, navController)
         }

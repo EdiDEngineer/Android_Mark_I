@@ -15,6 +15,8 @@
  */
 package com.example.android.androidmarki.ui.home.todo.tasks
 
+import android.app.Application
+import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
@@ -31,8 +33,9 @@ import kotlinx.coroutines.launch
  * ViewModel for the task list screen.
  */
 class TasksViewModel(
-    private val tasksRepository: TasksRepository
-) : BaseViewModel() {
+    private val tasksRepository: TasksRepository,
+    applicationContext: Application
+) : BaseViewModel(applicationContext) {
 
     private val _forceUpdate = MutableLiveData<Boolean>(false)
 

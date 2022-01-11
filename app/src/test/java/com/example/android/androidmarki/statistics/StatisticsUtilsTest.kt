@@ -26,7 +26,8 @@ import org.junit.Test
  * Unit tests for [getActiveAndCompletedStats].
  */
 class StatisticsUtilsTest {
-
+//GIVENWHENTHEN
+    //SubjectUnderTest_actionOrInput_resultState
     @Test
     fun getActiveAndCompletedStats_noCompleted_returnsHundredZero() {
         val tasks = listOf(

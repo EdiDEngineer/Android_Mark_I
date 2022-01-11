@@ -15,6 +15,7 @@
  */
 package com.example.android.androidmarki
 
+import android.view.Gravity
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
@@ -25,6 +26,8 @@ import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerMatchers
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isChecked
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -103,8 +106,18 @@ class TasksActivityTest {
         // Start up Tasks screen
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
-
         // Click on the task on the list and verify that all the data is correct
+        // Check that left drawer is closed at startup
+        onView(withId(R.id.drawer_layout))
+            .check(matches(DrawerMatchers.isClosed(Gravity.START))) // Left Drawer should be closed.
+
+        onView(
+            ViewMatchers.withContentDescription(
+                activityScenario
+                    .getToolbarNavigationContentDescription()
+            )
+        ).perform(click())
+
         onView(withText("TITLE1")).perform(click())
         onView(withId(R.id.task_detail_title_text)).check(matches(withText("TITLE1")))
         onView(withId(R.id.task_detail_description_text)).check(matches(withText("DESCRIPTION")))

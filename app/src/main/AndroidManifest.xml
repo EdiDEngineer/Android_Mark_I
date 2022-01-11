@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.androidmarki"
     android:installLocation="auto">
 
@@ -37,7 +38,8 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
         <activity
             android:name=".ui.firebase.FirebaseActivity"
             android:label="@string/title_activity_firebase"
-            android:parentActivityName=".ui.home.HomeActivity">
+            android:parentActivityName=".ui.home.HomeActivity"
+            android:exported="true">
             <intent-filter
                 android:icon="@mipmap/ic_launcher_round"
                 android:label="string resource">
@@ -50,16 +52,19 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
             android:name=".ui.home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_home"
+            android:exported="true"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:theme="@style/AppTheme.OverlapSystemBar"/>
 
         <activity android:name=".ui.main.MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ui.main.Splash"
             android:noHistory="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,15 +79,15 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
         <receiver
             android:name=".receiver.AlarmReceiver"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
         <receiver
             android:name=".receiver.SnoozeReceiver"
             android:enabled="true"
-            android:exported="false" /> <!-- AndroidManifest.xml -->
+            android:exported="true" /> <!-- AndroidManifest.xml -->
         <!-- TODO: Step 3.0 uncomment to start the service -->
         <service
             android:name=".data.remote.firebase.FirebaseUserMessagingService"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -127,8 +132,14 @@ The BACKGROUND_LOCATION permission is required for geofencing functionality to w
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <receiver android:name=".receiver.GeoFenceBroadcastReceiver" />
-
+        <receiver
+            android:exported="true"
+            android:name=".receiver.GeoFenceBroadcastReceiver" />
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false"
+            tools:node="remove" />
     </application>
 
 </manifest>

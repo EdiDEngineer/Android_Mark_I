@@ -1,10 +1,11 @@
 package com.example.android.androidmarki.ui.base
 
+import android.app.Application
 import androidx.annotation.CallSuper
 import androidx.lifecycle.AndroidViewModel
 import com.example.android.androidmarki.AndroidMarkI
 
-open class BaseViewModel(application: AndroidMarkI= AndroidMarkI.getApp()) : AndroidViewModel(application) {
+open class BaseViewModel(application: Application= AndroidMarkI.getApp()) : AndroidViewModel(application) {
 
 //    private val disposable = CompositeDisposable()
 //
